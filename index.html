@@ -848,35 +848,66 @@
     }
 
     /* ---- FUN FACTS ---- */
-    .fun-facts {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
+    /* Purchasing Power section */
+    .purchasing-power {
       margin: 32px 0;
     }
 
-    .fun-fact {
+    .pp-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .pp-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .pp-country-select {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--accent-dark);
+      background: var(--accent-light);
+      border: 1.5px solid var(--accent);
+      border-radius: 8px;
+      padding: 6px 12px;
+      cursor: pointer;
+      outline: none;
+    }
+
+    .pp-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .pp-item {
       background: var(--bg);
       border-radius: var(--radius-sm);
-      padding: 20px 16px;
+      padding: 16px 12px;
       text-align: center;
     }
 
-    .fun-fact-icon {
-      font-size: 28px;
-      margin-bottom: 6px;
+    .pp-item-icon {
+      font-size: 26px;
+      margin-bottom: 4px;
     }
 
-    .fun-fact-value {
-      font-size: 28px;
+    .pp-item-value {
+      font-size: 26px;
       font-weight: 800;
       color: var(--text);
       letter-spacing: -0.5px;
       line-height: 1.2;
     }
 
-    .fun-fact-label {
-      font-size: 12px;
+    .pp-item-label {
+      font-size: 11px;
       color: var(--text-light);
       margin-top: 4px;
       text-transform: uppercase;
@@ -1287,10 +1318,12 @@
       .result-hero-label { font-size: 14px; }
       .result-hero-sublabel { font-size: 15px; }
       .people-grid { max-width: 260px; gap: 4px; }
-      .fun-facts { grid-template-columns: repeat(2, 1fr); gap: 8px; }
-      .fun-fact { padding: 14px 10px; }
-      .fun-fact-value { font-size: 22px; }
-      .fun-fact-label { font-size: 11px; }
+      .pp-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+      .pp-item { padding: 12px 8px; }
+      .pp-item-value { font-size: 20px; }
+      .pp-item-label { font-size: 10px; }
+      .pp-title { font-size: 14px; }
+      .pp-country-select { font-size: 13px; }
       .result-card .number { font-size: 32px; }
       .result-big .number { font-size: 40px; }
       .day-row-label { flex: 0 0 70px; font-size: 11px; }
@@ -1435,14 +1468,14 @@
           </div>
         </div>
 
-        <!-- 100 People Grid -->
-        <div class="people-section">
-          <div class="people-title" id="peopleTitle"></div>
-          <div class="people-grid" id="peopleGrid"></div>
+        <!-- Purchasing Power -->
+        <div class="purchasing-power" id="purchasingPower">
+          <div class="pp-header">
+            <span class="pp-title" data-i18n="pp_title">With your salary you could buy in</span>
+            <select class="pp-country-select" id="ppCountrySelect"></select>
+          </div>
+          <div class="pp-grid" id="ppGrid"></div>
         </div>
-
-        <!-- Fun Facts -->
-        <div class="fun-facts" id="funFacts"></div>
 
         <!-- Day Comparison -->
         <div class="day-compare" id="dayCompare">
@@ -1639,11 +1672,12 @@
         s1_richer_than: 'You earn more than',
         s1_people_on_earth: 'people on Earth',
         s1_if_100: 'If the world were 100 people, {count} would earn less than you',
-        fun_bigmac: 'Big Macs per month',
-        fun_median: '× global median income',
-        fun_day: 'day', fun_days: 'days',
-        fun_earn_match: 'to earn what {country} earns in a month',
-        fun_iphones: 'iPhones per year',
+        pp_title: 'With your salary you could buy in',
+        pp_per_month: 'per month',
+        pp_months_rent: 'months of rent',
+        pp_cant_afford_rent: 'can\'t cover rent',
+        pp_monthly_passes: 'monthly passes',
+        pp_months_to_save: 'months to save',
         s1_out_of_total: 'out of 8.1 billion',
         s1_rank_country_caption: '{n} out of 100 people in {country} earn less than you',
         s1_rank_world_caption: '{n} out of 100 people on Earth earn less than you',
@@ -1773,11 +1807,12 @@
         s1_richer_than: 'Sa teenid rohkem kui',
         s1_people_on_earth: 'inimest Maal',
         s1_if_100: 'Kui maailm oleks 100 inimest, siis {count} neist teeniks sinust vähem',
-        fun_bigmac: 'Big Maci kuus',
-        fun_median: '× globaalset mediaanpalka',
-        fun_day: 'päev', fun_days: 'päeva',
-        fun_earn_match: 'et teenida see, mis {country} teenib kuuga',
-        fun_iphones: 'iPhone\'i aastas',
+        pp_title: 'Oma palgaga saaksid osta riigis',
+        pp_per_month: 'kuus',
+        pp_months_rent: 'kuu üüri',
+        pp_cant_afford_rent: 'ei kata üüri',
+        pp_monthly_passes: 'kuupiletit',
+        pp_months_to_save: 'kuud koguda',
         s1_out_of_total: '8.1 miljardist',
         day_compare_title: 'Mida sinu 1 tööpäev väärt on',
         day_compare_you: 'Sina',
@@ -1906,11 +1941,12 @@
         s1_richer_than: 'Du verdienst mehr als',
         s1_people_on_earth: 'Menschen auf der Erde',
         s1_if_100: 'Wäre die Welt 100 Menschen, würden {count} weniger verdienen als du',
-        fun_bigmac: 'Big Macs pro Monat',
-        fun_median: '× globales Medianeinkommen',
-        fun_day: 'Tag', fun_days: 'Tage',
-        fun_earn_match: 'um zu verdienen, was {country} im Monat verdient',
-        fun_iphones: 'iPhones pro Jahr',
+        pp_title: 'Mit deinem Gehalt könntest du kaufen in',
+        pp_per_month: 'pro Monat',
+        pp_months_rent: 'Monate Miete',
+        pp_cant_afford_rent: 'reicht nicht für Miete',
+        pp_monthly_passes: 'Monatskarten',
+        pp_months_to_save: 'Monate sparen',
         s1_out_of_total: 'von 8,1 Milliarden',
         day_compare_title: 'Was dein 1 Arbeitstag wert ist',
         day_compare_you: 'Du',
@@ -2039,11 +2075,12 @@
         s1_richer_than: 'Vous gagnez plus que',
         s1_people_on_earth: 'personnes sur Terre',
         s1_if_100: 'Si le monde comptait 100 personnes, {count} gagneraient moins que vous',
-        fun_bigmac: 'Big Macs par mois',
-        fun_median: '× le revenu médian mondial',
-        fun_day: 'jour', fun_days: 'jours',
-        fun_earn_match: 'pour gagner ce que {country} gagne en un mois',
-        fun_iphones: 'iPhones par an',
+        pp_title: 'Avec ton salaire tu pourrais acheter en',
+        pp_per_month: 'par mois',
+        pp_months_rent: 'mois de loyer',
+        pp_cant_afford_rent: 'ne couvre pas le loyer',
+        pp_monthly_passes: 'abonnements mensuels',
+        pp_months_to_save: 'mois pour économiser',
         s1_out_of_total: 'sur 8,1 milliards',
         day_compare_title: 'Ce que vaut votre journée de travail',
         day_compare_you: 'Vous',
@@ -2172,11 +2209,12 @@
         s1_richer_than: 'Ganas más que',
         s1_people_on_earth: 'personas en la Tierra',
         s1_if_100: 'Si el mundo fuera 100 personas, {count} ganarían menos que tú',
-        fun_bigmac: 'Big Macs al mes',
-        fun_median: '× el ingreso mediano global',
-        fun_day: 'día', fun_days: 'días',
-        fun_earn_match: 'para ganar lo que {country} gana en un mes',
-        fun_iphones: 'iPhones al año',
+        pp_title: 'Con tu salario podrías comprar en',
+        pp_per_month: 'al mes',
+        pp_months_rent: 'meses de alquiler',
+        pp_cant_afford_rent: 'no cubre el alquiler',
+        pp_monthly_passes: 'abonos mensuales',
+        pp_months_to_save: 'meses para ahorrar',
         s1_out_of_total: 'de 8.100 millones',
         day_compare_title: 'Lo que vale tu día de trabajo',
         day_compare_you: 'Tú',
@@ -2642,10 +2680,10 @@
       buildRankDots('worldRankVisual', worldPct, null, true);
 
       // 3. Build 100-people grid
-      buildPeopleGrid(worldPct);
+      // buildPeopleGrid removed — rank dots above already show the info
 
       // 4. Fun facts
-      buildFunFacts(income, compareCode);
+      buildPurchasingPower(income, compareCode);
 
       // 5. Day comparison
       lastWorldPct = worldPct;
@@ -2698,61 +2736,84 @@
     }
 
     // ---- FUN FACTS ----
-    function buildFunFacts(incomeUSD, compareCode) {
-      const container = document.getElementById('funFacts');
-      container.innerHTML = '';
-      const facts = [];
+    var ppIncomeUSD = 0; // stored for re-calculation when country changes
 
-      // 1. Big Macs per month
-      const bmPrice = D.prices.US ? D.prices.US.bigmac : 5.58;
-      if (bmPrice > 0) {
-        facts.push({
-          icon: '🍔',
-          value: Math.round(incomeUSD / bmPrice).toLocaleString(),
-          label: t('fun_bigmac')
+    function buildPurchasingPower(incomeUSD, defaultCountry) {
+      ppIncomeUSD = incomeUSD;
+      var select = document.getElementById('ppCountrySelect');
+
+      // Populate dropdown if empty
+      if (select.options.length === 0) {
+        var codes = Object.keys(D.countries).sort(function(a, b) {
+          return D.countries[a].name.localeCompare(D.countries[b].name);
+        });
+        codes.forEach(function(code) {
+          var opt = document.createElement('option');
+          opt.value = code;
+          opt.textContent = D.countries[code].name;
+          select.appendChild(opt);
+        });
+        select.addEventListener('change', function() {
+          renderPurchasingPower(ppIncomeUSD, this.value);
         });
       }
 
-      // 2. Times global median ($400/mo at 50th percentile)
-      const globalMedian = 400;
-      const timesMedian = incomeUSD / globalMedian;
-      facts.push({
-        icon: '🌍',
-        value: timesMedian >= 10 ? Math.round(timesMedian) + '×' : timesMedian.toFixed(1) + '×',
-        label: t('fun_median')
-      });
+      select.value = defaultCountry;
+      renderPurchasingPower(incomeUSD, defaultCountry);
+    }
 
-      // 3. Days to earn what poorest country earns in a month
-      const lowestCountry = findLowestSalaryCountry(compareCode);
-      if (lowestCountry) {
-        const daysToMatch = Math.max(1, Math.round(30 * lowestCountry.salary / incomeUSD));
-        facts.push({
-          icon: '⏱️',
-          value: daysToMatch + (daysToMatch === 1 ? ' ' + t('fun_day') : ' ' + t('fun_days')),
-          label: t('fun_earn_match', { country: lowestCountry.name })
-        });
-      }
+    function renderPurchasingPower(incomeUSD, countryCode) {
+      var grid = document.getElementById('ppGrid');
+      grid.innerHTML = '';
+      var prices = D.prices[countryCode];
+      if (!prices) return;
 
-      // 4. iPhones per year
-      const iphonePrice = D.prices.US ? D.prices.US.iphone : 799;
-      if (iphonePrice > 0) {
-        const iphonesPerYear = (incomeUSD * 12) / iphonePrice;
-        facts.push({
-          icon: '📱',
-          value: iphonesPerYear >= 10 ? Math.round(iphonesPerYear).toLocaleString() : iphonesPerYear.toFixed(1),
-          label: t('fun_iphones')
-        });
-      }
+      var productKeys = Object.keys(D.products);
+      productKeys.forEach(function(pk) {
+        var price = prices[pk];
+        if (!price || price <= 0) return;
 
-      // Render facts
-      facts.forEach(function(fact) {
-        const el = document.createElement('div');
-        el.className = 'fun-fact';
+        var product = D.products[pk];
+        var canBuy;
+        var label;
+
+        if (pk === 'rent_1bed') {
+          // Rent: show months you can pay
+          canBuy = incomeUSD / price;
+          label = canBuy >= 1 ? t('pp_months_rent') : t('pp_cant_afford_rent');
+        } else if (pk === 'transport_monthly') {
+          // Transport: months you can pay
+          canBuy = incomeUSD / price;
+          label = t('pp_monthly_passes');
+        } else if (pk === 'tesla') {
+          // Expensive items: months to save
+          var monthsToSave = Math.ceil(price / incomeUSD);
+          canBuy = monthsToSave;
+          label = t('pp_months_to_save');
+        } else {
+          // Regular items: how many per month
+          canBuy = incomeUSD / price;
+          label = t('pp_per_month');
+        }
+
+        var displayValue;
+        if (pk === 'tesla') {
+          displayValue = canBuy.toLocaleString();
+        } else if (canBuy >= 10) {
+          displayValue = Math.round(canBuy).toLocaleString();
+        } else if (canBuy >= 1) {
+          displayValue = canBuy.toFixed(1);
+        } else {
+          displayValue = canBuy.toFixed(2);
+        }
+
+        var el = document.createElement('div');
+        el.className = 'pp-item';
         el.innerHTML =
-          '<div class="fun-fact-icon">' + fact.icon + '</div>' +
-          '<div class="fun-fact-value">' + fact.value + '</div>' +
-          '<div class="fun-fact-label">' + fact.label + '</div>';
-        container.appendChild(el);
+          '<div class="pp-item-icon">' + product.icon + '</div>' +
+          '<div class="pp-item-value">' + displayValue + '</div>' +
+          '<div class="pp-item-label">' + product.name + '<br>' + label + '</div>';
+        grid.appendChild(el);
       });
     }
 
