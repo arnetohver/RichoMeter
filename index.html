@@ -1,0 +1,3646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Richometer — How Rich Are You?</title>
+  <meta name="description" content="Find out how rich you are compared to your country and the world. See how long you need to work to afford everyday products.">
+  <style>
+    /* ============================================
+       RICHOMETER — STYLES
+       Minimalist white, Apple-style aesthetic
+       ============================================ */
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #fafafa;
+      --bg-white: #ffffff;
+      --text: #111111;
+      --text-light: #666666;
+      --text-lighter: #999999;
+      --accent: #10b981;
+      --accent-dark: #059669;
+      --accent-light: #d1fae5;
+      --border: #e5e7eb;
+      --shadow: 0 1px 3px rgba(0,0,0,0.08);
+      --shadow-lg: 0 4px 12px rgba(0,0,0,0.1);
+      --radius: 12px;
+      --radius-sm: 8px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ---- NAVIGATION ---- */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+    }
+
+    .nav-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 48px;
+    }
+
+    .nav-logo {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.5px;
+    }
+
+    .nav-logo span { color: var(--accent); }
+
+    .nav-links {
+      display: flex;
+      gap: 4px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-light);
+      font-size: 14px;
+      font-weight: 500;
+      padding: 8px 16px;
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--accent-dark);
+      background: var(--accent-light);
+    }
+
+    .nav-lang {
+      font-size: 13px;
+      color: var(--text-light);
+      background: var(--bg-white);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 4px 8px;
+      cursor: pointer;
+      outline: none;
+    }
+
+    /* Games sub-nav row */
+    .nav-games {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 44px;
+      gap: 10px;
+      padding-left: 0;
+    }
+
+    .nav-games-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: #7c3aed;
+      margin-right: 6px;
+      white-space: nowrap;
+    }
+
+    .nav-games a {
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 8px 20px;
+      border-radius: 50px;
+      transition: all 0.2s;
+      color: #5b21b6;
+      background: rgba(139, 92, 246, 0.08);
+      border: 1.5px solid rgba(139, 92, 246, 0.2);
+      cursor: pointer;
+    }
+
+    .nav-games a:hover {
+      color: #fff;
+      background: linear-gradient(135deg, #7c3aed, #5b21b6);
+      border-color: transparent;
+      box-shadow: 0 3px 12px rgba(124, 58, 237, 0.3);
+      transform: translateY(-1px);
+    }
+
+    .nav-games a.active {
+      color: #fff;
+      background: linear-gradient(135deg, #7c3aed, #5b21b6);
+      border-color: transparent;
+      box-shadow: 0 3px 12px rgba(124, 58, 237, 0.3);
+    }
+
+    /* View switching */
+    .view-hidden {
+      display: none !important;
+    }
+
+    .back-to-tools {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: none;
+      border: 1.5px solid var(--border);
+      border-radius: 50px;
+      padding: 8px 20px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-light);
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-bottom: 20px;
+    }
+
+    .back-to-tools:hover {
+      border-color: var(--accent);
+      color: var(--accent-dark);
+      background: var(--accent-light);
+    }
+
+    /* ---- SECTIONS ---- */
+    .section {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 60px 24px 80px;
+    }
+
+    .section-title {
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+    }
+
+    .section-subtitle {
+      font-size: 16px;
+      color: var(--text-light);
+      margin-bottom: 40px;
+    }
+
+    /* ---- HERO ---- */
+    .hero {
+      text-align: center;
+      padding: 80px 24px 40px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      font-size: 48px;
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+
+    .hero h1 span { color: var(--accent); }
+
+    .hero p {
+      font-size: 18px;
+      color: var(--text-light);
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    /* ---- CARDS / INPUT AREAS ---- */
+    .card {
+      background: var(--bg-white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px;
+      box-shadow: var(--shadow);
+    }
+
+    .input-row {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .input-group {
+      flex: 1;
+      min-width: 140px;
+    }
+
+    .input-group label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-light);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .input-group input,
+    .input-group select {
+      width: 100%;
+      padding: 12px 16px;
+      font-size: 16px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: var(--bg);
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s;
+      font-family: inherit;
+    }
+
+    .input-group input:focus,
+    .input-group select:focus {
+      border-color: var(--accent);
+    }
+
+    .input-group input[type="number"] {
+      font-size: 20px;
+      font-weight: 600;
+      padding: 14px 16px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 32px;
+      font-size: 16px;
+      font-weight: 600;
+      color: white;
+      background: var(--accent);
+      border: none;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+      width: 100%;
+    }
+
+    .btn:hover { background: var(--accent-dark); transform: translateY(-1px); }
+    .btn:active { transform: translateY(0); }
+
+    /* ---- RESULTS ---- */
+    .results {
+      display: none;
+      margin-top: 32px;
+      animation: fadeIn 0.5s ease;
+    }
+
+    .results.visible { display: block; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .result-big {
+      text-align: center;
+      padding: 24px 0;
+    }
+
+    .result-big .label {
+      font-size: 14px;
+      color: var(--text-light);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .result-big .number {
+      font-size: 56px;
+      font-weight: 800;
+      color: var(--accent);
+      letter-spacing: -2px;
+      line-height: 1;
+    }
+
+    .result-big .context {
+      font-size: 16px;
+      color: var(--text-light);
+      margin-top: 8px;
+    }
+
+    .result-pair {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    .result-card {
+      background: var(--bg);
+      border-radius: var(--radius-sm);
+      padding: 24px;
+      text-align: center;
+    }
+
+    .result-card .label {
+      font-size: 12px;
+      color: var(--text-light);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .result-card .number {
+      font-size: 40px;
+      font-weight: 800;
+      color: var(--accent);
+      letter-spacing: -1px;
+      line-height: 1.1;
+    }
+
+    .result-card .context {
+      font-size: 14px;
+      color: var(--text-light);
+      margin-top: 6px;
+    }
+
+    /* ---- PROGRESS BAR ---- */
+    /* ---- DAY COMPARISON ---- */
+    .day-compare {
+      margin: 32px 0;
+      padding: 28px 24px;
+      background: var(--card);
+      border-radius: 16px;
+      border: 1px solid var(--border);
+    }
+
+    .day-compare-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 24px;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .day-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .day-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .day-row-label {
+      flex: 0 0 100px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+      text-align: right;
+    }
+
+    .day-row-bar-wrap {
+      flex: 1;
+      position: relative;
+    }
+
+    .day-row-bar {
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      padding: 0 12px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #fff;
+      min-width: 60px;
+      transition: width 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .day-row-bar.you {
+      background: linear-gradient(90deg, var(--accent), var(--accent-dark));
+    }
+
+    .day-row-bar.other {
+      background: linear-gradient(90deg, #e5e7eb, #d1d5db);
+      color: var(--text);
+    }
+
+    .day-row-bar-text {
+      position: relative;
+      z-index: 1;
+      white-space: nowrap;
+    }
+
+    .day-row-flag {
+      font-size: 18px;
+      margin-right: 6px;
+    }
+
+    .day-compare-punchline {
+      text-align: center;
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--accent-dark);
+    }
+
+    .day-compare-punchline span {
+      font-size: 32px;
+    }
+
+    /* ---- SHARE BUTTON ---- */
+    .share-row {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      margin-top: 24px;
+    }
+
+    .share-btn {
+      padding: 10px 20px;
+      font-size: 14px;
+      font-weight: 500;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: var(--bg-white);
+      color: var(--text);
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+
+    .share-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ---- TIME TO AFFORD RESULT ---- */
+    .time-result {
+      text-align: center;
+      padding: 32px 0;
+    }
+
+    .time-result .time-value {
+      font-size: 42px;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.5px;
+      line-height: 1.3;
+    }
+
+    .time-result .time-value .unit {
+      color: var(--text-light);
+      font-weight: 400;
+    }
+
+    .time-result .time-context {
+      font-size: 15px;
+      color: var(--text-light);
+      margin-top: 10px;
+    }
+
+    /* ---- COUNTRY RANKING (Section 2) ---- */
+    .country-ranking {
+      margin-top: 16px;
+    }
+
+    .ranking-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 6px;
+      font-size: 13px;
+    }
+
+    .ranking-pos {
+      flex: 0 0 24px;
+      text-align: right;
+      color: var(--text-lighter);
+      font-weight: 500;
+      font-size: 12px;
+    }
+
+    .ranking-flag {
+      font-size: 16px;
+      flex: 0 0 24px;
+      text-align: center;
+    }
+
+    .ranking-name {
+      flex: 0 0 110px;
+      font-weight: 500;
+      font-size: 13px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .ranking-bar-wrap {
+      flex: 1;
+      height: 24px;
+      position: relative;
+      background: var(--bg);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .ranking-bar {
+      height: 100%;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      padding: 0 8px;
+      font-size: 11px;
+      font-weight: 700;
+      color: #fff;
+      min-width: 40px;
+      transition: width 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+      white-space: nowrap;
+    }
+
+    .ranking-bar.fast {
+      background: linear-gradient(90deg, var(--accent), var(--accent-dark));
+    }
+
+    .ranking-bar.medium {
+      background: linear-gradient(90deg, #fbbf24, #f59e0b);
+    }
+
+    .ranking-bar.slow {
+      background: linear-gradient(90deg, #f87171, #ef4444);
+      color: #fff;
+    }
+
+    .ranking-row.highlighted {
+      background: var(--accent-light);
+      border-radius: 8px;
+      padding: 4px 6px;
+      margin-left: -6px;
+      margin-right: -6px;
+    }
+
+    .ranking-row.highlighted .ranking-name {
+      font-weight: 700;
+      color: var(--accent-dark);
+    }
+
+    /* ---- COMPARE VISUAL (Section 3) ---- */
+    .compare-item {
+      margin-bottom: 20px;
+    }
+
+    .compare-item-label {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+
+    .compare-bars {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .compare-bar-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .compare-bar-flag {
+      flex: 0 0 60px;
+      font-size: 12px;
+      font-weight: 500;
+      text-align: right;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .compare-bar-track {
+      flex: 1;
+      height: 22px;
+      background: var(--bg);
+      border-radius: 6px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .compare-bar-fill {
+      height: 100%;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      padding: 0 8px;
+      font-size: 11px;
+      font-weight: 600;
+      color: #fff;
+      min-width: 30px;
+      transition: width 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+      white-space: nowrap;
+    }
+
+    .compare-bar-fill.bar-a {
+      background: linear-gradient(90deg, var(--accent), var(--accent-dark));
+    }
+
+    .compare-bar-fill.bar-b {
+      background: linear-gradient(90deg, #6366f1, #4f46e5);
+    }
+
+    /* ---- RANK VISUAL (X out of Y people) ---- */
+    .rank-visual {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      padding: 12px 0;
+      flex-wrap: wrap;
+    }
+
+    .rank-dot {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      transition: all 0.3s ease;
+    }
+
+    .rank-dot.you {
+      background: var(--accent);
+      box-shadow: 0 0 0 2px var(--accent-dark);
+      transform: scale(1.1);
+    }
+
+    .rank-dot.below {
+      background: var(--accent-light);
+    }
+
+    .rank-dot.above {
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+    }
+
+    .rank-caption {
+      width: 100%;
+      text-align: center;
+      font-size: 14px;
+      color: var(--text-light);
+      margin-top: 8px;
+      line-height: 1.4;
+    }
+
+    .rank-caption strong {
+      color: var(--accent-dark);
+      font-weight: 700;
+    }
+
+    /* ---- COMPARE TABLE ---- */
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 24px;
+    }
+
+    .compare-table th {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-light);
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 2px solid var(--border);
+    }
+
+    .compare-table th:not(:first-child) { text-align: center; }
+
+    .compare-table td {
+      padding: 14px 16px;
+      font-size: 15px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .compare-table td:not(:first-child) {
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .compare-table td.winner {
+      color: var(--accent);
+    }
+
+    .compare-table .product-icon {
+      margin-right: 8px;
+    }
+
+    /* ---- DIVIDER ---- */
+    .section-divider {
+      max-width: 800px;
+      margin: 0 auto;
+      border: none;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ---- HERO RESULT (big impact number) ---- */
+    .result-hero {
+      text-align: center;
+      padding: 40px 0 20px;
+    }
+
+    .result-hero-label {
+      font-size: 16px;
+      color: var(--text-light);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .result-hero-number {
+      font-size: 64px;
+      font-weight: 900;
+      color: var(--accent);
+      letter-spacing: -3px;
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .result-hero-sublabel {
+      font-size: 18px;
+      color: var(--text-light);
+      margin-top: 10px;
+    }
+
+    .result-hero-total {
+      display: inline-block;
+      font-size: 14px;
+      color: var(--text-lighter, #999);
+      opacity: 0.7;
+    }
+
+    /* ---- 100 PEOPLE GRID ---- */
+    .people-section {
+      margin: 32px 0;
+      text-align: center;
+    }
+
+    .people-title {
+      font-size: 16px;
+      color: var(--text);
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+
+    .people-title strong {
+      color: var(--accent);
+      font-size: 20px;
+    }
+
+    .people-grid {
+      display: grid;
+      grid-template-columns: repeat(10, 1fr);
+      gap: 5px;
+      max-width: 300px;
+      margin: 0 auto;
+    }
+
+    .person-dot {
+      aspect-ratio: 1;
+      border-radius: 4px;
+      background: var(--accent-light);
+      opacity: 0;
+      transform: scale(0.3);
+      animation: dotPop 0.25s forwards;
+    }
+
+    .person-dot.you {
+      background: var(--accent);
+      box-shadow: 0 0 0 2px var(--accent-dark);
+      position: relative;
+    }
+
+    .person-dot.richer {
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+    }
+
+    @keyframes dotPop {
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    /* ---- FUN FACTS ---- */
+    .fun-facts {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin: 32px 0;
+    }
+
+    .fun-fact {
+      background: var(--bg);
+      border-radius: var(--radius-sm);
+      padding: 20px 16px;
+      text-align: center;
+    }
+
+    .fun-fact-icon {
+      font-size: 28px;
+      margin-bottom: 6px;
+    }
+
+    .fun-fact-value {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: -0.5px;
+      line-height: 1.2;
+    }
+
+    .fun-fact-label {
+      font-size: 12px;
+      color: var(--text-light);
+      margin-top: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    /* ---- MIND-BLOWING MONEY FACTS ---- */
+    .money-facts-btn {
+      display: block;
+      margin: 32px auto 0;
+      padding: 18px 48px;
+      background: linear-gradient(135deg, #7c3aed, #5b21b6);
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      font-size: 18px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s;
+      letter-spacing: 0.3px;
+    }
+
+    .money-facts-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(124, 58, 237, 0.4);
+    }
+
+    .money-facts-container {
+      margin-top: 16px;
+    }
+
+    .money-card {
+      background: linear-gradient(135deg, #1e1b4b, #312e81);
+      border-radius: 16px;
+      padding: 28px 24px;
+      color: #fff;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: cardReveal 0.5s forwards;
+    }
+
+    @keyframes cardReveal {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .money-card-disclaimer {
+      text-align: center;
+      font-size: 11px;
+      color: rgba(255,255,255,0.45);
+      margin-top: 8px;
+    }
+
+    /* ---- GUESS THE PRICE (Section 5) ---- */
+    .gtp-card {
+      background: var(--bg-white);
+      border-radius: var(--radius);
+      padding: 40px 24px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      text-align: center;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .gtp-progress {
+      font-size: 13px;
+      color: var(--text-light);
+      margin-bottom: 24px;
+      font-weight: 600;
+    }
+
+    .gtp-product-icon {
+      font-size: 56px;
+      margin-bottom: 8px;
+    }
+
+    .gtp-product-name {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .gtp-country {
+      font-size: 18px;
+      color: var(--text-light);
+      margin-bottom: 28px;
+      font-weight: 500;
+    }
+
+    .gtp-flag {
+      margin-right: 6px;
+      font-size: 22px;
+    }
+
+    .gtp-input-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .gtp-dollar {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--text-light);
+    }
+
+    .gtp-input {
+      font-size: 24px;
+      font-weight: 700;
+      width: 140px;
+      padding: 10px 14px;
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      text-align: center;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .gtp-input:focus {
+      border-color: var(--accent);
+    }
+
+    .gtp-guess-btn {
+      padding: 12px 28px;
+      font-size: 16px;
+      border-radius: 12px;
+    }
+
+    .gtp-feedback {
+      margin-top: 8px;
+      padding: 20px;
+      background: #f8fafc;
+      border-radius: 12px;
+    }
+
+    .gtp-answer {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .gtp-accuracy {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .gtp-accuracy.perfect { color: #059669; }
+    .gtp-accuracy.close { color: #d97706; }
+    .gtp-accuracy.off { color: #dc2626; }
+
+    .gtp-range {
+      font-size: 13px;
+      color: var(--text-light);
+      margin-bottom: 16px;
+      line-height: 1.6;
+    }
+
+    .gtp-next-btn {
+      padding: 10px 32px;
+      font-size: 15px;
+      border-radius: 50px;
+    }
+
+    .gtp-summary-icon {
+      font-size: 64px;
+      margin-bottom: 12px;
+    }
+
+    .gtp-summary-score {
+      font-size: 48px;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .gtp-summary-label {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text-light);
+      margin-bottom: 20px;
+    }
+
+    .gtp-summary-details {
+      text-align: left;
+      max-width: 400px;
+      margin: 0 auto 24px;
+    }
+
+    .gtp-detail-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+    }
+
+    .gtp-detail-row .gtp-detail-q {
+      color: var(--text);
+    }
+
+    .gtp-detail-row .gtp-detail-result {
+      font-weight: 700;
+    }
+
+    .gtp-detail-result.hit { color: #059669; }
+    .gtp-detail-result.miss { color: #dc2626; }
+
+    .gtp-new-btn {
+      padding: 14px 40px;
+      font-size: 16px;
+      border-radius: 50px;
+      background: linear-gradient(135deg, #7c3aed, #5b21b6);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      font-weight: 700;
+      transition: all 0.3s;
+    }
+
+    .gtp-new-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(124, 58, 237, 0.4);
+    }
+
+    /* ---- WOULD YOU RATHER (Section 4) ---- */
+    .wyr-card {
+      background: var(--bg-white);
+      border-radius: var(--radius);
+      padding: 40px 24px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .wyr-question {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 32px;
+      line-height: 1.5;
+    }
+
+    .wyr-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .wyr-option {
+      padding: 24px 16px;
+      border-radius: var(--radius);
+      font-size: 15px;
+      font-weight: 600;
+      line-height: 1.4;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: all 0.3s;
+    }
+
+    .wyr-option.option-a {
+      background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+      color: #065f46;
+      border-color: #a7f3d0;
+    }
+
+    .wyr-option.option-a:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+    }
+
+    .wyr-option.option-b {
+      background: linear-gradient(135deg, #fef2f2, #fee2e2);
+      color: #991b1b;
+      border-color: #fecaca;
+    }
+
+    .wyr-option.option-b:hover {
+      border-color: #ef4444;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2);
+    }
+
+    .wyr-option.disabled {
+      cursor: default;
+      transform: none !important;
+      box-shadow: none !important;
+    }
+
+    .wyr-option.chosen {
+      border-width: 3px;
+    }
+
+    .wyr-option.chosen.option-a { border-color: var(--accent-dark); }
+    .wyr-option.chosen.option-b { border-color: #dc2626; }
+
+    .wyr-result {
+      display: none;
+      margin-top: 8px;
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    .wyr-result.visible { display: block; }
+
+    .wyr-result-sub {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--text-light);
+      margin-top: 2px;
+    }
+
+    .wyr-vs {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-lighter);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 16px;
+    }
+
+    .wyr-nav {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .wyr-nav-btn {
+      padding: 12px 28px;
+      font-size: 15px;
+      font-weight: 700;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-family: inherit;
+      background: linear-gradient(135deg, #1e1b4b, #312e81);
+      color: #fff;
+    }
+
+    .wyr-nav-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(30, 27, 75, 0.35);
+    }
+
+    .wyr-counter {
+      font-size: 13px;
+      color: var(--text-lighter);
+      margin-top: 16px;
+    }
+
+    .money-card-icon {
+      font-size: 36px;
+      margin-bottom: 8px;
+    }
+
+    .money-card-number {
+      font-size: 36px;
+      font-weight: 900;
+      color: #a5b4fc;
+      letter-spacing: -1px;
+      line-height: 1.2;
+    }
+
+    .money-card-text {
+      font-size: 15px;
+      color: rgba(255,255,255,0.85);
+      margin-top: 8px;
+      line-height: 1.5;
+    }
+
+    .money-card-text strong {
+      color: #a5b4fc;
+      font-weight: 700;
+    }
+
+    /* ---- FOOTER ---- */
+    footer {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px 24px;
+      text-align: center;
+      font-size: 13px;
+      color: var(--text-lighter);
+    }
+
+    footer a { color: var(--text-light); }
+
+    /* ---- MOBILE ---- */
+    @media (max-width: 640px) {
+      .hero h1 { font-size: 32px; }
+      .hero p { font-size: 16px; }
+      .section-title { font-size: 24px; }
+      .section { padding: 40px 16px 60px; }
+      .card { padding: 20px; }
+      .result-pair { grid-template-columns: 1fr; }
+      .result-hero-number { font-size: 40px; letter-spacing: -1.5px; }
+      .result-hero-label { font-size: 14px; }
+      .result-hero-sublabel { font-size: 15px; }
+      .people-grid { max-width: 260px; gap: 4px; }
+      .fun-facts { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+      .fun-fact { padding: 14px 10px; }
+      .fun-fact-value { font-size: 22px; }
+      .fun-fact-label { font-size: 11px; }
+      .result-card .number { font-size: 32px; }
+      .result-big .number { font-size: 40px; }
+      .day-row-label { flex: 0 0 70px; font-size: 11px; }
+      .day-row-bar { height: 26px; font-size: 11px; }
+      .day-compare { padding: 20px 16px; }
+      .day-compare-punchline { font-size: 15px; }
+      .day-compare-punchline span { font-size: 24px; }
+      .money-card-number { font-size: 28px; }
+      .money-card-text { font-size: 13px; }
+      .money-card { padding: 18px; }
+      .wyr-options { grid-template-columns: 1fr; }
+      .wyr-option { padding: 18px 14px; font-size: 14px; }
+      .wyr-question { font-size: 16px; }
+      .gtp-card { padding: 24px 16px; }
+      .gtp-product-icon { font-size: 44px; }
+      .gtp-product-name { font-size: 18px; }
+      .gtp-input { font-size: 20px; width: 110px; }
+      .gtp-input-row { gap: 6px; }
+      .gtp-answer { font-size: 22px; }
+      .gtp-summary-score { font-size: 36px; }
+      .gtp-detail-row { font-size: 12px; }
+      .time-result .time-value { font-size: 36px; }
+      .nav-links a { padding: 6px 10px; font-size: 12px; }
+      .nav-games a { font-size: 11px; padding: 4px 10px; }
+      .nav-games-label { font-size: 9px; }
+      .money-facts-btn { padding: 16px 36px; font-size: 16px; }
+      .input-row { flex-direction: column; }
+      .compare-table { font-size: 13px; }
+      .compare-table td, .compare-table th { padding: 10px 8px; }
+
+    }
+
+    @media (max-width: 380px) {
+      .nav-links a { padding: 4px 6px; font-size: 11px; }
+      .nav-games a { font-size: 10px; padding: 3px 8px; }
+      .nav-logo { font-size: 16px; }
+      .nav-lang { font-size: 11px; padding: 3px 5px; }
+    }
+
+    /* ---- ANIMATE NUMBERS ---- */
+    .animate-number {
+      display: inline-block;
+      transition: all 0.3s;
+    }
+
+    /* ---- HIDDEN ---- */
+    .hidden { display: none; }
+
+    /* ---- NOTE for free transport ---- */
+    .note-free {
+      color: var(--accent);
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">richo<span>meter</span></a>
+      <ul class="nav-links">
+        <li><a href="#how-rich" class="active" data-i18n="nav_rich">How Rich</a></li>
+        <li><a href="#time-to-afford" data-i18n="nav_time">Work Time</a></li>
+        <li><a href="#compare" data-i18n="nav_compare">Compare</a></li>
+      </ul>
+      <select class="nav-lang" id="langSelect">
+        <option value="en">EN</option>
+        <option value="et">ET</option>
+        <option value="de">DE</option>
+        <option value="fr">FR</option>
+        <option value="es">ES</option>
+      </select>
+    </div>
+    <div class="nav-games">
+      <span class="nav-games-label" data-i18n="nav_games_label">Games</span>
+      <a href="#would-you-rather" data-i18n="nav_wyr">Would You Rather</a>
+      <a href="#guess-the-price" data-i18n="nav_gtp">Guess the Price</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <h1 data-i18n="hero_title">How <span>rich</span> are you?</h1>
+    <p data-i18n="hero_subtitle">Find out where you stand — in your country and in the world.</p>
+  </div>
+
+  <!-- SECTION 1: HOW RICH ARE YOU -->
+  <section class="section" id="how-rich">
+    <h2 class="section-title" data-i18n="s1_title">Income Rank</h2>
+    <p class="section-subtitle" data-i18n="s1_subtitle">Enter your monthly net income — what lands in your bank account.</p>
+
+    <div class="card">
+      <div class="input-row">
+        <div class="input-group" style="flex: 2;">
+          <label data-i18n="s1_income_label">Monthly Net Income (to your account)</label>
+          <div style="position: relative;">
+            <span id="currencyLabel" style="position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--text-light); font-weight: 500; pointer-events: none;">$</span>
+            <input type="number" id="incomeInput" min="0" step="100" style="padding-left: 40px;">
+          </div>
+          <div id="conversionInfo" style="font-size: 16px; font-weight: 600; color: var(--text); margin-top: 8px; display: none;">
+            <span id="convCurrency" style="color: var(--text-light);">EUR</span>
+            <span style="color: var(--text-lighter);"> × </span>
+            <span id="convRate" style="color: var(--text-light);">1.08</span>
+            <span style="color: var(--text-lighter);"> = </span>
+            <span id="convertedUSD" style="color: var(--accent);">$3,240</span>
+            <span style="color: var(--accent);"> USD</span>
+          </div>
+        </div>
+      </div>
+      <div class="input-row">
+        <div class="input-group">
+          <label data-i18n="s1_your_country">Your Country</label>
+          <select id="countrySelect"></select>
+        </div>
+        <div class="input-group">
+          <label data-i18n="s1_compare_country">Compare to</label>
+          <select id="compareToCountry"></select>
+        </div>
+      </div>
+      <button class="btn" id="calcRichBtn" data-i18n="s1_button">Show Me</button>
+
+      <!-- Results -->
+      <div class="results" id="richResults">
+
+        <!-- Big Impact Number -->
+        <div class="result-hero">
+          <div class="result-hero-label" data-i18n="s1_richer_than">You earn more than</div>
+          <div class="result-hero-number" id="richCount">0</div>
+          <div class="result-hero-sublabel"><span data-i18n="s1_people_on_earth">people on Earth</span> <span class="result-hero-total" data-i18n="s1_out_of_total">out of 8.1 billion</span></div>
+        </div>
+
+        <!-- Rank Cards (human-readable) -->
+        <div class="result-pair">
+          <div class="result-card">
+            <div class="label" id="countryRankLabel"></div>
+            <div class="rank-visual" id="countryRankVisual"></div>
+          </div>
+          <div class="result-card">
+            <div class="label" data-i18n="s1_world_label">In the World</div>
+            <div class="rank-visual" id="worldRankVisual"></div>
+          </div>
+        </div>
+
+        <!-- 100 People Grid -->
+        <div class="people-section">
+          <div class="people-title" id="peopleTitle"></div>
+          <div class="people-grid" id="peopleGrid"></div>
+        </div>
+
+        <!-- Fun Facts -->
+        <div class="fun-facts" id="funFacts"></div>
+
+        <!-- Day Comparison -->
+        <div class="day-compare" id="dayCompare">
+          <div class="day-compare-title" id="dayCompareTitle"></div>
+          <div class="day-compare-rows" id="dayCompareRows"></div>
+        </div>
+
+        <!-- Mind-Blowing Money Facts -->
+        <button class="money-facts-btn" id="moneyFactsBtn" data-i18n="mf_button">🤯 Fun fact!</button>
+        <div class="money-facts-container" id="moneyFactsContainer"></div>
+
+        <!-- Share -->
+        <div class="share-row">
+          <button class="share-btn" id="shareCopy" data-i18n="s1_share_copy">Copy Link</button>
+          <button class="share-btn" id="shareTwitter" data-i18n="s1_share_twitter">Twitter</button>
+          <button class="share-btn" id="shareWhatsapp" data-i18n="s1_share_whatsapp">WhatsApp</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- SECTION 2: WORK TIME INDEX -->
+  <section class="section" id="time-to-afford">
+    <h2 class="section-title" data-i18n="s2_title">How long do you have to work?</h2>
+    <p class="section-subtitle" data-i18n="s2_subtitle">How many work days does the average worker need? Select a product and see.</p>
+
+    <div class="card">
+      <div class="input-row" style="justify-content: center;">
+        <div class="input-group" style="flex: 0 1 300px;">
+          <label data-i18n="s2_product_label">Product</label>
+          <select id="affordProduct"></select>
+        </div>
+      </div>
+      <button class="btn" id="calcAffordBtn" data-i18n="s2_button">Show Ranking</button>
+
+      <div class="results" id="affordResults">
+        <div class="country-ranking" id="countryRanking"></div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- SECTION 3: COMPARE COUNTRIES -->
+  <section class="section" id="compare">
+    <h2 class="section-title" data-i18n="s3_title">Compare Countries</h2>
+    <p class="section-subtitle" data-i18n="s3_subtitle">See how work time compares for everyday products.</p>
+
+    <div class="card">
+      <div class="input-row">
+        <div class="input-group">
+          <label data-i18n="s3_country_a">Country A</label>
+          <select id="compareCountryA"></select>
+        </div>
+        <div class="input-group">
+          <label data-i18n="s3_country_b">Country B</label>
+          <select id="compareCountryB"></select>
+        </div>
+      </div>
+      <button class="btn" id="calcCompareBtn" data-i18n="s3_button">Compare</button>
+
+      <div class="results" id="compareResults">
+        <div id="compareVisual"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4: WOULD YOU RATHER -->
+  <section class="section" id="would-you-rather">
+    <button class="back-to-tools" onclick="switchView('tools'); window.scrollTo(0,0);">← <span data-i18n="nav_back">Back</span></button>
+    <h2 class="section-title" data-i18n="s4_title">Would You Rather</h2>
+    <p class="section-subtitle" data-i18n="s4_subtitle">Hard choices about money and life. Pick one — then see what others chose.</p>
+
+    <div class="wyr-card">
+      <div class="wyr-question" id="wyrQuestion"></div>
+      <div class="wyr-vs">VS</div>
+      <div class="wyr-options" id="wyrOptions">
+        <div class="wyr-option option-a" id="wyrOptionA"></div>
+        <div class="wyr-option option-b" id="wyrOptionB"></div>
+      </div>
+      <div class="wyr-result" id="wyrResultA">
+        <span id="wyrPctA">—</span>
+        <div class="wyr-result-sub" id="wyrCountA"></div>
+      </div>
+      <div class="wyr-result" id="wyrResultB">
+        <span id="wyrPctB">—</span>
+        <div class="wyr-result-sub" id="wyrCountB"></div>
+      </div>
+      <div class="wyr-nav">
+        <button class="wyr-nav-btn" id="wyrNextBtn" data-i18n="s4_next">Next Question</button>
+      </div>
+      <div class="wyr-counter" id="wyrCounter"></div>
+    </div>
+  </section>
+
+  <!-- SECTION 5: GUESS THE PRICE -->
+  <section class="section" id="guess-the-price">
+    <button class="back-to-tools" onclick="switchView('tools'); window.scrollTo(0,0);">← <span data-i18n="nav_back">Back</span></button>
+    <h2 class="section-title" data-i18n="s5_title">Guess the Price</h2>
+    <p class="section-subtitle" data-i18n="s5_subtitle">How well do you know what things cost around the world?</p>
+
+    <div class="gtp-card" id="gtpCard">
+      <!-- Game state -->
+      <div id="gtpGame">
+        <div class="gtp-progress" id="gtpProgress"></div>
+        <div class="gtp-product-icon" id="gtpIcon"></div>
+        <div class="gtp-product-name" id="gtpProduct"></div>
+        <div class="gtp-country">
+          <span class="gtp-flag" id="gtpFlag"></span>
+          <span id="gtpCountry"></span>
+        </div>
+        <div class="gtp-input-row">
+          <span class="gtp-dollar">$</span>
+          <input type="number" class="gtp-input" id="gtpInput" placeholder="?" min="0" step="0.01">
+          <button class="btn gtp-guess-btn" id="gtpGuessBtn" data-i18n="s5_guess">Guess!</button>
+        </div>
+        <div class="gtp-feedback" id="gtpFeedback" style="display:none;">
+          <div class="gtp-answer" id="gtpAnswer"></div>
+          <div class="gtp-accuracy" id="gtpAccuracy"></div>
+          <div class="gtp-range" id="gtpRange"></div>
+          <button class="btn gtp-next-btn" id="gtpNextBtn" data-i18n="s5_next">Next →</button>
+        </div>
+      </div>
+      <!-- Summary state -->
+      <div id="gtpSummary" style="display:none;">
+        <div class="gtp-summary-icon">🏆</div>
+        <div class="gtp-summary-score" id="gtpFinalScore"></div>
+        <div class="gtp-summary-label" id="gtpFinalLabel"></div>
+        <div class="gtp-summary-details" id="gtpDetails"></div>
+        <button class="btn gtp-new-btn" id="gtpNewBtn" data-i18n="s5_new_game">New Game</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>Richometer &copy; 2025</p>
+    <p style="margin-top: 8px;" data-i18n="footer_disclaimer">Data compiled by AI (Claude Opus 4.6) based on publicly available sources (Numbeo, Big Mac Index, World Bank, OECD) as of March 2025. Exchange rates are approximate and may be outdated. All calculations run locally in your browser — no personal data is collected or stored. This is not financial advice.</p>
+  </footer>
+
+  <!-- DATA -->
+  <script src="data.js"></script>
+
+  <!-- APP LOGIC -->
+  <script>
+    // ============================================
+    // RICHOMETER — APP LOGIC
+    // ============================================
+
+    if (typeof RICHOMETER_DATA === 'undefined') {
+      document.body.innerHTML = '<div style="padding:40px;text-align:center;font-family:sans-serif;">' +
+        '<h2 style="color:#e11d48;">Data failed to load</h2>' +
+        '<p>Could not load data.js. Make sure both index.html and data.js are in the same folder.</p></div>';
+      throw new Error('RICHOMETER_DATA not defined — data.js failed to load');
+    }
+
+    const D = RICHOMETER_DATA;
+
+    // ---- TRANSLATIONS ----
+    const TRANSLATIONS = {
+      en: {
+        hero_title: 'How <span>rich</span> are you?',
+        hero_subtitle: 'You might be richer than you think. Enter your salary and find out.',
+        nav_rich: 'How Rich', nav_time: 'Work Time', nav_compare: 'Compare', nav_games_label: 'Games', nav_back: 'Back',
+        s1_title: 'Income Rank',
+        s1_subtitle: 'Enter your monthly net income — what lands in your bank account.',
+        s1_income_label: 'Monthly Net Income (to your account)',
+        s1_your_country: 'Your Country',
+        s1_compare_country: 'Compare to',
+        s1_button: 'Show Me',
+        s1_world_label: 'In the World',
+        s1_bar_title: 'Your position in the world',
+        s1_poorest: 'Lower', s1_richest: 'Higher',
+        s1_markers_label: 'Average salaries in the selected country (global scale):',
+        s1_share_copy: 'Copy Link', s1_share_twitter: 'Twitter', s1_share_whatsapp: 'WhatsApp',
+        s1_country_rank: 'In {country}',
+        s1_country_context: 'You earn more than {pct}% of people in {country}',
+        s1_world_context: 'You earn more than {pct}% of the world population',
+        s2_title: 'How long do you have to work?',
+        s2_subtitle: 'Pick a product. See how many work days it takes in every country.',
+        s2_country_label: 'Country', s2_product_label: 'Product',
+        s2_button: 'Show Ranking',
+        s2_context: 'Average net salary in the selected country: {salary}/month',
+        s2_price_info: '{product} price in {country}: {price}',
+        s3_title: 'Compare Countries',
+        s3_subtitle: 'How many work days does the average worker need to afford everyday products? Based on 40h work week and average net salary.',
+        s3_country_a: 'Country A', s3_country_b: 'Country B',
+        s3_button: 'Compare',
+        s3_product: 'Product',
+        s3_not_available: 'N/A',
+        s3_free: 'Free!',
+        s1_richer_than: 'You earn more than',
+        s1_people_on_earth: 'people on Earth',
+        s1_if_100: 'If the world were 100 people, {count} would earn less than you',
+        fun_bigmac: 'Big Macs per month',
+        fun_median: '× global median income',
+        fun_day: 'day', fun_days: 'days',
+        fun_earn_match: 'to earn what {country} earns in a month',
+        fun_iphones: 'iPhones per year',
+        s1_out_of_total: 'out of 8.1 billion',
+        s1_rank_country_caption: '{n} out of 100 people in {country} earn less than you',
+        s1_rank_world_caption: '{n} out of 100 people on Earth earn less than you',
+        day_compare_title: 'What your 1 work day is worth',
+        day_compare_you: 'You',
+        day_compare_days: '{days} work days',
+        day_compare_day: '1 work day',
+        day_compare_punchline: 'Your 1 day = their {days} days',
+        mf_button: '🤯 Fun fact!',
+        mf_another: '🤯 Another one!',
+        mf_restart: '🤯 Start over!',
+        mf_years: 'years',
+        mf_pickup_100: 'If Elon Musk drops $100, it\'s not even worth picking up — his wealth grows by this much in just 4 seconds anyway. (Based on average net worth growth over 5 years.)',
+        mf_bills_lined: 'Line up your monthly salary in $1 bills end to end. {comparison}',
+        mf_bills_ref_pool: 'That\'s over 5 Olympic swimming pools.',
+        mf_bills_ref_fields: 'That\'s {n} football fields.',
+        mf_bills_ref_eiffel: 'That\'s taller than the Eiffel Tower (330m).',
+        mf_bills_ref_km: 'That\'s {n} km — you\'d need a bike.',
+        mf_gold_backpack: 'Fill a regular backpack with pure gold. It\'s worth this much but weighs {weight} kg ({lbs} lbs) — you couldn\'t even lift it off the ground.',
+        mf_moon_ticket: 'A SpaceX ticket to the Moon costs this much. You\'d need to save every cent for {years} years.',
+        mf_bitcoin_pizza: 'In 2010, someone paid 10,000 Bitcoin for 2 pizzas. Today that would be ~$850M. The most expensive meal in human history.',
+        mf_physical_cash: 'Only 8% of all money in the world exists as physical cash. The other 92% is just numbers on computers.',
+        mf_sun_bridge: 'If you converted all the world\'s physical cash into $1 bills, you could build a bridge to the Sun — and it would be just wide enough to walk on (57 cm).',
+        mf_disclaimer: '* Based on Elon Musk\'s average net worth growth over 5 years (~$850B). Not actual income — wealth fluctuates.',
+        nav_wyr: 'Would You Rather',
+        s4_title: 'Would You Rather',
+        s4_subtitle: 'Hard choices about money and life. Pick one — then see what others chose.',
+        s4_next: 'Next Question',
+        wyr_your_choice: 'Your choice',
+        wyr_q1: 'Would you rather...',
+        wyr_q1_a: 'Get $5,000 right now, guaranteed',
+        wyr_q1_b: 'Flip a coin: heads = $100,000,000, tails = you die within a year',
+        wyr_q2: 'Would you rather...',
+        wyr_q2_a: 'Give up 30% of your salary for life',
+        wyr_q2_b: 'Give up 10 years of your life',
+        wyr_q3: 'Would you rather...',
+        wyr_q3_a: 'Receive $10,000/month passive income but never travel more than 100km from home',
+        wyr_q3_b: 'Keep your current salary with zero restrictions',
+        wyr_q4: 'Would you rather...',
+        wyr_q4_a: 'Get $1,000,000 right now',
+        wyr_q4_b: 'Get $5,000 every month for the rest of your life',
+        wyr_q5: 'Would you rather...',
+        wyr_q5_a: 'Double your salary but work a job you hate',
+        wyr_q5_b: 'Half your salary but do your dream job',
+        wyr_q6: 'Would you rather...',
+        wyr_q6_a: 'Get $1,000,000 but your entire internet history becomes public',
+        wyr_q6_b: 'Get $0 and keep your privacy',
+        wyr_q7: 'Would you rather...',
+        wyr_q7_a: 'Get $1 billion but only live 10 more years',
+        wyr_q7_b: 'Keep your current salary but live an extra 25 years',
+        wyr_q8: 'Would you rather...',
+        wyr_q8_a: 'Live in a beautiful beach house under palm trees — but be poor',
+        wyr_q8_b: 'Live in a grey, rainy city — but earn 3× more',
+        wyr_q9: 'Would you rather...',
+        wyr_q9_a: 'Retire at 40 on a very tight budget',
+        wyr_q9_b: 'Work until 65 but retire wealthy',
+        wyr_q10: 'Would you rather...',
+        wyr_q10_a: 'Inherit $10,000,000 but never be allowed to work again',
+        wyr_q10_b: 'Earn a modest salary doing meaningful work',
+        wyr_q11: 'Would you rather...',
+        wyr_q11_a: 'Spend all your savings traveling the world in your 30s, then live modestly',
+        wyr_q11_b: 'Save everything and travel the world at 65',
+        wyr_q12: 'Would you rather...',
+        wyr_q12_a: 'Work 70 hours a week earning $1,000,000/year',
+        wyr_q12_b: 'Work 20 hours a week with a comfortable but modest income',
+        wyr_q13: 'Would you rather...',
+        wyr_q13_a: 'Win the lottery but lose all your friends',
+        wyr_q13_b: 'Go bankrupt but find your soulmate',
+        wyr_q14: 'Would you rather...',
+        wyr_q14_a: 'Find $100,000 in a briefcase on the street (could be stolen)',
+        wyr_q14_b: 'Receive a legitimate $5,000 inheritance',
+        wyr_q15: 'Would you rather...',
+        wyr_q15_a: 'Earn $200K/year but everyone knows exactly how much you make',
+        wyr_q15_b: 'Earn $120K/year with complete financial privacy',
+        nav_gtp: 'Guess the Price',
+        s5_title: 'Guess the Price',
+        s5_subtitle: 'How well do you know what things cost around the world?',
+        s5_guess: 'Guess!',
+        s5_next: 'Next →',
+        s5_new_game: 'New Game',
+        s5_perfect: 'Spot on! 🎯',
+        s5_close: 'Close enough! ✓',
+        s5_off: '{pct}% off',
+        s5_cheapest: 'Cheapest',
+        s5_priciest: 'Most expensive',
+        s5_rank_expert: 'Price Expert! 🌍',
+        s5_rank_good: 'Well Traveled! ✈️',
+        s5_rank_ok: 'Getting There 📚',
+        s5_rank_tourist: 'Tourist Mode 🗺️',
+        share_text: 'I earn more than {count} people on Earth ({pct}% of the world). How rich are you? richometer.com',
+        copied: 'Copied!',
+        footer_disclaimer: 'Data compiled by AI (Claude Opus 4.6) based on publicly available sources (Numbeo, Big Mac Index, World Bank, OECD) as of March 2025. Exchange rates are approximate and may be outdated. All calculations run locally in your browser — no personal data is collected or stored. This is not financial advice.',
+        prof_cashier: 'Cashier', prof_teacher: 'Teacher', prof_firefighter: 'Firefighter',
+        prof_police: 'Police', prof_nurse: 'Nurse', prof_developer: 'Developer', prof_dentist: 'Dentist',
+      },
+      et: {
+        hero_title: 'Kui <span>rikas</span> sa oled?',
+        hero_subtitle: 'Sa oled ilmselt rikkam kui arvad. Sisesta palk ja vaata järele.',
+        nav_rich: 'Kui rikas', nav_time: 'Tööaeg', nav_compare: 'Võrdle', nav_games_label: 'Mängud', nav_back: 'Tagasi',
+        s1_title: 'Sissetuleku koht',
+        s1_subtitle: 'Sisesta oma igakuine netopalk — mis kontole laekub.',
+        s1_income_label: 'Igakuine netopalk (kontole laekuv)',
+        s1_your_country: 'Sinu riik',
+        s1_compare_country: 'Võrdle riigiga',
+        s1_button: 'Näita',
+        s1_world_label: 'Maailmas',
+        s1_bar_title: 'Sinu koht maailmas',
+        s1_poorest: 'Madalam', s1_richest: 'Kõrgem',
+        s1_markers_label: 'Keskmised palgad valitud riigis (globaalsel skaalal):',
+        s1_share_copy: 'Kopeeri link', s1_share_twitter: 'Twitter', s1_share_whatsapp: 'WhatsApp',
+        s1_country_rank: '{country}',
+        s1_country_context: 'Sa teenid rohkem kui {pct}% riigi {country} elanikest',
+        s1_world_context: 'Sa teenid rohkem kui {pct}% maailma elanikkonnast',
+        s2_title: 'Kui kaua pead töötama?',
+        s2_subtitle: 'Vali toode. Vaata, mitu tööpäeva selleks kulub igas riigis.',
+        s2_country_label: 'Riik', s2_product_label: 'Toode',
+        s2_button: 'Näita edetabelit',
+        s2_context: 'Keskmine netopalk valitud riigis: {salary}/kuus',
+        s2_price_info: '{product} hind valitud riigis: {price}',
+        s3_title: 'Võrdle riike',
+        s3_subtitle: 'Mitu tööpäeva peab keskmine töötaja tööd tegema, et toodet osta? Arvestus: 40h töönädal ja keskmine netopalk.',
+        s3_country_a: 'Riik A', s3_country_b: 'Riik B',
+        s3_button: 'Võrdle',
+        s3_product: 'Toode',
+        s3_not_available: 'Pole saadaval',
+        s3_free: 'Tasuta!',
+        s1_richer_than: 'Sa teenid rohkem kui',
+        s1_people_on_earth: 'inimest Maal',
+        s1_if_100: 'Kui maailm oleks 100 inimest, siis {count} neist teeniks sinust vähem',
+        fun_bigmac: 'Big Maci kuus',
+        fun_median: '× globaalset mediaanpalka',
+        fun_day: 'päev', fun_days: 'päeva',
+        fun_earn_match: 'et teenida see, mis {country} teenib kuuga',
+        fun_iphones: 'iPhone\'i aastas',
+        s1_out_of_total: '8.1 miljardist',
+        day_compare_title: 'Mida sinu 1 tööpäev väärt on',
+        day_compare_you: 'Sina',
+        day_compare_days: '{days} tööpäeva',
+        day_compare_day: '1 tööpäev',
+        day_compare_punchline: 'Sinu 1 päev = nende {days} päeva',
+        mf_button: '🤯 Fun fact!',
+        mf_another: '🤯 Veel üks!',
+        mf_restart: '🤯 Alusta uuesti!',
+        mf_years: 'aastat',
+        mf_pickup_100: 'Kui Elon Muskil kukub $100 maha, siis ei tasuks tal isegi seda üles võtta — tema vara tõuseb selle 4 sekundi jooksul nagunii nii palju. (Viimase 5 aasta vara kasvu põhjal.)',
+        mf_bills_lined: 'Pane oma kuupalk $1 rahatähtedena üksteise järel ritta. {comparison}',
+        mf_bills_ref_pool: 'See on üle 5 olümpia ujumisbasseini.',
+        mf_bills_ref_fields: 'See on {n} jalgpalliväljakut.',
+        mf_bills_ref_eiffel: 'See on kõrgem kui Eiffeli torn (330m).',
+        mf_bills_ref_km: 'See on {n} km — vajad jalgratast.',
+        mf_gold_backpack: 'Täida tavaline seljakott puhta kullaga. See maksab nii palju, aga kaalub {weight} kg ({lbs} lbs) — sa ei jaksaks seda maast üleski tõsta.',
+        mf_moon_ticket: 'SpaceX pilet Kuule maksab nii palju. Pead iga sendi kokku hoidma {years} aastat.',
+        mf_bitcoin_pizza: '2010. aastal maksis keegi 2 pizza eest 10 000 Bitcoini. Täna oleks see ~$850M. Inimkonna ajaloo kalleim eine.',
+        mf_physical_cash: 'Ainult 8% kogu maailma rahast on füüsiline sularaha. Ülejäänud 92% eksisteerib vaid numbritena arvutites.',
+        mf_sun_bridge: 'Kui kogu maailma füüsiline raha teha $1 rahatähtedeks, saaksid ehitada silla Päikeseni — ja see oleks piisavalt lai, et sellel kõndida (57 cm).',
+        mf_disclaimer: '* Elon Muski number põhineb keskmise varade kasvu 5 aasta jooksul (~$850B). Mitte tegelik sissetulek — vara kõigub.',
+        s1_rank_country_caption: '{n} inimest 100-st riigis {country} teenivad sinust vähem',
+        s1_rank_world_caption: '{n} inimest 100-st Maal teenivad sinust vähem',
+        nav_wyr: 'Vali üks',
+        s4_title: 'Kumma valid?',
+        s4_subtitle: 'Rasked valikud raha ja elu kohta. Vali üks — siis vaata mida teised valisid.',
+        s4_next: 'Järgmine küsimus',
+        wyr_your_choice: 'Sinu valik',
+        wyr_q1: 'Kumma valid?',
+        wyr_q1_a: 'Saad $5,000 kohe, garanteeritud',
+        wyr_q1_b: 'Viska münti: kull = $100,000,000, kiri = sured aasta jooksul',
+        wyr_q2: 'Kumma valid?',
+        wyr_q2_a: 'Loobud 30% palgast elu lõpuni',
+        wyr_q2_b: 'Loobud 10 eluaastast',
+        wyr_q3: 'Kumma valid?',
+        wyr_q3_a: '$10,000/kuu passiivne sissetulek, aga ei tohi kunagi kodust 100km kaugemale minna',
+        wyr_q3_b: 'Praegune palk, ilma ühegi piiranguta',
+        wyr_q4: 'Kumma valid?',
+        wyr_q4_a: 'Saad $1,000,000 kohe kätte',
+        wyr_q4_b: 'Saad $5,000 iga kuu elu lõpuni',
+        wyr_q5: 'Kumma valid?',
+        wyr_q5_a: 'Kahekordne palk, aga töö mida vihkad',
+        wyr_q5_b: 'Pool praegust palka, aga unistuste töö',
+        wyr_q6: 'Kumma valid?',
+        wyr_q6_a: 'Saad $1,000,000 aga kogu su internetiajalugu tehakse avalikuks',
+        wyr_q6_b: 'Saad $0, privaatsus jääb',
+        wyr_q7: 'Kumma valid?',
+        wyr_q7_a: 'Saad $1 miljardi aga elad ainult 10 aastat veel',
+        wyr_q7_b: 'Praegune palk aga elad 25 aastat kauem',
+        wyr_q8: 'Kumma valid?',
+        wyr_q8_a: 'Elad kaunis rannamajas palmide all — aga oled vaene',
+        wyr_q8_b: 'Elad hallis vihmases linnas — aga teenid 3× rohkem',
+        wyr_q9: 'Kumma valid?',
+        wyr_q9_a: 'Pension 40-aastaselt, aga väga kitsalt',
+        wyr_q9_b: 'Tööd 65-ni, aga pensionile jõukalt',
+        wyr_q10: 'Kumma valid?',
+        wyr_q10_a: 'Pärid $10,000,000 aga ei tohi enam kunagi töötada',
+        wyr_q10_b: 'Teenid tagasihoidlikku palka tehes tähendusrikast tööd',
+        wyr_q11: 'Kumma valid?',
+        wyr_q11_a: 'Kulutad kogu raha reisimisele 30ndates, pärast elad tagasihoidlikult',
+        wyr_q11_b: 'Säästad kõik ja reisid maailma 65-aastaselt',
+        wyr_q12: 'Kumma valid?',
+        wyr_q12_a: 'Töötad 70h nädalas ja teenid $1,000,000 aastas',
+        wyr_q12_b: 'Töötad 20h nädalas mugava aga tagasihoidliku palgaga',
+        wyr_q13: 'Kumma valid?',
+        wyr_q13_a: 'Võidad loterii, aga kaotad kõik sõbrad',
+        wyr_q13_b: 'Lähed pankrotti, aga leiad hingesugulase',
+        wyr_q14: 'Kumma valid?',
+        wyr_q14_a: 'Leiad tänavalt kohvri $100,000-ga (võib olla varastatud)',
+        wyr_q14_b: 'Saad legaalse $5,000 päranduse',
+        wyr_q15: 'Kumma valid?',
+        wyr_q15_a: 'Teenid $200K aastas, aga kõik teavad täpselt kui palju',
+        wyr_q15_b: 'Teenid $120K aastas täieliku rahalise privaatsusega',
+        nav_gtp: 'Arva hind',
+        s5_title: 'Arva hind',
+        s5_subtitle: 'Kui hästi sa tead mis asjad maailmas maksavad?',
+        s5_guess: 'Paku!',
+        s5_next: 'Järgmine →',
+        s5_new_game: 'Uus mäng',
+        s5_perfect: 'Täppi! 🎯',
+        s5_close: 'Piisavalt lähedal! ✓',
+        s5_off: '{pct}% mööda',
+        s5_cheapest: 'Kõige odavam',
+        s5_priciest: 'Kõige kallim',
+        s5_rank_expert: 'Hinnaekspert! 🌍',
+        s5_rank_good: 'Palju reisinud! ✈️',
+        s5_rank_ok: 'Hakkab tulema 📚',
+        s5_rank_tourist: 'Turisti mood 🗺️',
+        share_text: 'Ma teenin rohkem kui {count} inimest Maal ({pct}% maailmast). Kui rikas oled sina? richometer.com',
+        copied: 'Kopeeritud!',
+        footer_disclaimer: 'Andmed koostas tehisintellekt (Claude Opus 4.6) avalikult kättesaadavate allikate põhjal (Numbeo, Big Mac Index, Maailmapank, OECD) seisuga märts 2025. Vahetuskursid on ligikaudsed ja võivad olla aegunud. Kõik arvutused toimuvad sinu brauseris — isikuandmeid ei koguta ega salvestata. Tegemist ei ole finantsnõuandega.',
+        prof_cashier: 'Müüja', prof_teacher: 'Õpetaja', prof_firefighter: 'Tuletõrjuja',
+        prof_police: 'Politseinik', prof_nurse: 'Õde', prof_developer: 'Arendaja', prof_dentist: 'Hambaarst',
+      },
+      de: {
+        hero_title: 'Wie <span>reich</span> bist du?',
+        hero_subtitle: 'Du bist wahrscheinlich reicher als du denkst. Gib dein Gehalt ein.',
+        nav_rich: 'Wie reich', nav_time: 'Arbeitszeit', nav_compare: 'Vergleichen', nav_games_label: 'Spiele', nav_back: 'Zurück',
+        s1_title: 'Einkommensrang',
+        s1_subtitle: 'Gib dein monatliches Nettoeinkommen ein — was auf deinem Konto landet.',
+        s1_income_label: 'Monatliches Netto (auf Ihr Konto)',
+        s1_your_country: 'Dein Land',
+        s1_compare_country: 'Vergleichen mit',
+        s1_button: 'Zeig mir',
+        s1_world_label: 'In der Welt',
+        s1_poorest: 'Niedriger', s1_richest: 'Höher',
+        s1_markers_label: 'Durchschnittliche Gehälter im gewählten Land (globale Skala):',
+        s1_share_copy: 'Link kopieren', s1_share_twitter: 'Twitter', s1_share_whatsapp: 'WhatsApp',
+        s1_country_rank: 'In {country}',
+        s1_country_context: 'Du verdienst mehr als {pct}% der Menschen in {country}',
+        s1_world_context: 'Du verdienst mehr als {pct}% der Weltbevölkerung',
+        s2_title: 'Wie lange musst du arbeiten?',
+        s2_subtitle: 'Wähle ein Produkt. Sieh, wie viele Arbeitstage es in jedem Land kostet.',
+        s2_country_label: 'Land', s2_product_label: 'Produkt',
+        s2_button: 'Ranking anzeigen',
+        s2_context: 'Durchschnittliches Nettogehalt im gewählten Land: {salary}/Monat',
+        s2_price_info: '{product} Preis in {country}: {price}',
+        s3_title: 'Länder vergleichen',
+        s3_subtitle: 'Wie viele Arbeitstage braucht ein durchschnittlicher Arbeiter für Alltagsprodukte? Basierend auf 40h-Arbeitswoche und durchschnittlichem Nettogehalt.',
+        s3_country_a: 'Land A', s3_country_b: 'Land B',
+        s3_button: 'Vergleichen',
+        s3_product: 'Produkt',
+        s3_not_available: 'N/V',
+        s3_free: 'Kostenlos!',
+        s1_richer_than: 'Du verdienst mehr als',
+        s1_people_on_earth: 'Menschen auf der Erde',
+        s1_if_100: 'Wäre die Welt 100 Menschen, würden {count} weniger verdienen als du',
+        fun_bigmac: 'Big Macs pro Monat',
+        fun_median: '× globales Medianeinkommen',
+        fun_day: 'Tag', fun_days: 'Tage',
+        fun_earn_match: 'um zu verdienen, was {country} im Monat verdient',
+        fun_iphones: 'iPhones pro Jahr',
+        s1_out_of_total: 'von 8,1 Milliarden',
+        day_compare_title: 'Was dein 1 Arbeitstag wert ist',
+        day_compare_you: 'Du',
+        day_compare_days: '{days} Arbeitstage',
+        day_compare_day: '1 Arbeitstag',
+        day_compare_punchline: 'Dein 1 Tag = deren {days} Tage',
+        mf_button: '🤯 Fun fact!',
+        mf_another: '🤯 Noch einer!',
+        mf_restart: '🤯 Nochmal!',
+        mf_years: 'Jahre',
+        mf_pickup_100: 'Wenn Elon Musk $100 fallen lässt, lohnt es sich nicht mal, sie aufzuheben — sein Vermögen wächst in diesen 4 Sekunden sowieso um so viel. (Basierend auf dem durchschnittlichen Vermögenswachstum über 5 Jahre.)',
+        mf_bills_lined: 'Lege dein Monatsgehalt in $1-Scheinen hintereinander. {comparison}',
+        mf_bills_ref_pool: 'Das sind über 5 olympische Schwimmbecken.',
+        mf_bills_ref_fields: 'Das sind {n} Fußballfelder.',
+        mf_bills_ref_eiffel: 'Das ist höher als der Eiffelturm (330m).',
+        mf_bills_ref_km: 'Das sind {n} km — du brauchst ein Fahrrad.',
+        mf_gold_backpack: 'Fülle einen normalen Rucksack mit purem Gold. Er ist so viel wert, wiegt aber {weight} kg ({lbs} lbs) — du könntest ihn nicht mal vom Boden heben.',
+        mf_moon_ticket: 'Ein SpaceX-Ticket zum Mond kostet so viel. Du müsstest jeden Cent {years} Jahre lang sparen.',
+        mf_bitcoin_pizza: '2010 bezahlte jemand 10.000 Bitcoin für 2 Pizzen. Heute wären das ~$850M. Die teuerste Mahlzeit der Menschheitsgeschichte.',
+        mf_physical_cash: 'Nur 8% des gesamten Geldes auf der Welt ist physisches Bargeld. Die anderen 92% existieren nur als Zahlen auf Computern.',
+        mf_sun_bridge: 'Wenn man alles physische Geld der Welt in $1-Scheine umwandeln würde, könnte man eine Brücke zur Sonne bauen — gerade breit genug zum Drüberlaufen (57 cm).',
+        mf_disclaimer: '* Elon Musk-Zahl basiert auf durchschnittlichem Vermögenswachstum über 5 Jahre (~$850 Mrd.). Kein tatsächliches Einkommen — Vermögen schwankt.',
+        s1_rank_country_caption: '{n} von 100 Menschen in {country} verdienen weniger als du',
+        s1_rank_world_caption: '{n} von 100 Menschen auf der Erde verdienen weniger als du',
+        nav_wyr: 'Was wählst du?',
+        s4_title: 'Was wählst du?',
+        s4_subtitle: 'Schwere Entscheidungen über Geld und Leben. Wähle eine — dann sieh, was andere gewählt haben.',
+        s4_next: 'Nächste Frage',
+        wyr_your_choice: 'Deine Wahl',
+        wyr_q1: 'Was wählst du?',
+        wyr_q1_a: '$5.000 sofort, garantiert',
+        wyr_q1_b: 'Münze werfen: Kopf = $100.000.000, Zahl = du stirbst innerhalb eines Jahres',
+        wyr_q2: 'Was wählst du?',
+        wyr_q2_a: '30% deines Gehalts lebenslang abgeben',
+        wyr_q2_b: '10 Lebensjahre abgeben',
+        wyr_q3: 'Was wählst du?',
+        wyr_q3_a: '$10.000/Monat passives Einkommen, aber nie mehr als 100km von zuhause weg',
+        wyr_q3_b: 'Aktuelles Gehalt ohne Einschränkungen',
+        wyr_q4: 'Was wählst du?',
+        wyr_q4_a: '$1.000.000 sofort',
+        wyr_q4_b: '$5.000 jeden Monat für den Rest deines Lebens',
+        wyr_q5: 'Was wählst du?',
+        wyr_q5_a: 'Doppeltes Gehalt, aber ein Job den du hasst',
+        wyr_q5_b: 'Halbes Gehalt, aber dein Traumjob',
+        wyr_q6: 'Was wählst du?',
+        wyr_q6_a: '$1.000.000 aber dein gesamter Internetverlauf wird öffentlich',
+        wyr_q6_b: '$0 und du behältst deine Privatsphäre',
+        wyr_q7: 'Was wählst du?',
+        wyr_q7_a: '$1 Milliarde, aber nur noch 10 Jahre leben',
+        wyr_q7_b: 'Aktuelles Gehalt, aber 25 Jahre länger leben',
+        wyr_q8: 'Was wählst du?',
+        wyr_q8_a: 'In einem schönen Strandhaus unter Palmen leben — aber arm sein',
+        wyr_q8_b: 'In einer grauen, verregneten Stadt leben — aber 3× mehr verdienen',
+        wyr_q9: 'Was wählst du?',
+        wyr_q9_a: 'Rente mit 40, aber sehr knapp',
+        wyr_q9_b: 'Arbeiten bis 65, aber wohlhabend in Rente',
+        wyr_q10: 'Was wählst du?',
+        wyr_q10_a: '$10.000.000 erben, aber nie wieder arbeiten dürfen',
+        wyr_q10_b: 'Bescheidenes Gehalt mit sinnvoller Arbeit',
+        wyr_q11: 'Was wählst du?',
+        wyr_q11_a: 'Alles Geld für Reisen in den 30ern ausgeben, danach bescheiden leben',
+        wyr_q11_b: 'Alles sparen und mit 65 die Welt bereisen',
+        wyr_q12: 'Was wählst du?',
+        wyr_q12_a: '70 Stunden/Woche arbeiten für $1.000.000/Jahr',
+        wyr_q12_b: '20 Stunden/Woche mit bequemem aber bescheidenem Einkommen',
+        wyr_q13: 'Was wählst du?',
+        wyr_q13_a: 'Lotterie gewinnen, aber alle Freunde verlieren',
+        wyr_q13_b: 'Bankrott gehen, aber deine Seelenverwandte finden',
+        wyr_q14: 'Was wählst du?',
+        wyr_q14_a: 'Koffer mit $100.000 auf der Straße finden (könnte gestohlen sein)',
+        wyr_q14_b: 'Legitime $5.000 Erbschaft erhalten',
+        wyr_q15: 'Was wählst du?',
+        wyr_q15_a: '$200K/Jahr verdienen, aber jeder weiß genau wie viel',
+        wyr_q15_b: '$120K/Jahr mit vollständiger finanzieller Privatsphäre',
+        nav_gtp: 'Rate den Preis',
+        s5_title: 'Rate den Preis',
+        s5_subtitle: 'Wie gut kennst du die Preise rund um die Welt?',
+        s5_guess: 'Raten!',
+        s5_next: 'Weiter →',
+        s5_new_game: 'Neues Spiel',
+        s5_perfect: 'Volltreffer! 🎯',
+        s5_close: 'Nah genug! ✓',
+        s5_off: '{pct}% daneben',
+        s5_cheapest: 'Am günstigsten',
+        s5_priciest: 'Am teuersten',
+        s5_rank_expert: 'Preisexperte! 🌍',
+        s5_rank_good: 'Weltreisender! ✈️',
+        s5_rank_ok: 'Auf dem Weg 📚',
+        s5_rank_tourist: 'Tourist-Modus 🗺️',
+        share_text: 'Ich verdiene mehr als {count} Menschen auf der Erde ({pct}% der Welt). Wie reich bist du? richometer.com',
+        copied: 'Kopiert!',
+        footer_disclaimer: 'Daten erstellt von KI (Claude Opus 4.6) auf Basis öffentlich zugänglicher Quellen (Numbeo, Big Mac Index, Weltbank, OECD), Stand März 2025. Wechselkurse sind ungefähr und können veraltet sein. Alle Berechnungen laufen lokal in Ihrem Browser — es werden keine persönlichen Daten erhoben oder gespeichert. Dies ist keine Finanzberatung.',
+        prof_cashier: 'Kassierer', prof_teacher: 'Lehrer', prof_firefighter: 'Feuerwehr',
+        prof_police: 'Polizist', prof_nurse: 'Krankenpfleger', prof_developer: 'Entwickler', prof_dentist: 'Zahnarzt',
+      },
+      fr: {
+        hero_title: 'Êtes-vous <span>riche</span> ?',
+        hero_subtitle: 'Vous êtes probablement plus riche que vous ne le pensez. Entrez votre salaire.',
+        nav_rich: 'Richesse', nav_time: 'Temps d\'achat', nav_compare: 'Comparer', nav_games_label: 'Jeux', nav_back: 'Retour',
+        s1_title: 'Rang de revenu',
+        s1_subtitle: 'Entrez votre revenu mensuel net — ce qui arrive sur votre compte.',
+        s1_income_label: 'Revenu net mensuel (sur votre compte)',
+        s1_your_country: 'Votre pays',
+        s1_compare_country: 'Comparer avec',
+        s1_button: 'Montrez-moi',
+        s1_world_label: 'Dans le monde',
+        s1_poorest: 'Plus bas', s1_richest: 'Plus haut',
+        s1_markers_label: 'Salaires moyens dans le pays sélectionné (échelle mondiale) :',
+        s1_share_copy: 'Copier le lien', s1_share_twitter: 'Twitter', s1_share_whatsapp: 'WhatsApp',
+        s1_country_rank: 'En {country}',
+        s1_country_context: 'Vous gagnez plus que {pct}% des gens en {country}',
+        s1_world_context: 'Vous gagnez plus que {pct}% de la population mondiale',
+        s2_title: 'Combien de temps dois-tu travailler ?',
+        s2_subtitle: 'Choisissez un produit. Voyez combien de jours de travail il faut dans chaque pays.',
+        s2_country_label: 'Pays', s2_product_label: 'Produit',
+        s2_button: 'Voir le classement',
+        s2_context: 'Salaire net moyen dans le pays sélectionné : {salary}/mois',
+        s2_price_info: 'Prix de {product} en {country} : {price}',
+        s3_title: 'Comparer les pays',
+        s3_subtitle: 'Combien de jours de travail pour les produits du quotidien ? Basé sur 40h/semaine et le salaire net moyen.',
+        s3_country_a: 'Pays A', s3_country_b: 'Pays B',
+        s3_button: 'Comparer',
+        s3_product: 'Produit',
+        s3_not_available: 'N/D',
+        s3_free: 'Gratuit !',
+        s1_richer_than: 'Vous gagnez plus que',
+        s1_people_on_earth: 'personnes sur Terre',
+        s1_if_100: 'Si le monde comptait 100 personnes, {count} gagneraient moins que vous',
+        fun_bigmac: 'Big Macs par mois',
+        fun_median: '× le revenu médian mondial',
+        fun_day: 'jour', fun_days: 'jours',
+        fun_earn_match: 'pour gagner ce que {country} gagne en un mois',
+        fun_iphones: 'iPhones par an',
+        s1_out_of_total: 'sur 8,1 milliards',
+        day_compare_title: 'Ce que vaut votre journée de travail',
+        day_compare_you: 'Vous',
+        day_compare_days: '{days} jours de travail',
+        day_compare_day: '1 jour de travail',
+        day_compare_punchline: 'Votre 1 jour = leurs {days} jours',
+        mf_button: '🤯 Fun fact!',
+        mf_another: '🤯 Encore un!',
+        mf_restart: '🤯 Recommencer!',
+        mf_years: 'ans',
+        mf_pickup_100: 'Si Elon Musk laisse tomber $100, ça ne vaut même pas la peine de les ramasser — sa fortune augmente de ce montant en seulement 4 secondes. (Basé sur la croissance moyenne de sa fortune sur 5 ans.)',
+        mf_bills_lined: 'Alignez votre salaire mensuel en billets de $1 bout à bout. {comparison}',
+        mf_bills_ref_pool: 'C\'est plus de 5 piscines olympiques.',
+        mf_bills_ref_fields: 'C\'est {n} terrains de football.',
+        mf_bills_ref_eiffel: 'C\'est plus haut que la Tour Eiffel (330m).',
+        mf_bills_ref_km: 'C\'est {n} km — il vous faut un vélo.',
+        mf_gold_backpack: 'Remplissez un sac à dos normal d\'or pur. Il vaut ce montant mais pèse {weight} kg ({lbs} lbs) — vous ne pourriez même pas le soulever.',
+        mf_moon_ticket: 'Un billet SpaceX pour la Lune coûte ce montant. Vous devriez économiser chaque centime pendant {years} ans.',
+        mf_bitcoin_pizza: 'En 2010, quelqu\'un a payé 10 000 Bitcoin pour 2 pizzas. Aujourd\'hui ça vaudrait ~$850M. Le repas le plus cher de l\'histoire humaine.',
+        mf_physical_cash: 'Seulement 8% de tout l\'argent du monde est du cash physique. Les 92% restants n\'existent que sous forme de chiffres sur des ordinateurs.',
+        mf_sun_bridge: 'Si on convertissait tout le cash physique du monde en billets de $1, on pourrait construire un pont jusqu\'au Soleil — juste assez large pour y marcher (57 cm).',
+        mf_disclaimer: '* Le chiffre d\'Elon Musk est basé sur la croissance moyenne du patrimoine sur 5 ans (~850 Mrd $). Pas un revenu réel — la fortune fluctue.',
+        s1_rank_country_caption: '{n} personnes sur 100 en {country} gagnent moins que vous',
+        s1_rank_world_caption: '{n} personnes sur 100 sur Terre gagnent moins que vous',
+        nav_wyr: 'Tu préfères ?',
+        s4_title: 'Tu préfères ?',
+        s4_subtitle: 'Des choix difficiles sur l\'argent et la vie. Choisis — puis vois ce que les autres ont choisi.',
+        s4_next: 'Question suivante',
+        wyr_your_choice: 'Votre choix',
+        wyr_q1: 'Tu préfères ?',
+        wyr_q1_a: 'Recevoir $5 000 maintenant, garanti',
+        wyr_q1_b: 'Pile ou face : pile = $100 000 000, face = tu meurs dans l\'année',
+        wyr_q2: 'Tu préfères ?',
+        wyr_q2_a: 'Renoncer à 30% de ton salaire à vie',
+        wyr_q2_b: 'Renoncer à 10 ans de ta vie',
+        wyr_q3: 'Tu préfères ?',
+        wyr_q3_a: '$10 000/mois de revenu passif, mais ne jamais aller à plus de 100km de chez toi',
+        wyr_q3_b: 'Ton salaire actuel sans aucune restriction',
+        wyr_q4: 'Tu préfères ?',
+        wyr_q4_a: 'Recevoir $1 000 000 maintenant',
+        wyr_q4_b: 'Recevoir $5 000 chaque mois pour le reste de ta vie',
+        wyr_q5: 'Tu préfères ?',
+        wyr_q5_a: 'Double salaire, mais un travail que tu détestes',
+        wyr_q5_b: 'Demi-salaire, mais le travail de tes rêves',
+        wyr_q6: 'Tu préfères ?',
+        wyr_q6_a: '$1 000 000 mais tout ton historique internet devient public',
+        wyr_q6_b: '$0 et garder ta vie privée',
+        wyr_q7: 'Tu préfères ?',
+        wyr_q7_a: '$1 milliard mais ne vivre que 10 ans de plus',
+        wyr_q7_b: 'Ton salaire actuel mais vivre 25 ans de plus',
+        wyr_q8: 'Tu préfères ?',
+        wyr_q8_a: 'Vivre dans une belle maison sur la plage sous les palmiers — mais être pauvre',
+        wyr_q8_b: 'Vivre dans une ville grise et pluvieuse — mais gagner 3× plus',
+        wyr_q9: 'Tu préfères ?',
+        wyr_q9_a: 'Retraite à 40 ans, mais très serré',
+        wyr_q9_b: 'Travailler jusqu\'à 65 ans, mais retraite aisée',
+        wyr_q10: 'Tu préfères ?',
+        wyr_q10_a: 'Hériter de $10 000 000 mais ne plus jamais travailler',
+        wyr_q10_b: 'Salaire modeste en faisant un travail qui a du sens',
+        wyr_q11: 'Tu préfères ?',
+        wyr_q11_a: 'Dépenser toutes tes économies pour voyager dans la trentaine, puis vivre modestement',
+        wyr_q11_b: 'Tout économiser et voyager à 65 ans',
+        wyr_q12: 'Tu préfères ?',
+        wyr_q12_a: 'Travailler 70h/semaine pour $1 000 000/an',
+        wyr_q12_b: 'Travailler 20h/semaine avec un revenu confortable mais modeste',
+        wyr_q13: 'Tu préfères ?',
+        wyr_q13_a: 'Gagner au loto, mais perdre tous tes amis',
+        wyr_q13_b: 'Faire faillite, mais trouver ton âme sœur',
+        wyr_q14: 'Tu préfères ?',
+        wyr_q14_a: 'Trouver une mallette de $100 000 dans la rue (peut-être volée)',
+        wyr_q14_b: 'Recevoir un héritage légitime de $5 000',
+        wyr_q15: 'Tu préfères ?',
+        wyr_q15_a: 'Gagner $200K/an mais tout le monde sait exactement combien',
+        wyr_q15_b: 'Gagner $120K/an avec une confidentialité financière totale',
+        nav_gtp: 'Devinez le prix',
+        s5_title: 'Devinez le prix',
+        s5_subtitle: 'Connaissez-vous les prix dans le monde ?',
+        s5_guess: 'Deviner !',
+        s5_next: 'Suivant →',
+        s5_new_game: 'Nouvelle partie',
+        s5_perfect: 'En plein dans le mille ! 🎯',
+        s5_close: 'Assez proche ! ✓',
+        s5_off: '{pct}% à côté',
+        s5_cheapest: 'Le moins cher',
+        s5_priciest: 'Le plus cher',
+        s5_rank_expert: 'Expert des prix ! 🌍',
+        s5_rank_good: 'Grand voyageur ! ✈️',
+        s5_rank_ok: 'En progrès 📚',
+        s5_rank_tourist: 'Mode touriste 🗺️',
+        share_text: 'Je gagne plus que {count} personnes sur Terre ({pct}% du monde). Et toi ? richometer.com',
+        copied: 'Copié !',
+        footer_disclaimer: 'Données compilées par IA (Claude Opus 4.6) à partir de sources publiques (Numbeo, Big Mac Index, Banque mondiale, OCDE) en date de mars 2025. Les taux de change sont approximatifs et peuvent être obsolètes. Tous les calculs sont effectués localement dans votre navigateur — aucune donnée personnelle n\'est collectée ni stockée. Ceci ne constitue pas un conseil financier.',
+        prof_cashier: 'Caissier', prof_teacher: 'Enseignant', prof_firefighter: 'Pompier',
+        prof_police: 'Policier', prof_nurse: 'Infirmier', prof_developer: 'Développeur', prof_dentist: 'Dentiste',
+      },
+      es: {
+        hero_title: '¿Qué tan <span>rico</span> eres?',
+        hero_subtitle: 'Probablemente eres más rico de lo que crees. Ingresa tu salario.',
+        nav_rich: 'Riqueza', nav_time: 'Tiempo', nav_compare: 'Comparar', nav_games_label: 'Juegos', nav_back: 'Volver',
+        s1_title: 'Rango de ingresos',
+        s1_subtitle: 'Ingresa tu ingreso mensual neto — lo que llega a tu cuenta.',
+        s1_income_label: 'Ingreso neto mensual (a tu cuenta)',
+        s1_your_country: 'Tu país',
+        s1_compare_country: 'Comparar con',
+        s1_button: 'Muéstrame',
+        s1_world_label: 'En el mundo',
+        s1_poorest: 'Menor', s1_richest: 'Mayor',
+        s1_markers_label: 'Salarios promedio en el país seleccionado (escala global):',
+        s1_share_copy: 'Copiar enlace', s1_share_twitter: 'Twitter', s1_share_whatsapp: 'WhatsApp',
+        s1_country_rank: 'En {country}',
+        s1_country_context: 'Ganas más que el {pct}% de las personas en {country}',
+        s1_world_context: 'Ganas más que el {pct}% de la población mundial',
+        s2_title: '¿Cuánto tiempo tienes que trabajar?',
+        s2_subtitle: 'Elige un producto. Mira cuántos días de trabajo cuesta en cada país.',
+        s2_country_label: 'País', s2_product_label: 'Producto',
+        s2_button: 'Ver ranking',
+        s2_context: 'Salario neto promedio en el país seleccionado: {salary}/mes',
+        s2_price_info: 'Precio de {product} en {country}: {price}',
+        s3_title: 'Comparar países',
+        s3_subtitle: '¿Cuántos días de trabajo necesita un trabajador promedio para productos cotidianos? Basado en 40h/semana y salario neto promedio.',
+        s3_country_a: 'País A', s3_country_b: 'País B',
+        s3_button: 'Comparar',
+        s3_product: 'Producto',
+        s3_not_available: 'N/D',
+        s3_free: '¡Gratis!',
+        s1_richer_than: 'Ganas más que',
+        s1_people_on_earth: 'personas en la Tierra',
+        s1_if_100: 'Si el mundo fuera 100 personas, {count} ganarían menos que tú',
+        fun_bigmac: 'Big Macs al mes',
+        fun_median: '× el ingreso mediano global',
+        fun_day: 'día', fun_days: 'días',
+        fun_earn_match: 'para ganar lo que {country} gana en un mes',
+        fun_iphones: 'iPhones al año',
+        s1_out_of_total: 'de 8.100 millones',
+        day_compare_title: 'Lo que vale tu día de trabajo',
+        day_compare_you: 'Tú',
+        day_compare_days: '{days} días de trabajo',
+        day_compare_day: '1 día de trabajo',
+        day_compare_punchline: 'Tu 1 día = sus {days} días',
+        mf_button: '🤯 Fun fact!',
+        mf_another: '🤯 Otro más!',
+        mf_restart: '🤯 De nuevo!',
+        mf_years: 'años',
+        mf_pickup_100: 'Si a Elon Musk se le caen $100, ni vale la pena recogerlos — su fortuna crece esta cantidad en solo 4 segundos. (Basado en el crecimiento promedio de su patrimonio en 5 años.)',
+        mf_bills_lined: 'Alinea tu salario mensual en billetes de $1 uno tras otro. {comparison}',
+        mf_bills_ref_pool: 'Son más de 5 piscinas olímpicas.',
+        mf_bills_ref_fields: 'Son {n} campos de fútbol.',
+        mf_bills_ref_eiffel: 'Es más alto que la Torre Eiffel (330m).',
+        mf_bills_ref_km: 'Son {n} km — necesitas una bicicleta.',
+        mf_gold_backpack: 'Llena una mochila normal con oro puro. Vale esta cantidad pero pesa {weight} kg ({lbs} lbs) — no podrías ni levantarla del suelo.',
+        mf_moon_ticket: 'Un boleto SpaceX a la Luna cuesta esta cantidad. Necesitarías ahorrar cada centavo durante {years} años.',
+        mf_bitcoin_pizza: 'En 2010, alguien pagó 10.000 Bitcoin por 2 pizzas. Hoy serían ~$850M. La comida más cara de la historia humana.',
+        mf_physical_cash: 'Solo el 8% de todo el dinero del mundo es efectivo físico. El otro 92% existe solo como números en computadoras.',
+        mf_sun_bridge: 'Si convirtieras todo el efectivo físico del mundo en billetes de $1, podrías construir un puente al Sol — justo lo suficientemente ancho para caminar (57 cm).',
+        mf_disclaimer: '* La cifra de Elon Musk se basa en el crecimiento promedio del patrimonio en 5 años (~$850 mil millones). No son ingresos reales — la fortuna fluctúa.',
+        s1_rank_country_caption: '{n} de cada 100 personas en {country} ganan menos que tú',
+        s1_rank_world_caption: '{n} de cada 100 personas en la Tierra ganan menos que tú',
+        nav_wyr: '¿Qué prefieres?',
+        s4_title: '¿Qué prefieres?',
+        s4_subtitle: 'Decisiones difíciles sobre dinero y vida. Elige una — luego ve qué eligieron otros.',
+        s4_next: 'Siguiente pregunta',
+        wyr_your_choice: 'Tu elección',
+        wyr_q1: '¿Qué prefieres?',
+        wyr_q1_a: 'Recibir $5,000 ahora, garantizado',
+        wyr_q1_b: 'Lanzar una moneda: cara = $100,000,000, cruz = mueres en un año',
+        wyr_q2: '¿Qué prefieres?',
+        wyr_q2_a: 'Renunciar al 30% de tu salario de por vida',
+        wyr_q2_b: 'Renunciar a 10 años de tu vida',
+        wyr_q3: '¿Qué prefieres?',
+        wyr_q3_a: '$10,000/mes de ingreso pasivo, pero nunca ir a más de 100km de tu casa',
+        wyr_q3_b: 'Tu salario actual sin ninguna restricción',
+        wyr_q4: '¿Qué prefieres?',
+        wyr_q4_a: 'Recibir $1,000,000 ahora mismo',
+        wyr_q4_b: 'Recibir $5,000 cada mes por el resto de tu vida',
+        wyr_q5: '¿Qué prefieres?',
+        wyr_q5_a: 'Doble salario, pero un trabajo que odias',
+        wyr_q5_b: 'Mitad de salario, pero el trabajo de tus sueños',
+        wyr_q6: '¿Qué prefieres?',
+        wyr_q6_a: '$1,000,000 pero todo tu historial de internet se hace público',
+        wyr_q6_b: '$0 y mantener tu privacidad',
+        wyr_q7: '¿Qué prefieres?',
+        wyr_q7_a: '$1 mil millones pero solo vivir 10 años más',
+        wyr_q7_b: 'Tu salario actual pero vivir 25 años más',
+        wyr_q8: '¿Qué prefieres?',
+        wyr_q8_a: 'Vivir en una hermosa casa en la playa bajo palmeras — pero ser pobre',
+        wyr_q8_b: 'Vivir en una ciudad gris y lluviosa — pero ganar 3× más',
+        wyr_q9: '¿Qué prefieres?',
+        wyr_q9_a: 'Jubilarte a los 40, pero con un presupuesto muy ajustado',
+        wyr_q9_b: 'Trabajar hasta los 65, pero jubilarte rico',
+        wyr_q10: '¿Qué prefieres?',
+        wyr_q10_a: 'Heredar $10,000,000 pero no poder trabajar nunca más',
+        wyr_q10_b: 'Ganar un salario modesto haciendo un trabajo significativo',
+        wyr_q11: '¿Qué prefieres?',
+        wyr_q11_a: 'Gastar todos tus ahorros viajando por el mundo a los 30, luego vivir modestamente',
+        wyr_q11_b: 'Ahorrar todo y viajar por el mundo a los 65',
+        wyr_q12: '¿Qué prefieres?',
+        wyr_q12_a: 'Trabajar 70 horas a la semana ganando $1,000,000/año',
+        wyr_q12_b: 'Trabajar 20 horas a la semana con un ingreso cómodo pero modesto',
+        wyr_q13: '¿Qué prefieres?',
+        wyr_q13_a: 'Ganar la lotería pero perder todos tus amigos',
+        wyr_q13_b: 'Ir a la quiebra pero encontrar a tu alma gemela',
+        wyr_q14: '¿Qué prefieres?',
+        wyr_q14_a: 'Encontrar un maletín con $100,000 en la calle (podría ser robado)',
+        wyr_q14_b: 'Recibir una herencia legítima de $5,000',
+        wyr_q15: '¿Qué prefieres?',
+        wyr_q15_a: 'Ganar $200K/año pero todos saben exactamente cuánto ganas',
+        wyr_q15_b: 'Ganar $120K/año con total privacidad financiera',
+        nav_gtp: 'Adivina el precio',
+        s5_title: 'Adivina el precio',
+        s5_subtitle: '¿Sabes cuánto cuestan las cosas en el mundo?',
+        s5_guess: '¡Adivinar!',
+        s5_next: 'Siguiente →',
+        s5_new_game: 'Nuevo juego',
+        s5_perfect: '¡En el clavo! 🎯',
+        s5_close: '¡Bastante cerca! ✓',
+        s5_off: '{pct}% de diferencia',
+        s5_cheapest: 'Más barato',
+        s5_priciest: 'Más caro',
+        s5_rank_expert: '¡Experto en precios! 🌍',
+        s5_rank_good: '¡Gran viajero! ✈️',
+        s5_rank_ok: 'En camino 📚',
+        s5_rank_tourist: 'Modo turista 🗺️',
+        share_text: '¡Gano más que {count} personas en la Tierra ({pct}% del mundo)! ¿Y tú? richometer.com',
+        copied: '¡Copiado!',
+        footer_disclaimer: 'Datos recopilados por IA (Claude Opus 4.6) a partir de fuentes públicas (Numbeo, Big Mac Index, Banco Mundial, OCDE) a fecha de marzo de 2025. Los tipos de cambio son aproximados y pueden estar desactualizados. Todos los cálculos se ejecutan localmente en tu navegador — no se recopilan ni almacenan datos personales. Esto no constituye asesoramiento financiero.',
+        prof_cashier: 'Cajero', prof_teacher: 'Profesor', prof_firefighter: 'Bombero',
+        prof_police: 'Policía', prof_nurse: 'Enfermero', prof_developer: 'Programador', prof_dentist: 'Dentista',
+      },
+    };
+
+    // ---- STATE ----
+    let currentLang = 'en';
+    let compareToManuallyChanged = false;
+    let lastWorldPct = 0;
+    let lastRichCount = 0;
+
+    // ---- INIT ----
+    function init() {
+      populateCountryDropdowns();
+      populateProductDropdown();
+      detectLanguage();
+      detectCountry();
+      setupEventListeners();
+      setupNavigation();
+      wyrInit();
+      gtpInit();
+    }
+
+    // ---- POPULATE DROPDOWNS ----
+    function populateCountryDropdowns() {
+      const selects = ['countrySelect', 'compareToCountry', 'compareCountryA', 'compareCountryB'];
+      const sorted = Object.entries(D.countries).sort((a, b) => a[1].name.localeCompare(b[1].name));
+
+      selects.forEach(id => {
+        const el = document.getElementById(id);
+        sorted.forEach(([code, c]) => {
+          const opt = document.createElement('option');
+          opt.value = code;
+          opt.textContent = c.name;
+          el.appendChild(opt);
+        });
+      });
+    }
+
+    function populateProductDropdown() {
+      const el = document.getElementById('affordProduct');
+      Object.entries(D.products).forEach(([key, p]) => {
+        const opt = document.createElement('option');
+        opt.value = key;
+        opt.textContent = `${p.icon} ${p.name}`;
+        el.appendChild(opt);
+      });
+    }
+
+    // ---- LANGUAGE DETECTION ----
+    function detectLanguage() {
+      const browserLang = (navigator.language || 'en').split('-')[0].toLowerCase();
+      if (TRANSLATIONS[browserLang]) {
+        currentLang = browserLang;
+      }
+      document.getElementById('langSelect').value = currentLang;
+      applyTranslations();
+    }
+
+    function applyTranslations() {
+      const t = TRANSLATIONS[currentLang] || TRANSLATIONS['en'];
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (t[key]) {
+          el.innerHTML = t[key];
+        }
+      });
+      document.documentElement.lang = currentLang;
+    }
+
+    function t(key, replacements = {}) {
+      const translations = TRANSLATIONS[currentLang] || TRANSLATIONS['en'];
+      let text = translations[key] || TRANSLATIONS['en'][key] || key;
+      Object.entries(replacements).forEach(([k, v]) => {
+        text = text.replace(`{${k}}`, v);
+      });
+      return text;
+    }
+
+    // ---- COUNTRY DETECTION (via IP) ----
+    function detectCountry() {
+      // Try browser language first to guess country
+      const lang = (navigator.language || 'en').split('-');
+      const regionCode = lang[1] ? lang[1].toUpperCase() : null;
+
+      if (regionCode && D.countries[regionCode]) {
+        setCountryDefaults(regionCode);
+        return;
+      }
+
+      // Fallback: try IP geolocation
+      fetch('https://ipapi.co/json/')
+        .then(r => r.json())
+        .then(data => {
+          if (data.country_code && D.countries[data.country_code]) {
+            setCountryDefaults(data.country_code);
+          }
+        })
+        .catch(() => {
+          // Default to US if all fails
+          setCountryDefaults('US');
+        });
+    }
+
+    function setCountryDefaults(code) {
+      document.getElementById('countrySelect').value = code;
+      document.getElementById('compareToCountry').value = code;
+      document.getElementById('compareCountryA').value = code;
+      // Set a different default for country B
+      const otherCountry = code === 'US' ? 'IN' : 'US';
+      document.getElementById('compareCountryB').value = otherCountry;
+      updateCurrencyLabel();
+    }
+
+    // ---- EVENT LISTENERS ----
+    function setupEventListeners() {
+      document.getElementById('calcRichBtn').addEventListener('click', calculateRich);
+      document.getElementById('calcAffordBtn').addEventListener('click', calculateAfford);
+      document.getElementById('calcCompareBtn').addEventListener('click', calculateCompare);
+      document.getElementById('langSelect').addEventListener('change', (e) => {
+        currentLang = e.target.value;
+        applyTranslations();
+      });
+
+      // Update currency label when your country changes
+      document.getElementById('countrySelect').addEventListener('change', function() {
+        updateCurrencyLabel();
+        // Sync "compare to" dropdown if user hasn't changed it manually
+        if (!compareToManuallyChanged) {
+          document.getElementById('compareToCountry').value = document.getElementById('countrySelect').value;
+        }
+      });
+
+      // Track if user manually changed the compare-to dropdown
+      document.getElementById('compareToCountry').addEventListener('change', function() {
+        compareToManuallyChanged = true;
+      });
+
+      // Show conversion on input
+      document.getElementById('incomeInput').addEventListener('input', updateConversion);
+
+      // Enter key support
+      document.getElementById('incomeInput').addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') calculateRich();
+      });
+
+      // Share buttons
+      document.getElementById('shareCopy').addEventListener('click', shareCopyLink);
+      document.getElementById('shareTwitter').addEventListener('click', shareTwitter);
+      document.getElementById('shareWhatsapp').addEventListener('click', shareWhatsApp);
+
+      // Money facts
+      document.getElementById('moneyFactsBtn').addEventListener('click', showMoneyFacts);
+
+      // Would You Rather
+      document.getElementById('wyrOptionA').addEventListener('click', function() { wyrChoose('a'); });
+      document.getElementById('wyrOptionB').addEventListener('click', function() { wyrChoose('b'); });
+      document.getElementById('wyrNextBtn').addEventListener('click', wyrShowNext);
+
+      // Guess the Price
+      document.getElementById('gtpGuessBtn').addEventListener('click', gtpGuess);
+      document.getElementById('gtpNextBtn').addEventListener('click', gtpNext);
+      document.getElementById('gtpNewBtn').addEventListener('click', gtpInit);
+      document.getElementById('gtpInput').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') gtpGuess();
+      });
+
+      // Select all on focus for all number inputs (better UX)
+      var numInputs = [document.getElementById('incomeInput'), document.getElementById('gtpInput')];
+      numInputs.forEach(function(inp) {
+        if (inp) inp.addEventListener('focus', function() { this.select(); });
+      });
+    }
+
+    // ---- VIEW SWITCHING (Tools vs Games) ----
+    var toolSections = ['how-rich', 'time-to-afford', 'compare'];
+    var gameSections = ['would-you-rather', 'guess-the-price'];
+    var currentView = 'tools'; // 'tools' or a game section id
+
+    function switchView(viewId) {
+      var toolLinks = document.querySelectorAll('.nav-links a');
+      var gameLinks = document.querySelectorAll('.nav-games a');
+      var dividers = document.querySelectorAll('.section-divider');
+
+      if (gameSections.indexOf(viewId) !== -1) {
+        // Switching to a game view
+        currentView = viewId;
+
+        // Hide all tool sections + dividers
+        toolSections.forEach(function(id) {
+          var el = document.getElementById(id);
+          if (el) el.classList.add('view-hidden');
+        });
+        dividers.forEach(function(d) { d.classList.add('view-hidden'); });
+
+        // Hide all game sections, show only selected one
+        gameSections.forEach(function(id) {
+          var el = document.getElementById(id);
+          if (el) el.classList.add('view-hidden');
+        });
+        var target = document.getElementById(viewId);
+        if (target) target.classList.remove('view-hidden');
+
+        // Update nav active states
+        toolLinks.forEach(function(l) { l.classList.remove('active'); });
+        gameLinks.forEach(function(l) {
+          l.classList.remove('active');
+          if (l.getAttribute('href') === '#' + viewId) l.classList.add('active');
+        });
+
+        window.scrollTo(0, 0);
+
+      } else {
+        // Switching back to tools view
+        currentView = 'tools';
+
+        // Show all tool sections + dividers
+        toolSections.forEach(function(id) {
+          var el = document.getElementById(id);
+          if (el) el.classList.remove('view-hidden');
+        });
+        dividers.forEach(function(d) { d.classList.remove('view-hidden'); });
+
+        // Hide all game sections
+        gameSections.forEach(function(id) {
+          var el = document.getElementById(id);
+          if (el) el.classList.add('view-hidden');
+        });
+
+        // Update nav active states
+        gameLinks.forEach(function(l) { l.classList.remove('active'); });
+      }
+    }
+
+    function setupNavigation() {
+      var toolLinks = document.querySelectorAll('.nav-links a');
+      var gameLinks = document.querySelectorAll('.nav-games a');
+
+      // Tool links — switch to tools view + scroll to section
+      toolLinks.forEach(function(link) {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          switchView('tools');
+          var targetId = this.getAttribute('href').substring(1);
+          var target = document.getElementById(targetId);
+          if (target) {
+            // Update active
+            toolLinks.forEach(function(l) { l.classList.remove('active'); });
+            this.classList.add('active');
+            setTimeout(function() {
+              target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 50);
+          }
+        });
+      });
+
+      // Game links — switch to game view
+      gameLinks.forEach(function(link) {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          var targetId = this.getAttribute('href').substring(1);
+          switchView(targetId);
+        });
+      });
+
+      // Logo click — back to tools
+      var logo = document.querySelector('.nav-logo');
+      if (logo) {
+        logo.addEventListener('click', function(e) {
+          e.preventDefault();
+          switchView('tools');
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          toolLinks.forEach(function(l) { l.classList.remove('active'); });
+          toolLinks[0].classList.add('active');
+        });
+      }
+
+      // Scroll spy for tools only
+      window.addEventListener('scroll', function() {
+        if (currentView !== 'tools') return;
+        var current = '';
+        toolSections.forEach(function(id) {
+          var section = document.getElementById(id);
+          if (section && section.getBoundingClientRect().top < 150) {
+            current = id;
+          }
+        });
+        toolLinks.forEach(function(link) {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === '#' + current) {
+            link.classList.add('active');
+          }
+        });
+      });
+
+      // Start in tools view — hide games
+      gameSections.forEach(function(id) {
+        var el = document.getElementById(id);
+        if (el) el.classList.add('view-hidden');
+      });
+    }
+
+    // ---- CURRENCY HELPERS ----
+    function updateCurrencyLabel() {
+      const code = document.getElementById('countrySelect').value;
+      const country = D.countries[code];
+      if (!country) return;
+      document.getElementById('currencyLabel').textContent = country.symbol;
+      // Adjust input padding for longer symbols
+      const padLeft = country.symbol.length > 2 ? (country.symbol.length * 12 + 14) : 40;
+      document.getElementById('incomeInput').style.paddingLeft = padLeft + 'px';
+      updateConversion();
+    }
+
+    function updateConversion() {
+      const code = document.getElementById('countrySelect').value;
+      const country = D.countries[code];
+      const income = parseFloat(document.getElementById('incomeInput').value);
+      const infoEl = document.getElementById('conversionInfo');
+
+      if (!country || !income || income <= 0 || country.currency === 'USD') {
+        infoEl.style.display = 'none';
+        return;
+      }
+
+      const usd = income * country.toUSD;
+      document.getElementById('convertedUSD').textContent = '$' + usd.toLocaleString(undefined, { maximumFractionDigits: 0 });
+      document.getElementById('convCurrency').textContent = country.currency;
+      // Show rate in readable format
+      const rate = country.toUSD;
+      document.getElementById('convRate').textContent = rate >= 0.01 ? rate.toFixed(2) : rate.toExponential(2);
+      infoEl.style.display = 'block';
+    }
+
+    // ---- CALCULATE: HOW RICH ARE YOU ----
+    const WORLD_POP = 8100000000;
+
+    function calculateRich() {
+      const localIncome = parseFloat(document.getElementById('incomeInput').value);
+      if (!localIncome || localIncome <= 0) return;
+
+      const myCountryCode = document.getElementById('countrySelect').value;
+      const myCountry = D.countries[myCountryCode];
+      const compareCode = document.getElementById('compareToCountry').value;
+      const compareCountry = D.countries[compareCode];
+
+      // Convert local currency to USD
+      const income = localIncome * myCountry.toUSD;
+
+      // Reset money facts pool (salary may have changed)
+      moneyFactsReady = false;
+
+      // Show conversion
+      updateConversion();
+
+      // Calculate percentiles
+      const countryPct = getCountryPercentile(compareCode, income);
+      const worldPct = getGlobalPercentile(income);
+      const richerThan = Math.round(WORLD_POP * worldPct / 100);
+
+      // Show results
+      const results = document.getElementById('richResults');
+      results.classList.add('visible');
+
+      // 1. Animated big counter
+      animateCount(document.getElementById('richCount'), richerThan, 2000);
+
+      // 2. Rank visuals (human-readable "X out of 10")
+      document.getElementById('countryRankLabel').innerHTML = getFlag(compareCode) + ' ' + compareCountry.name;
+      buildRankDots('countryRankVisual', countryPct, compareCountry.name, false);
+      buildRankDots('worldRankVisual', worldPct, null, true);
+
+      // 3. Build 100-people grid
+      buildPeopleGrid(worldPct);
+
+      // 4. Fun facts
+      buildFunFacts(income, compareCode);
+
+      // 5. Day comparison
+      lastWorldPct = worldPct;
+      lastRichCount = Math.round(WORLD_POP * worldPct / 100);
+      buildDayCompare(income, compareCode);
+
+      // Scroll to results
+      results.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    // ---- ANIMATED COUNTER ----
+    function animateCount(el, target, duration) {
+      const start = performance.now();
+      function update(now) {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        // Ease out cubic
+        const eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.round(target * eased).toLocaleString();
+        if (progress < 1) requestAnimationFrame(update);
+      }
+      requestAnimationFrame(update);
+    }
+
+    // ---- 100 PEOPLE GRID ----
+    function buildPeopleGrid(worldPct) {
+      const grid = document.getElementById('peopleGrid');
+      grid.innerHTML = '';
+      const youAt = Math.round(worldPct); // out of 100
+      const peopleCount = Math.min(youAt, 99);
+
+      // Title text
+      document.getElementById('peopleTitle').innerHTML =
+        t('s1_if_100', { count: '<strong>' + peopleCount + '</strong>' });
+
+      for (let i = 0; i < 100; i++) {
+        const dot = document.createElement('div');
+        dot.className = 'person-dot';
+        if (i < peopleCount) {
+          // People who earn less
+        } else if (i === peopleCount) {
+          dot.classList.add('you');
+        } else {
+          dot.classList.add('richer');
+        }
+        // Staggered animation
+        dot.style.animationDelay = (i * 12) + 'ms';
+        grid.appendChild(dot);
+      }
+    }
+
+    // ---- FUN FACTS ----
+    function buildFunFacts(incomeUSD, compareCode) {
+      const container = document.getElementById('funFacts');
+      container.innerHTML = '';
+      const facts = [];
+
+      // 1. Big Macs per month
+      const bmPrice = D.prices.US ? D.prices.US.bigmac : 5.58;
+      if (bmPrice > 0) {
+        facts.push({
+          icon: '🍔',
+          value: Math.round(incomeUSD / bmPrice).toLocaleString(),
+          label: t('fun_bigmac')
+        });
+      }
+
+      // 2. Times global median ($400/mo at 50th percentile)
+      const globalMedian = 400;
+      const timesMedian = incomeUSD / globalMedian;
+      facts.push({
+        icon: '🌍',
+        value: timesMedian >= 10 ? Math.round(timesMedian) + '×' : timesMedian.toFixed(1) + '×',
+        label: t('fun_median')
+      });
+
+      // 3. Days to earn what poorest country earns in a month
+      const lowestCountry = findLowestSalaryCountry(compareCode);
+      if (lowestCountry) {
+        const daysToMatch = Math.max(1, Math.round(30 * lowestCountry.salary / incomeUSD));
+        facts.push({
+          icon: '⏱️',
+          value: daysToMatch + (daysToMatch === 1 ? ' ' + t('fun_day') : ' ' + t('fun_days')),
+          label: t('fun_earn_match', { country: lowestCountry.name })
+        });
+      }
+
+      // 4. iPhones per year
+      const iphonePrice = D.prices.US ? D.prices.US.iphone : 799;
+      if (iphonePrice > 0) {
+        const iphonesPerYear = (incomeUSD * 12) / iphonePrice;
+        facts.push({
+          icon: '📱',
+          value: iphonesPerYear >= 10 ? Math.round(iphonesPerYear).toLocaleString() : iphonesPerYear.toFixed(1),
+          label: t('fun_iphones')
+        });
+      }
+
+      // Render facts
+      facts.forEach(function(fact) {
+        const el = document.createElement('div');
+        el.className = 'fun-fact';
+        el.innerHTML =
+          '<div class="fun-fact-icon">' + fact.icon + '</div>' +
+          '<div class="fun-fact-value">' + fact.value + '</div>' +
+          '<div class="fun-fact-label">' + fact.label + '</div>';
+        container.appendChild(el);
+      });
+    }
+
+    function findLowestSalaryCountry(excludeCode) {
+      let lowest = null;
+      Object.entries(D.countries).forEach(function([code, c]) {
+        if (code === excludeCode) return;
+        if (!lowest || c.avgNetSalary < lowest.salary) {
+          lowest = { code: code, name: c.name, salary: c.avgNetSalary };
+        }
+      });
+      return lowest;
+    }
+
+    // ---- RANK DOTS (X out of 100 visualization) ----
+    function buildRankDots(containerId, percentile, countryName, isWorld) {
+      var container = document.getElementById(containerId);
+      container.innerHTML = '';
+
+      // Convert percentile to "X out of 100"
+      var youBeat = Math.round(percentile);
+      if (youBeat < 1 && percentile > 0) youBeat = 1;
+      if (youBeat > 99) youBeat = 99;
+
+      // Create 100 dots (10×10 grid)
+      var grid = document.createElement('div');
+      grid.style.cssText = 'display:grid;grid-template-columns:repeat(10,1fr);gap:2px;max-width:220px;margin:0 auto;';
+      for (var i = 0; i < 100; i++) {
+        var dot = document.createElement('div');
+        dot.className = 'rank-dot';
+        dot.style.width = '14px';
+        dot.style.height = '14px';
+        if (i < youBeat) {
+          dot.classList.add('below');
+        } else if (i === youBeat) {
+          dot.classList.add('you');
+        } else {
+          dot.classList.add('above');
+        }
+        grid.appendChild(dot);
+      }
+      container.appendChild(grid);
+
+      // Caption
+      var caption = document.createElement('div');
+      caption.className = 'rank-caption';
+      if (isWorld) {
+        caption.innerHTML = t('s1_rank_world_caption', { n: '<strong>' + youBeat + '</strong>' });
+      } else {
+        caption.innerHTML = t('s1_rank_country_caption', { n: '<strong>' + youBeat + '</strong>', country: countryName });
+      }
+      container.appendChild(caption);
+    }
+
+    // ---- DAY COMPARISON ----
+    function buildDayCompare(incomeUSD, compareCode) {
+      var container = document.getElementById('dayCompareRows');
+      container.innerHTML = '';
+      var titleEl = document.getElementById('dayCompareTitle');
+      titleEl.textContent = t('day_compare_title');
+
+      var myDaily = incomeUSD / D.workDaysPerMonth;
+
+      // Find 2-3 countries to compare against
+      var comparisons = [];
+
+      // 1. The lowest salary country (max contrast)
+      var lowest = findLowestSalaryCountry(compareCode);
+      if (lowest && lowest.salary > 0) {
+        var lowestDaily = lowest.salary / D.workDaysPerMonth;
+        var ratio = Math.round(myDaily / lowestDaily);
+        if (ratio > 1) {
+          comparisons.push({ name: lowest.name, flag: getFlag(lowest.code), days: ratio });
+        }
+      }
+
+      // 2. A middle-income country for context (find one around $500-800/mo)
+      var midCountry = null;
+      var midTarget = 600;
+      var midDiff = Infinity;
+      Object.entries(D.countries).forEach(function([code, c]) {
+        if (code === compareCode) return;
+        if (lowest && code === lowest.code) return;
+        var diff = Math.abs(c.avgNetSalary - midTarget);
+        if (diff < midDiff) { midDiff = diff; midCountry = { code: code, name: c.name, salary: c.avgNetSalary }; }
+      });
+      if (midCountry && midCountry.salary > 0) {
+        var midDaily = midCountry.salary / D.workDaysPerMonth;
+        var midRatio = Math.round(myDaily / midDaily);
+        if (midRatio > 1 && midRatio !== (comparisons[0] && comparisons[0].days)) {
+          comparisons.push({ name: midCountry.name, flag: getFlag(midCountry.code), days: midRatio });
+        }
+      }
+
+      // Sort by days descending (biggest contrast first)
+      comparisons.sort(function(a, b) { return b.days - a.days; });
+
+      if (comparisons.length === 0) {
+        document.getElementById('dayCompare').style.display = 'none';
+        return;
+      }
+      document.getElementById('dayCompare').style.display = '';
+
+      // Find max days for bar scaling
+      var maxDays = comparisons[0].days;
+
+      // Build "You" row first
+      var youRow = document.createElement('div');
+      youRow.className = 'day-row';
+      youRow.innerHTML =
+        '<div class="day-row-label">' + t('day_compare_you') + '</div>' +
+        '<div class="day-row-bar-wrap">' +
+          '<div class="day-row-bar you" style="width: 0%">' +
+            '<span class="day-row-bar-text">' + t('day_compare_day') + '</span>' +
+          '</div>' +
+        '</div>';
+      container.appendChild(youRow);
+
+      // Animate "You" bar
+      setTimeout(function() {
+        var youBar = youRow.querySelector('.day-row-bar');
+        youBar.style.width = Math.max(5, (1 / maxDays) * 100) + '%';
+      }, 100);
+
+      // Build comparison rows
+      comparisons.forEach(function(comp, idx) {
+        var row = document.createElement('div');
+        row.className = 'day-row';
+        row.innerHTML =
+          '<div class="day-row-label">' + comp.flag + ' ' + comp.name + '</div>' +
+          '<div class="day-row-bar-wrap">' +
+            '<div class="day-row-bar other" style="width: 0%">' +
+              '<span class="day-row-bar-text">' + t('day_compare_days', { days: comp.days }) + '</span>' +
+            '</div>' +
+          '</div>';
+        container.appendChild(row);
+
+        // Animate bar with stagger
+        setTimeout(function() {
+          var bar = row.querySelector('.day-row-bar');
+          bar.style.width = Math.max(8, (comp.days / maxDays) * 100) + '%';
+        }, 300 + idx * 200);
+      });
+
+      // Punchline
+      var punch = document.createElement('div');
+      punch.className = 'day-compare-punchline';
+      punch.innerHTML = t('day_compare_punchline', { days: '<span>' + comparisons[0].days + '</span>' });
+      container.appendChild(punch);
+    }
+
+    function getFlag(countryCode) {
+      // Return flag as Twemoji SVG image (works on Windows too)
+      if (!countryCode || countryCode.length !== 2) return '';
+      var first = (0x1F1E6 + countryCode.charCodeAt(0) - 65).toString(16);
+      var second = (0x1F1E6 + countryCode.charCodeAt(1) - 65).toString(16);
+      var url = 'https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/' + first + '-' + second + '.svg';
+      return '<img src="' + url + '" alt="' + countryCode + '" style="width:1.2em;height:1.2em;vertical-align:middle;margin-right:2px;" loading="lazy">';
+    }
+
+    function getGlobalPercentile(monthlyIncome) {
+      const percs = D.globalPercentiles;
+      if (monthlyIncome <= percs[0][1]) return percs[0][0];
+      if (monthlyIncome >= percs[percs.length - 1][1]) return percs[percs.length - 1][0];
+
+      for (let i = 0; i < percs.length - 1; i++) {
+        if (monthlyIncome >= percs[i][1] && monthlyIncome < percs[i + 1][1]) {
+          // Linear interpolation
+          const ratio = (monthlyIncome - percs[i][1]) / (percs[i + 1][1] - percs[i][1]);
+          return percs[i][0] + ratio * (percs[i + 1][0] - percs[i][0]);
+        }
+      }
+      return 99;
+    }
+
+    function getCountryPercentile(countryCode, monthlyIncome) {
+      const thresholds = D.countryPercentiles[countryCode];
+      if (!thresholds) return 50;
+
+      // thresholds = [p10, p20, p30, p40, p50, p60, p70, p80, p90, p95, p99]
+      const percentiles = [10, 20, 30, 40, 50, 60, 70, 80, 90, 95, 99];
+
+      if (monthlyIncome <= thresholds[0]) {
+        return (monthlyIncome / thresholds[0]) * 10;
+      }
+      if (monthlyIncome >= thresholds[thresholds.length - 1]) {
+        return 99 + (1 - 1 / (1 + (monthlyIncome - thresholds[thresholds.length - 1]) / thresholds[thresholds.length - 1]));
+      }
+
+      for (let i = 0; i < thresholds.length - 1; i++) {
+        if (monthlyIncome >= thresholds[i] && monthlyIncome < thresholds[i + 1]) {
+          const ratio = (monthlyIncome - thresholds[i]) / (thresholds[i + 1] - thresholds[i]);
+          return percentiles[i] + ratio * (percentiles[i + 1] - percentiles[i]);
+        }
+      }
+      return 50;
+    }
+
+    // ---- CALCULATE: TIME TO AFFORD ----
+    function calculateAfford() {
+      var productKey = document.getElementById('affordProduct').value;
+      var product = D.products[productKey];
+      var container = document.getElementById('countryRanking');
+      container.innerHTML = '';
+
+      // Get user's country from Section 1 (to highlight)
+      var userCountry = document.getElementById('countrySelect').value;
+
+      // Calculate work days for ALL countries that have this product
+      var rankings = [];
+      Object.entries(D.countries).forEach(function([code, country]) {
+        var prices = D.prices[code];
+        if (!prices || !prices[productKey]) return;
+        var price = prices[productKey];
+        var salary = country.avgNetSalary;
+        if (salary <= 0) return;
+
+        if (price === 0) {
+          rankings.push({ code: code, name: country.name, days: 0, free: true });
+          return;
+        }
+
+        var hourlyRate = salary / (D.workDaysPerMonth * D.workHoursPerDay);
+        var totalHours = price / hourlyRate;
+        var totalDays = totalHours / D.workHoursPerDay;
+        rankings.push({ code: code, name: country.name, days: totalDays, free: false });
+      });
+
+      // Sort by days (fastest first)
+      rankings.sort(function(a, b) { return a.days - b.days; });
+
+      // Find max for scaling
+      var maxDays = rankings.length > 0 ? rankings[rankings.length - 1].days : 1;
+      if (maxDays === 0) maxDays = 1;
+
+      // Build rows
+      rankings.forEach(function(r, idx) {
+        var row = document.createElement('div');
+        row.className = 'ranking-row';
+        if (r.code === userCountry) row.classList.add('highlighted');
+
+        var daysRound = Math.round(r.days);
+        var daysText = r.free ? t('s3_free') : (r.days < 1 ? formatDaysLabel(r.days) : daysRound + ' ' + (daysRound === 1 ? t('fun_day') : t('fun_days')));
+
+        // Color based on speed
+        var barClass = 'fast';
+        if (!r.free && r.days > 30) barClass = 'slow';
+        else if (!r.free && r.days > 10) barClass = 'medium';
+
+        var barWidth = r.free ? 3 : Math.max(3, (r.days / maxDays) * 100);
+
+        row.innerHTML =
+          '<div class="ranking-pos">' + (idx + 1) + '</div>' +
+          '<div class="ranking-flag">' + getFlag(r.code) + '</div>' +
+          '<div class="ranking-name">' + r.name + '</div>' +
+          '<div class="ranking-bar-wrap">' +
+            '<div class="ranking-bar ' + barClass + '" style="width: 0%">' + daysText + '</div>' +
+          '</div>';
+
+        container.appendChild(row);
+
+        // Animate bar
+        setTimeout(function() {
+          var bar = row.querySelector('.ranking-bar');
+          bar.style.width = barWidth + '%';
+        }, 50 + idx * 30);
+      });
+
+      document.getElementById('affordResults').classList.add('visible');
+      document.getElementById('affordResults').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    // ---- CALCULATE: COMPARE COUNTRIES ----
+    function formatDaysLabel(days) {
+      if (days < 0.01) return '<1h';
+      if (days < 1) {
+        var hours = Math.round(days * D.workHoursPerDay);
+        return hours < 1 ? '<1h' : hours + 'h';
+      }
+      return Math.round(days) + 'd';
+    }
+
+    function calculateCompare() {
+      var codeA = document.getElementById('compareCountryA').value;
+      var codeB = document.getElementById('compareCountryB').value;
+
+      var countryA = D.countries[codeA];
+      var countryB = D.countries[codeB];
+      var pricesA = D.prices[codeA];
+      var pricesB = D.prices[codeB];
+
+      if (!pricesA || !pricesB) return;
+
+      var hourlyA = countryA.avgNetSalary / (D.workDaysPerMonth * D.workHoursPerDay);
+      var hourlyB = countryB.avgNetSalary / (D.workDaysPerMonth * D.workHoursPerDay);
+
+      var container = document.getElementById('compareVisual');
+      container.innerHTML = '';
+
+      var nameA = getFlag(codeA) + ' ' + countryA.name;
+      var nameB = getFlag(codeB) + ' ' + countryB.name;
+      var delayIdx = 0;
+
+      Object.entries(D.products).forEach(function([key, product]) {
+        var priceA = pricesA[key];
+        var priceB = pricesB[key];
+        if (!priceA && !priceB) return;
+
+        var daysA = priceA ? (priceA / hourlyA) / D.workHoursPerDay : null;
+        var daysB = priceB ? (priceB / hourlyB) / D.workHoursPerDay : null;
+
+        var maxDays = Math.max(daysA || 0, daysB || 0);
+        if (maxDays === 0) maxDays = 1;
+
+        var item = document.createElement('div');
+        item.className = 'compare-item';
+
+        var labelA = daysA !== null ? formatDaysLabel(daysA) : t('s3_not_available');
+        var labelB = daysB !== null ? formatDaysLabel(daysB) : t('s3_not_available');
+        if (priceA === 0) labelA = t('s3_free');
+        if (priceB === 0) labelB = t('s3_free');
+
+        var widthA = daysA !== null ? Math.max(5, (daysA / maxDays) * 100) : 5;
+        var widthB = daysB !== null ? Math.max(5, (daysB / maxDays) * 100) : 5;
+        if (priceA === 0) widthA = 3;
+        if (priceB === 0) widthB = 3;
+
+        item.innerHTML =
+          '<div class="compare-item-label">' + product.icon + ' ' + product.name + '</div>' +
+          '<div class="compare-bars">' +
+            '<div class="compare-bar-row">' +
+              '<div class="compare-bar-flag">' + nameA + '</div>' +
+              '<div class="compare-bar-track">' +
+                '<div class="compare-bar-fill bar-a" style="width: 0%">' + labelA + '</div>' +
+              '</div>' +
+            '</div>' +
+            '<div class="compare-bar-row">' +
+              '<div class="compare-bar-flag">' + nameB + '</div>' +
+              '<div class="compare-bar-track">' +
+                '<div class="compare-bar-fill bar-b" style="width: 0%">' + labelB + '</div>' +
+              '</div>' +
+            '</div>' +
+          '</div>';
+
+        container.appendChild(item);
+
+        // Animate
+        var currentDelay = delayIdx;
+        setTimeout(function() {
+          var bars = item.querySelectorAll('.compare-bar-fill');
+          bars[0].style.width = widthA + '%';
+          bars[1].style.width = widthB + '%';
+        }, 100 + currentDelay * 80);
+        delayIdx++;
+      });
+
+      document.getElementById('compareResults').classList.add('visible');
+      document.getElementById('compareResults').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    // ---- FORMAT WORK TIME ----
+    // Returns: "2h 35min", "3d 4h 12min", "2y 145d 6h"
+    function formatWorkTime(totalHours) {
+      if (totalHours < 1) {
+        const mins = Math.round(totalHours * 60);
+        return `${mins}<span class="unit">min</span>`;
+      }
+
+      const totalMins = Math.round(totalHours * 60);
+      const years = Math.floor(totalMins / (60 * D.workHoursPerDay * D.workDaysPerMonth * 12));
+      let remaining = totalMins - years * 60 * D.workHoursPerDay * D.workDaysPerMonth * 12;
+      const days = Math.floor(remaining / (60 * D.workHoursPerDay));
+      remaining -= days * 60 * D.workHoursPerDay;
+      const hours = Math.floor(remaining / 60);
+      const mins = remaining % 60;
+
+      let parts = [];
+      if (years > 0) parts.push(`${years}<span class="unit">y</span>`);
+      if (days > 0) parts.push(`${days}<span class="unit">d</span>`);
+      if (hours > 0) parts.push(`${hours}<span class="unit">h</span>`);
+      if (mins > 0 && years === 0) parts.push(`${mins}<span class="unit">min</span>`);
+
+      return parts.join(' ');
+    }
+
+    // Short version for comparison table
+    function formatWorkTimeShort(totalHours) {
+      if (totalHours < 1) {
+        return Math.round(totalHours * 60) + 'min';
+      }
+
+      const totalMins = Math.round(totalHours * 60);
+      const years = Math.floor(totalMins / (60 * D.workHoursPerDay * D.workDaysPerMonth * 12));
+      let remaining = totalMins - years * 60 * D.workHoursPerDay * D.workDaysPerMonth * 12;
+      const days = Math.floor(remaining / (60 * D.workHoursPerDay));
+      remaining -= days * 60 * D.workHoursPerDay;
+      const hours = Math.floor(remaining / 60);
+      const mins = remaining % 60;
+
+      let parts = [];
+      if (years > 0) parts.push(years + 'y');
+      if (days > 0) parts.push(days + 'd');
+      if (hours > 0) parts.push(hours + 'h');
+      if (mins > 0 && years === 0) parts.push(mins + 'min');
+
+      return parts.join(' ');
+    }
+
+    // ---- SHARING ----
+    // ---- MIND-BLOWING MONEY FACTS ----
+    var MUSK_PER_SECOND = 5387; // ~$850B net worth growth over ~5 years
+    var DOLLAR_BILL_CM = 15.6; // length of a US $1 bill in cm
+    var GOLD_DENSITY = 19.32; // g/cm³
+    var GOLD_PRICE_PER_GRAM = 165; // ~March 2026 price
+    var BACKPACK_LITERS = 25; // standard backpack volume
+    var MOON_TICKET_USD = 70000000; // SpaceX estimated price
+    var WORLD_PHYSICAL_CASH_USD = 8.28e12; // ~$8.28 trillion (BIS)
+
+    // State for random fact cycling
+    var moneyFactsPool = [];
+    var moneyFactsShown = [];
+    var moneyFactsReady = false;
+
+    function buildMoneyFactsPool() {
+      var localIncome = parseFloat(document.getElementById('incomeInput').value);
+      if (!localIncome || localIncome <= 0) return;
+      var myCountryCode = document.getElementById('countrySelect').value;
+      var myCountry = D.countries[myCountryCode];
+      var incomeUSD = localIncome * myCountry.toUSD;
+      var yearlyUSD = incomeUSD * 12;
+
+      moneyFactsPool = [];
+      moneyFactsShown = [];
+
+      // FACT 1: Musk $100 bill pickup — storytelling style
+      var earnDuringPickup = Math.round(MUSK_PER_SECOND * 4);
+      moneyFactsPool.push({
+        icon: '💵',
+        number: '$' + earnDuringPickup.toLocaleString(),
+        unit: '',
+        text: t('mf_pickup_100')
+      });
+
+      // FACT 2: $1 bills lined up end to end (personalized)
+      var billCount = Math.round(incomeUSD);
+      var totalCm = billCount * DOLLAR_BILL_CM;
+      var meters = Math.round(totalCm / 100);
+      var feet = Math.round(meters * 3.281);
+      var comparison = '';
+      if (meters < 100) {
+        comparison = t('mf_bills_ref_pool');
+      } else if (meters < 350) {
+        comparison = t('mf_bills_ref_fields', { n: (meters / 91).toFixed(1) });
+      } else if (meters < 1000) {
+        comparison = t('mf_bills_ref_eiffel');
+      } else {
+        comparison = t('mf_bills_ref_km', { n: (meters / 1000).toFixed(1) });
+      }
+      moneyFactsPool.push({
+        icon: '💸',
+        number: meters.toLocaleString() + 'm',
+        unit: '(' + feet.toLocaleString() + ' ft)',
+        text: t('mf_bills_lined', { comparison: comparison })
+      });
+
+      // FACT 3: Gold backpack — weight AND value both prominent
+      var goldWeightKg = Math.round(BACKPACK_LITERS * 1000 * GOLD_DENSITY / 1000);
+      var goldWeightLbs = Math.round(goldWeightKg * 2.205);
+      var goldValueUSD = Math.round(BACKPACK_LITERS * 1000 * GOLD_DENSITY * GOLD_PRICE_PER_GRAM);
+      moneyFactsPool.push({
+        icon: '🎒',
+        number: '$' + (goldValueUSD / 1e6).toFixed(1) + 'M',
+        unit: '',
+        text: t('mf_gold_backpack', { weight: goldWeightKg, lbs: goldWeightLbs })
+      });
+
+      // FACT 4: Moon ticket (personalized) — "Pilet Kuule" not "kuupilet"
+      var yearsToMoon = Math.round(MOON_TICKET_USD / yearlyUSD);
+      moneyFactsPool.push({
+        icon: '🌙',
+        number: '$70M',
+        unit: '',
+        text: t('mf_moon_ticket', { years: yearsToMoon.toLocaleString() })
+      });
+
+      // FACT 5: Bitcoin pizza
+      moneyFactsPool.push({
+        icon: '🍕',
+        number: '~$850M',
+        unit: '',
+        text: t('mf_bitcoin_pizza')
+      });
+
+      // FACT 6: Only 8% of money is physical
+      moneyFactsPool.push({
+        icon: '🏦',
+        number: '8%',
+        unit: '',
+        text: t('mf_physical_cash')
+      });
+
+      // FACT 7: Sun bridge — all world's physical cash as $1 bills
+      // $8.28T bills × 15.6cm = 1.29B km, Sun = 150M km, bridge = 8.6 lanes × 6.6cm = ~57cm
+      moneyFactsPool.push({
+        icon: '☀️',
+        number: '57 cm',
+        unit: '',
+        text: t('mf_sun_bridge')
+      });
+
+      moneyFactsReady = true;
+    }
+
+    function showMoneyFacts() {
+      var container = document.getElementById('moneyFactsContainer');
+      var btn = document.getElementById('moneyFactsBtn');
+
+      var localIncome = parseFloat(document.getElementById('incomeInput').value);
+      if (!localIncome || localIncome <= 0) return;
+
+      // Build pool if needed (first click or salary changed)
+      if (!moneyFactsReady) buildMoneyFactsPool();
+
+      // If all facts shown, reset
+      if (moneyFactsShown.length >= moneyFactsPool.length) {
+        moneyFactsShown = [];
+      }
+
+      // Pick a random unseen fact
+      var available = [];
+      for (var i = 0; i < moneyFactsPool.length; i++) {
+        if (moneyFactsShown.indexOf(i) === -1) available.push(i);
+      }
+      var pick = available[Math.floor(Math.random() * available.length)];
+      moneyFactsShown.push(pick);
+      var card = moneyFactsPool[pick];
+
+      // Render single card
+      container.innerHTML = '';
+      var el = document.createElement('div');
+      el.className = 'money-card';
+      el.innerHTML =
+        '<div class="money-card-icon">' + card.icon + '</div>' +
+        '<div class="money-card-number">' + card.number + ' <small style="font-size:60%;opacity:0.7">' + card.unit + '</small></div>' +
+        '<div class="money-card-text">' + card.text + '</div>';
+      container.appendChild(el);
+
+      // Disclaimer if this fact has one (Musk stat)
+      if (card.disclaimer) {
+        var disc = document.createElement('div');
+        disc.className = 'money-card-disclaimer';
+        disc.textContent = card.disclaimer;
+        container.appendChild(disc);
+      }
+
+      // Update button text
+      var remaining = moneyFactsPool.length - moneyFactsShown.length;
+      if (remaining > 0) {
+        btn.textContent = t('mf_another');
+      } else {
+        btn.textContent = t('mf_restart');
+      }
+    }
+
+    function shareCopyLink() {
+      // Save income in USD in URL so it works across countries
+      const localIncome = parseFloat(document.getElementById('incomeInput').value) || 0;
+      const code = document.getElementById('countrySelect').value;
+      const incomeUSD = Math.round(localIncome * (D.countries[code]?.toUSD || 1));
+      const url = `${window.location.origin}${window.location.pathname}?income=${incomeUSD}&country=${code}`;
+      navigator.clipboard.writeText(url).then(() => {
+        const btn = document.getElementById('shareCopy');
+        const orig = btn.textContent;
+        btn.textContent = t('copied');
+        setTimeout(() => btn.textContent = orig, 2000);
+      });
+    }
+
+    function formatBillions(n) {
+      if (n >= 1e9) return (n / 1e9).toFixed(1) + 'B';
+      if (n >= 1e6) return (n / 1e6).toFixed(0) + 'M';
+      return n.toLocaleString();
+    }
+
+    function shareTwitter() {
+      const text = t('share_text', { pct: lastWorldPct.toFixed(1), count: formatBillions(lastRichCount) });
+      window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`, '_blank');
+    }
+
+    function shareWhatsApp() {
+      const text = t('share_text', { pct: lastWorldPct.toFixed(1), count: formatBillions(lastRichCount) });
+      window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
+    }
+
+    // ---- URL PARAMS (for shared links) ----
+    function checkUrlParams() {
+      const params = new URLSearchParams(window.location.search);
+      const income = params.get('income');
+      const country = params.get('country');
+
+      if (income) {
+        if (country && D.countries[country]) {
+          document.getElementById('countrySelect').value = country;
+          updateCurrencyLabel();
+          // Income in URL is USD — convert to local currency for display
+          const localIncome = Math.round(parseFloat(income) / D.countries[country].toUSD);
+          document.getElementById('incomeInput').value = localIncome;
+        } else {
+          document.getElementById('incomeInput').value = income;
+        }
+        setTimeout(calculateRich, 500);
+      }
+    }
+
+    // ---- WOULD YOU RATHER ----
+    // Build questions array from translation keys (q1-q15)
+    var wyrQuestions = [];
+    for (var qi = 1; qi <= 15; qi++) {
+      wyrQuestions.push({ q_key: 'wyr_q' + qi, a_key: 'wyr_q' + qi + '_a', b_key: 'wyr_q' + qi + '_b' });
+    }
+
+    var wyrShown = [];
+    var wyrCurrent = -1;
+    var wyrAnswered = false;
+
+    // ---- GUESS THE PRICE GAME ----
+    var gtpRounds = [];
+    var gtpCurrent = 0;
+    var gtpScore = 0;
+    var gtpHistory = [];
+    var GTP_TOTAL = 10;
+    var GTP_TOLERANCE = 0.20; // ±20% = hit
+
+    function gtpInit() {
+      gtpRounds = [];
+      gtpCurrent = 0;
+      gtpScore = 0;
+      gtpHistory = [];
+
+      // Build pool of product+country combos with valid prices (>0)
+      var pool = [];
+      var productKeys = Object.keys(D.products);
+      var countryCodes = Object.keys(D.countries);
+      for (var p = 0; p < productKeys.length; p++) {
+        for (var c = 0; c < countryCodes.length; c++) {
+          var pk = productKeys[p];
+          var cc = countryCodes[c];
+          if (D.prices[cc] && D.prices[cc][pk] && D.prices[cc][pk] > 0) {
+            pool.push({ product: pk, country: cc });
+          }
+        }
+      }
+
+      // Shuffle and pick 10, ensuring variety (no repeat product+country)
+      for (var i = pool.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var tmp = pool[i]; pool[i] = pool[j]; pool[j] = tmp;
+      }
+
+      // Try to pick diverse products — at most 2 of same product
+      var prodCount = {};
+      for (var k = 0; k < pool.length && gtpRounds.length < GTP_TOTAL; k++) {
+        var pk2 = pool[k].product;
+        if (!prodCount[pk2]) prodCount[pk2] = 0;
+        if (prodCount[pk2] < 2) {
+          gtpRounds.push(pool[k]);
+          prodCount[pk2]++;
+        }
+      }
+
+      // If we didn't get enough (unlikely), fill from pool
+      for (var m = 0; m < pool.length && gtpRounds.length < GTP_TOTAL; m++) {
+        if (gtpRounds.indexOf(pool[m]) === -1) gtpRounds.push(pool[m]);
+      }
+
+      document.getElementById('gtpSummary').style.display = 'none';
+      document.getElementById('gtpGame').style.display = '';
+      gtpShowRound();
+    }
+
+    function gtpShowRound() {
+      if (gtpCurrent >= gtpRounds.length) {
+        gtpShowSummary();
+        return;
+      }
+
+      var round = gtpRounds[gtpCurrent];
+      var product = D.products[round.product];
+      var country = D.countries[round.country];
+
+      document.getElementById('gtpProgress').textContent = (gtpCurrent + 1) + ' / ' + GTP_TOTAL;
+      document.getElementById('gtpIcon').textContent = product.icon;
+      document.getElementById('gtpProduct').textContent = product.name;
+      document.getElementById('gtpFlag').innerHTML = getFlag(round.country);
+      document.getElementById('gtpCountry').textContent = country.name;
+
+      document.getElementById('gtpInput').value = '';
+      document.getElementById('gtpInput').focus();
+      document.getElementById('gtpFeedback').style.display = 'none';
+      document.getElementById('gtpGuessBtn').style.display = '';
+      document.getElementById('gtpInput').disabled = false;
+    }
+
+    function gtpGuess() {
+      var input = document.getElementById('gtpInput');
+      var guess = parseFloat(input.value);
+      if (isNaN(guess) || guess < 0) {
+        input.style.borderColor = '#dc2626';
+        setTimeout(function() { input.style.borderColor = ''; }, 600);
+        return;
+      }
+
+      var round = gtpRounds[gtpCurrent];
+      var actual = D.prices[round.country][round.product];
+      var product = D.products[round.product];
+      var diff = Math.abs(guess - actual);
+      var pct = actual > 0 ? diff / actual : 1;
+      var isHit = pct <= GTP_TOLERANCE;
+
+      if (isHit) gtpScore++;
+      gtpHistory.push({
+        product: round.product,
+        country: round.country,
+        guess: guess,
+        actual: actual,
+        hit: isHit,
+        pct: pct
+      });
+
+      // Show feedback
+      document.getElementById('gtpGuessBtn').style.display = 'none';
+      input.disabled = true;
+      var fb = document.getElementById('gtpFeedback');
+      fb.style.display = '';
+
+      document.getElementById('gtpAnswer').textContent = '$' + actual.toFixed(2);
+
+      var accEl = document.getElementById('gtpAccuracy');
+      if (isHit) {
+        accEl.textContent = pct < 0.05 ? t('s5_perfect') : t('s5_close');
+        accEl.className = 'gtp-accuracy ' + (pct < 0.05 ? 'perfect' : 'close');
+      } else {
+        var offPct = Math.round(pct * 100);
+        accEl.textContent = t('s5_off', { pct: offPct });
+        accEl.className = 'gtp-accuracy off';
+      }
+
+      // Find cheapest and most expensive for this product
+      var cheapest = { code: '', price: Infinity };
+      var priciest = { code: '', price: 0 };
+      var countryCodes = Object.keys(D.prices);
+      for (var i = 0; i < countryCodes.length; i++) {
+        var cc = countryCodes[i];
+        var pr = D.prices[cc][round.product];
+        if (pr && pr > 0) {
+          if (pr < cheapest.price) { cheapest = { code: cc, price: pr }; }
+          if (pr > priciest.price) { priciest = { code: cc, price: pr }; }
+        }
+      }
+
+      document.getElementById('gtpRange').innerHTML =
+        t('s5_cheapest') + ': ' + getFlag(cheapest.code) + ' ' + D.countries[cheapest.code].name + ' — $' + cheapest.price.toFixed(2) +
+        '<br>' +
+        t('s5_priciest') + ': ' + getFlag(priciest.code) + ' ' + D.countries[priciest.code].name + ' — $' + priciest.price.toFixed(2);
+    }
+
+    function gtpNext() {
+      gtpCurrent++;
+      gtpShowRound();
+    }
+
+    function gtpShowSummary() {
+      document.getElementById('gtpGame').style.display = 'none';
+      document.getElementById('gtpSummary').style.display = '';
+
+      document.getElementById('gtpFinalScore').textContent = gtpScore + ' / ' + GTP_TOTAL;
+
+      var label = '';
+      if (gtpScore >= 9) label = t('s5_rank_expert');
+      else if (gtpScore >= 7) label = t('s5_rank_good');
+      else if (gtpScore >= 4) label = t('s5_rank_ok');
+      else label = t('s5_rank_tourist');
+
+      document.getElementById('gtpFinalLabel').textContent = label;
+
+      // Build detail rows
+      var detailsHtml = '';
+      for (var i = 0; i < gtpHistory.length; i++) {
+        var h = gtpHistory[i];
+        var prod = D.products[h.product];
+        var cty = D.countries[h.country];
+        detailsHtml += '<div class="gtp-detail-row">' +
+          '<span class="gtp-detail-q">' + prod.icon + ' ' + prod.name + ' in ' + getFlag(h.country) + ' ' + cty.name + '</span>' +
+          '<span class="gtp-detail-result ' + (h.hit ? 'hit' : 'miss') + '">' +
+          '$' + h.guess.toFixed(2) + ' → $' + h.actual.toFixed(2) +
+          (h.hit ? ' ✓' : ' ✗') +
+          '</span></div>';
+      }
+      document.getElementById('gtpDetails').innerHTML = detailsHtml;
+    }
+
+    function wyrInit() {
+      wyrShown = [];
+      wyrShowNext();
+    }
+
+    function wyrShowNext() {
+      wyrAnswered = false;
+
+      // Reset if all shown
+      if (wyrShown.length >= wyrQuestions.length) {
+        wyrShown = [];
+      }
+
+      // Pick random unseen question
+      var available = [];
+      for (var i = 0; i < wyrQuestions.length; i++) {
+        if (wyrShown.indexOf(i) === -1) available.push(i);
+      }
+      var pick = available[Math.floor(Math.random() * available.length)];
+      wyrShown.push(pick);
+      wyrCurrent = pick;
+
+      var q = wyrQuestions[pick];
+
+      // Update UI
+      document.getElementById('wyrQuestion').textContent = t(q.q_key);
+      document.getElementById('wyrOptionA').textContent = t(q.a_key);
+      document.getElementById('wyrOptionB').textContent = t(q.b_key);
+
+      // Reset styles
+      var optA = document.getElementById('wyrOptionA');
+      var optB = document.getElementById('wyrOptionB');
+      optA.className = 'wyr-option option-a';
+      optB.className = 'wyr-option option-b';
+
+      // Hide results
+      document.getElementById('wyrResultA').className = 'wyr-result';
+      document.getElementById('wyrResultB').className = 'wyr-result';
+
+      // Counter
+      document.getElementById('wyrCounter').textContent = wyrShown.length + ' / ' + wyrQuestions.length;
+    }
+
+    function wyrChoose(choice) {
+      if (wyrAnswered) return;
+      wyrAnswered = true;
+
+      var optA = document.getElementById('wyrOptionA');
+      var optB = document.getElementById('wyrOptionB');
+
+      // Disable both
+      optA.classList.add('disabled');
+      optB.classList.add('disabled');
+
+      // Mark chosen
+      if (choice === 'a') {
+        optA.classList.add('chosen');
+      } else {
+        optB.classList.add('chosen');
+      }
+
+      // Show placeholder results (real stats come later with backend)
+      var resultA = document.getElementById('wyrResultA');
+      var resultB = document.getElementById('wyrResultB');
+      document.getElementById('wyrPctA').textContent = choice === 'a' ? '✓' : '';
+      document.getElementById('wyrPctB').textContent = choice === 'b' ? '✓' : '';
+      document.getElementById('wyrCountA').textContent = choice === 'a' ? t('wyr_your_choice') : '';
+      document.getElementById('wyrCountB').textContent = choice === 'b' ? t('wyr_your_choice') : '';
+      resultA.className = 'wyr-result visible';
+      resultB.className = 'wyr-result visible';
+    }
+
+    // ---- START ----
+    document.addEventListener('DOMContentLoaded', () => {
+      try {
+        init();
+        checkUrlParams();
+      } catch (err) {
+        console.error('Richometer init error:', err);
+        var errDiv = document.createElement('div');
+        errDiv.style.cssText = 'position:fixed;top:0;left:0;right:0;padding:12px;background:#fef2f2;color:#dc2626;font-size:14px;z-index:9999;text-align:center;';
+        errDiv.textContent = 'Error: ' + err.message;
+        document.body.prepend(errDiv);
+      }
+
+    });
+  </script>
+
+</body>
+</html>
