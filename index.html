@@ -1728,6 +1728,16 @@
 
     <div class="card">
       <div class="input-row">
+        <div class="input-group">
+          <label data-i18n="s1_your_country">Your Country</label>
+          <select id="countrySelect"></select>
+        </div>
+        <div class="input-group">
+          <label data-i18n="s1_compare_country">Compare to</label>
+          <select id="compareToCountry"></select>
+        </div>
+      </div>
+      <div class="input-row">
         <div class="input-group" style="flex: 2;">
           <label data-i18n="s1_income_label">Monthly Net Income (to your account)</label>
           <div style="position: relative;">
@@ -1742,16 +1752,6 @@
             <span id="convertedUSD" style="color: var(--accent);">$3,240</span>
             <span style="color: var(--accent);"> USD</span>
           </div>
-        </div>
-      </div>
-      <div class="input-row">
-        <div class="input-group">
-          <label data-i18n="s1_your_country">Your Country</label>
-          <select id="countrySelect"></select>
-        </div>
-        <div class="input-group">
-          <label data-i18n="s1_compare_country">Compare to</label>
-          <select id="compareToCountry"></select>
         </div>
       </div>
       <button class="btn" id="calcRichBtn" data-i18n="s1_button">Show Me</button>
