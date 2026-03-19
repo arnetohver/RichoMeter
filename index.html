@@ -995,167 +995,134 @@
       margin-top: 8px;
     }
 
-    /* ---- GUESS THE PRICE (Section 5) ---- */
-    .gtp-card {
+    /* ---- HIGHER OR LOWER (Section 5) ---- */
+    .hol-card {
       background: var(--bg-white);
       border-radius: var(--radius);
       padding: 40px 24px;
       border: 1px solid var(--border);
       box-shadow: var(--shadow);
       text-align: center;
-      max-width: 500px;
+      max-width: 600px;
       margin: 0 auto;
     }
-
-    .gtp-progress {
-      font-size: 13px;
-      color: var(--text-light);
-      margin-bottom: 24px;
-      font-weight: 600;
-    }
-
-    .gtp-product-icon {
-      font-size: 56px;
-      margin-bottom: 8px;
-    }
-
-    .gtp-product-name {
-      font-size: 22px;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 6px;
-    }
-
-    .gtp-country {
-      font-size: 18px;
-      color: var(--text-light);
-      margin-bottom: 28px;
-      font-weight: 500;
-    }
-
-    .gtp-flag {
-      margin-right: 6px;
-      font-size: 22px;
-    }
-
-    .gtp-input-row {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
+    .hol-streak {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--accent);
       margin-bottom: 20px;
     }
-
-    .gtp-dollar {
-      font-size: 24px;
+    .hol-product {
+      font-size: 18px;
       font-weight: 700;
-      color: var(--text-light);
+      color: var(--text);
+      margin-bottom: 24px;
+      padding: 12px 20px;
+      background: var(--accent-light);
+      border-radius: 12px;
+      display: inline-block;
     }
-
-    .gtp-input {
-      font-size: 24px;
-      font-weight: 700;
-      width: 140px;
-      padding: 10px 14px;
+    .hol-vs-wrap {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 16px;
+      align-items: center;
+      margin-bottom: 28px;
+    }
+    .hol-side {
+      padding: 24px 16px;
+      border-radius: 16px;
       border: 2px solid var(--border);
-      border-radius: 12px;
-      text-align: center;
-      outline: none;
-      transition: border-color 0.2s;
+      background: var(--card);
+      transition: all 0.3s;
+      cursor: default;
     }
-
-    .gtp-input:focus {
-      border-color: var(--accent);
-    }
-
-    .gtp-guess-btn {
-      padding: 12px 28px;
+    .hol-vs {
       font-size: 16px;
-      border-radius: 12px;
+      font-weight: 800;
+      color: var(--text-lighter);
     }
-
-    .gtp-feedback {
-      margin-top: 8px;
-      padding: 20px;
-      background: #f8fafc;
-      border-radius: 12px;
+    .hol-flag {
+      font-size: 40px;
+      margin-bottom: 8px;
+      line-height: 1;
     }
-
-    .gtp-answer {
+    .hol-country {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+    .hol-price {
       font-size: 28px;
       font-weight: 800;
+      letter-spacing: -1px;
+    }
+    .hol-price-known {
       color: var(--text);
-      margin-bottom: 6px;
     }
-
-    .gtp-accuracy {
-      font-size: 16px;
-      font-weight: 600;
-      margin-bottom: 12px;
+    .hol-price-hidden {
+      color: var(--accent);
+      font-size: 36px;
     }
-
-    .gtp-accuracy.perfect { color: #059669; }
-    .gtp-accuracy.close { color: #d97706; }
-    .gtp-accuracy.off { color: #dc2626; }
-
-    .gtp-range {
-      font-size: 13px;
-      color: var(--text-light);
-      margin-bottom: 16px;
-      line-height: 1.6;
-    }
-
-    .gtp-next-btn {
-      padding: 10px 32px;
-      font-size: 15px;
-      border-radius: 50px;
-    }
-
-    .gtp-summary-icon {
-      font-size: 64px;
-      margin-bottom: 12px;
-    }
-
-    .gtp-summary-score {
-      font-size: 48px;
-      font-weight: 800;
-      color: var(--text);
-      margin-bottom: 4px;
-    }
-
-    .gtp-summary-label {
-      font-size: 18px;
-      font-weight: 600;
-      color: var(--text-light);
+    .hol-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
       margin-bottom: 20px;
     }
-
-    .gtp-summary-details {
-      text-align: left;
-      max-width: 400px;
-      margin: 0 auto 24px;
+    .hol-btn {
+      padding: 14px 36px;
+      border-radius: 50px;
+      font-size: 18px;
+      font-weight: 800;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
     }
-
-    .gtp-detail-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 8px 0;
-      border-bottom: 1px solid var(--border);
-      font-size: 14px;
+    .hol-btn-higher {
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: #fff;
     }
-
-    .gtp-detail-row .gtp-detail-q {
-      color: var(--text);
+    .hol-btn-higher:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.3);
     }
-
-    .gtp-detail-row .gtp-detail-result {
+    .hol-btn-lower {
+      background: linear-gradient(135deg, #ef4444, #dc2626);
+      color: #fff;
+    }
+    .hol-btn-lower:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(239, 68, 68, 0.3);
+    }
+    .hol-feedback {
+      font-size: 18px;
       font-weight: 700;
+      padding: 16px;
+      border-radius: 12px;
+      margin-bottom: 16px;
     }
-
-    .gtp-detail-result.hit { color: #059669; }
-    .gtp-detail-result.miss { color: #dc2626; }
-
+    .hol-feedback.correct {
+      background: rgba(16, 185, 129, 0.1);
+      color: #059669;
+    }
+    .hol-feedback.wrong {
+      background: rgba(239, 68, 68, 0.1);
+      color: #dc2626;
+    }
+    .hol-side.winner {
+      border-color: #10b981;
+      background: rgba(16, 185, 129, 0.05);
+    }
+    .hol-side.loser {
+      border-color: #ef4444;
+      background: rgba(239, 68, 68, 0.05);
+    }
+    .hol-go-icon { font-size: 64px; margin-bottom: 12px; }
+    .hol-go-title { font-size: 28px; font-weight: 800; color: var(--text); margin-bottom: 8px; }
+    .hol-go-streak { font-size: 48px; font-weight: 900; color: var(--accent); margin-bottom: 4px; }
+    .hol-go-label { font-size: 16px; color: var(--text-light); margin-bottom: 24px; }
     .gtp-new-btn {
       padding: 14px 40px;
       font-size: 16px;
@@ -1167,7 +1134,6 @@
       font-weight: 700;
       transition: all 0.3s;
     }
-
     .gtp-new-btn:hover {
       transform: translateY(-2px);
       box-shadow: 0 6px 24px rgba(124, 58, 237, 0.4);
@@ -1353,178 +1319,260 @@
 
     /* ---- DEAL OR NO DEAL ---- */
     .dond-card {
-      max-width: 600px;
+      max-width: 800px;
       margin: 0 auto;
-      background: var(--card);
-      border: 1px solid var(--border);
+      background: linear-gradient(180deg, #0a0a0a, #1a1a2e, #0a0a0a);
       border-radius: 20px;
-      padding: 32px 24px;
+      padding: 32px 20px;
       text-align: center;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255,215,0,0.15);
+    }
+    .dond-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120%;
+      height: 100%;
+      background: radial-gradient(ellipse at center, rgba(255,215,0,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .dond-stage {
+      display: grid;
+      grid-template-columns: 1fr 4fr 1fr;
+      gap: 16px;
+      align-items: start;
+      margin: 20px 0;
+    }
+    .dond-amounts-col {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .dond-amount {
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 700;
+      text-align: center;
+      transition: all 0.4s;
+      font-family: 'Courier New', monospace;
+      letter-spacing: -0.5px;
+    }
+    .dond-amount.low {
+      background: linear-gradient(90deg, #1a3a2a, #0d2818);
+      color: #4ade80;
+      border: 1px solid rgba(74, 222, 128, 0.3);
+    }
+    .dond-amount.high {
+      background: linear-gradient(90deg, #3a1a1a, #281010);
+      color: #fbbf24;
+      border: 1px solid rgba(251, 191, 36, 0.3);
+    }
+    .dond-amount.eliminated {
+      background: rgba(255,255,255,0.03);
+      color: rgba(255,255,255,0.15);
+      text-decoration: line-through;
+      border-color: transparent;
     }
     .dond-cases {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-      margin: 24px 0;
+      gap: 8px;
+      max-width: 380px;
+      margin: 0 auto;
     }
     .dond-case {
-      aspect-ratio: 1;
-      border-radius: 12px;
-      border: 2px solid var(--border);
-      background: linear-gradient(135deg, #1e1b4b, #312e81);
-      color: #e0e7ff;
-      font-size: 13px;
-      font-weight: 700;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.3s;
       position: relative;
+      cursor: pointer;
+      transition: all 0.3s;
+      aspect-ratio: 100/85;
+    }
+    .dond-case svg { width: 100%; height: 100%; }
+    .dond-case-num {
+      position: absolute;
+      top: 52%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 22px;
+      font-weight: 900;
+      color: #1a1a2e;
+      font-family: 'Arial Black', Arial, sans-serif;
+      text-shadow: 0 1px 0 rgba(255,255,255,0.3);
+      pointer-events: none;
     }
     .dond-case:hover:not(.opened):not(.player-case) {
-      transform: scale(1.08);
-      border-color: #7c3aed;
-      box-shadow: 0 4px 16px rgba(124, 58, 237, 0.3);
+      transform: scale(1.08) translateY(-4px);
+      filter: brightness(1.15);
     }
     .dond-case.opened {
-      background: rgba(0,0,0,0.05);
-      border-color: transparent;
-      color: var(--text-lighter);
+      opacity: 0.25;
+      transform: scale(0.92);
       cursor: default;
-      text-decoration: line-through;
-      font-size: 11px;
     }
-    .dond-case.player-case {
-      background: linear-gradient(135deg, #10b981, #059669);
-      border-color: #10b981;
-      color: #fff;
-      cursor: default;
-      box-shadow: 0 4px 16px rgba(16, 185, 129, 0.3);
+    .dond-case.opened .dond-case-num { font-size: 12px; color: #aaa; text-shadow: none; }
+    .dond-case.opened:hover { transform: scale(0.92); filter: none; }
+    .dond-case.player-case svg .case-body { fill: url(#greenGrad); }
+    .dond-case.player-case svg .case-lid { fill: url(#greenLidGrad); }
+    .dond-case.player-case svg .case-stroke { stroke: #059669; }
+    .dond-case.player-case svg .case-seam { stroke: rgba(255,255,255,0.2); }
+    .dond-case.player-case .dond-case-num { color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,0.3); }
+    .dond-case.player-case { cursor: default; }
+    .dond-case.revealed svg .case-body { fill: url(#goldGrad); }
+    .dond-case.revealed svg .case-lid { fill: url(#goldLidGrad); }
+    .dond-case.revealed svg .case-stroke { stroke: #b45309; }
+    .dond-case.revealed .dond-case-num { color: #1a1a2e; }
+    .dond-amount.just-eliminated {
+      animation: dond-amount-flash 0.6s ease;
     }
-    .dond-case.revealed {
-      background: linear-gradient(135deg, #f59e0b, #d97706);
-      border-color: #f59e0b;
-      color: #fff;
-      animation: dond-reveal 0.5s ease;
+    @keyframes dond-amount-flash {
+      0% { transform: scale(1); box-shadow: none; }
+      30% { transform: scale(1.15); box-shadow: 0 0 16px rgba(255,255,255,0.6); background: rgba(255,255,255,0.2); }
+      100% { transform: scale(1); box-shadow: none; }
+    }
+      animation: dond-reveal 0.6s ease;
+      box-shadow: 0 4px 20px rgba(251,191,36,0.4);
     }
     @keyframes dond-reveal {
-      0% { transform: rotateY(90deg); }
-      100% { transform: rotateY(0); }
+      0% { transform: scale(0.8) rotateY(90deg); opacity: 0.5; }
+      50% { transform: scale(1.1) rotateY(0); }
+      100% { transform: scale(1) rotateY(0); opacity: 1; }
     }
-    .dond-amounts {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
+    .dond-status {
+      font-size: 18px;
+      color: #fbbf24;
+      margin-bottom: 16px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      text-shadow: 0 0 20px rgba(251,191,36,0.3);
+    }
+    #dondOfferArea {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: none;
+      flex-direction: column;
+      align-items: center;
       justify-content: center;
-      margin: 24px 0;
+      background: rgba(0, 0, 0, 0.85);
+      z-index: 10;
+      border-radius: 20px;
     }
-    .dond-amount {
-      padding: 8px 16px;
-      border-radius: 24px;
-      font-size: 16px;
-      font-weight: 800;
-      background: rgba(16, 185, 129, 0.1);
-      color: #10b981;
-      border: 2px solid rgba(16, 185, 129, 0.25);
-      transition: all 0.3s;
-      letter-spacing: -0.5px;
+    #dondOfferArea.visible {
+      display: flex;
+      animation: dond-offer-in 0.5s ease;
     }
-    .dond-amount.eliminated {
-      background: rgba(0,0,0,0.03);
-      color: var(--text-lighter);
-      text-decoration: line-through;
-      border-color: transparent;
-    }
-    .dond-amount.high {
-      background: rgba(239, 68, 68, 0.1);
-      color: #ef4444;
-      border-color: rgba(239, 68, 68, 0.2);
-    }
-    .dond-amount.high.eliminated {
-      background: rgba(0,0,0,0.03);
-      color: var(--text-lighter);
-      border-color: transparent;
+    @keyframes dond-offer-in {
+      0% { opacity: 0; transform: scale(0.9); }
+      100% { opacity: 1; transform: scale(1); }
     }
     .dond-offer {
-      background: linear-gradient(135deg, #1e1b4b, #312e81);
-      border-radius: 16px;
-      padding: 28px;
-      margin: 20px 0;
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      border-radius: 20px;
+      padding: 36px 48px;
       color: #fff;
+      border: 2px solid rgba(251,191,36,0.4);
+      box-shadow: 0 0 60px rgba(251,191,36,0.2), 0 0 120px rgba(251,191,36,0.1);
+      text-align: center;
     }
     .dond-offer-label {
-      font-size: 13px;
+      font-size: 12px;
       text-transform: uppercase;
-      letter-spacing: 1.5px;
-      opacity: 0.7;
+      letter-spacing: 2px;
+      color: rgba(255,255,255,0.5);
       margin-bottom: 8px;
     }
     .dond-offer-amount {
-      font-size: 42px;
-      font-weight: 800;
+      font-size: 48px;
+      font-weight: 900;
       color: #fbbf24;
       letter-spacing: -1px;
+      text-shadow: 0 0 30px rgba(251,191,36,0.5);
+      font-family: 'Courier New', monospace;
     }
     .dond-buttons {
       display: flex;
-      gap: 12px;
+      gap: 16px;
       justify-content: center;
-      margin-top: 16px;
+      margin-top: 20px;
     }
     .dond-btn-deal, .dond-btn-nodeal {
-      padding: 12px 32px;
+      padding: 14px 36px;
       border-radius: 50px;
-      font-size: 16px;
-      font-weight: 700;
+      font-size: 18px;
+      font-weight: 800;
       border: none;
       cursor: pointer;
       transition: all 0.2s;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
     .dond-btn-deal {
-      background: #10b981;
+      background: linear-gradient(135deg, #10b981, #059669);
       color: #fff;
+      box-shadow: 0 4px 16px rgba(16, 185, 129, 0.3);
     }
     .dond-btn-deal:hover {
-      background: #059669;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+      background: linear-gradient(135deg, #059669, #047857);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(16, 185, 129, 0.4);
     }
     .dond-btn-nodeal {
-      background: #ef4444;
+      background: linear-gradient(135deg, #ef4444, #dc2626);
       color: #fff;
+      box-shadow: 0 4px 16px rgba(239, 68, 68, 0.3);
     }
     .dond-btn-nodeal:hover {
-      background: #dc2626;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+      background: linear-gradient(135deg, #dc2626, #b91c1c);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(239, 68, 68, 0.4);
     }
-    .dond-status {
-      font-size: 15px;
-      color: var(--text-light);
-      margin-bottom: 16px;
-      font-weight: 500;
+    #dondResult {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.9);
+      z-index: 10;
+      border-radius: 20px;
+    }
+    #dondResult.visible {
+      display: flex;
+      animation: dond-offer-in 0.5s ease;
     }
     .dond-result {
-      margin: 20px 0;
+      text-align: center;
     }
     .dond-result-label {
       font-size: 14px;
-      color: var(--text-light);
+      color: rgba(255,255,255,0.6);
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
     .dond-result-amount {
-      font-size: 48px;
-      font-weight: 800;
-      color: #10b981;
+      font-size: 56px;
+      font-weight: 900;
+      color: #fbbf24;
       letter-spacing: -2px;
+      text-shadow: 0 0 30px rgba(251,191,36,0.5);
+      font-family: 'Courier New', monospace;
     }
     .dond-result-amount.bad {
       color: #ef4444;
+      text-shadow: 0 0 30px rgba(239, 68, 68, 0.5);
     }
     .dond-result-compare {
-      font-size: 14px;
-      color: var(--text-light);
-      margin-top: 8px;
+      font-size: 15px;
+      margin-top: 12px;
+      font-weight: 600;
     }
 
     /* Sources page */
@@ -1608,6 +1656,16 @@
       .input-row { flex-direction: column; }
       .compare-table { font-size: 13px; }
       .compare-table td, .compare-table th { padding: 10px 8px; }
+      .dond-stage { grid-template-columns: 1fr 3fr 1fr; gap: 4px; }
+      .dond-case { font-size: 12px; }
+      .dond-row .dond-case { min-width: 38px; max-width: 52px; }
+      .dond-row { gap: 5px; }
+      .dond-cases { gap: 5px; }
+      .dond-amount { font-size: 11px; padding: 4px 6px; }
+      .dond-offer-amount { font-size: 36px; }
+      .dond-result-amount { font-size: 40px; }
+      .dond-btn-deal, .dond-btn-nodeal { padding: 12px 24px; font-size: 15px; }
+      .dond-status { font-size: 15px; }
 
     }
 
@@ -1831,44 +1889,79 @@
     </div>
   </section>
 
-  <!-- SECTION 5: GUESS THE PRICE -->
+  <!-- SECTION 5: HIGHER OR LOWER -->
   <section class="section" id="guess-the-price">
     <button class="back-to-tools" onclick="switchView('tools'); window.scrollTo(0,0);">← <span data-i18n="nav_back">Back</span></button>
-    <h2 class="section-title" data-i18n="s5_title">Guess the Price</h2>
-    <p class="section-subtitle" data-i18n="s5_subtitle">How well do you know what things cost around the world?</p>
+    <h2 class="section-title" data-i18n="s5_title">Higher or Lower</h2>
+    <p class="section-subtitle" data-i18n="s5_subtitle">Which country pays more? Tap to guess — one wrong and it's game over!</p>
 
-    <div class="gtp-card" id="gtpCard">
-      <!-- Game state -->
-      <div id="gtpGame">
-        <div class="gtp-progress" id="gtpProgress"></div>
-        <div class="gtp-product-icon" id="gtpIcon"></div>
-        <div class="gtp-product-name" id="gtpProduct"></div>
-        <div class="gtp-country">
-          <span class="gtp-flag" id="gtpFlag"></span>
-          <span id="gtpCountry"></span>
+    <div class="hol-card" id="holCard">
+      <div id="holGame">
+        <div class="hol-streak" id="holStreak">🔥 0</div>
+        <div class="hol-product" id="holProduct"></div>
+        <div class="hol-vs-wrap">
+          <div class="hol-side hol-left" id="holLeft">
+            <div class="hol-flag" id="holFlagA"></div>
+            <div class="hol-country" id="holCountryA"></div>
+            <div class="hol-price hol-price-known" id="holPriceA"></div>
+          </div>
+          <div class="hol-vs">VS</div>
+          <div class="hol-side hol-right" id="holRight">
+            <div class="hol-flag" id="holFlagB"></div>
+            <div class="hol-country" id="holCountryB"></div>
+            <div class="hol-price hol-price-hidden" id="holPriceB">?</div>
+          </div>
         </div>
-        <div class="gtp-input-row">
-          <span class="gtp-dollar">$</span>
-          <input type="number" class="gtp-input" id="gtpInput" placeholder="?" min="0" step="0.01">
-          <button class="btn gtp-guess-btn" id="gtpGuessBtn" data-i18n="s5_guess">Guess!</button>
+        <div class="hol-buttons" id="holButtons">
+          <button class="hol-btn hol-btn-higher" id="holHigherBtn" data-i18n="s5_higher">⬆ Higher</button>
+          <button class="hol-btn hol-btn-lower" id="holLowerBtn" data-i18n="s5_lower">⬇ Lower</button>
         </div>
-        <div class="gtp-feedback" id="gtpFeedback" style="display:none;">
-          <div class="gtp-answer" id="gtpAnswer"></div>
-          <div class="gtp-accuracy" id="gtpAccuracy"></div>
-          <div class="gtp-range" id="gtpRange"></div>
-          <button class="btn gtp-next-btn" id="gtpNextBtn" data-i18n="s5_next">Next →</button>
-        </div>
+        <div class="hol-feedback" id="holFeedback" style="display:none;"></div>
       </div>
-      <!-- Summary state -->
-      <div id="gtpSummary" style="display:none;">
-        <div class="gtp-summary-icon">🏆</div>
-        <div class="gtp-summary-score" id="gtpFinalScore"></div>
-        <div class="gtp-summary-label" id="gtpFinalLabel"></div>
-        <div class="gtp-summary-details" id="gtpDetails"></div>
-        <button class="btn gtp-new-btn" id="gtpNewBtn" data-i18n="s5_new_game">New Game</button>
+      <div id="holGameOver" style="display:none;">
+        <div class="hol-go-icon">💀</div>
+        <div class="hol-go-title" data-i18n="s5_game_over">Game Over!</div>
+        <div class="hol-go-streak" id="holFinalStreak"></div>
+        <div class="hol-go-label" id="holFinalLabel"></div>
+        <button class="btn gtp-new-btn" id="holNewBtn" data-i18n="s5_new_game">Play Again</button>
       </div>
     </div>
   </section>
+
+  <!-- SVG Briefcase Definitions -->
+  <svg width="0" height="0" style="position:absolute;">
+    <defs>
+      <linearGradient id="steelGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#d0d0d0"/><stop offset="15%" stop-color="#a0a0a0"/>
+        <stop offset="50%" stop-color="#c8c8c8"/><stop offset="85%" stop-color="#909090"/>
+        <stop offset="100%" stop-color="#707070"/>
+      </linearGradient>
+      <linearGradient id="steelLidGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#b0b0b0"/><stop offset="100%" stop-color="#888888"/>
+      </linearGradient>
+      <linearGradient id="greenGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#34d399"/><stop offset="50%" stop-color="#10b981"/>
+        <stop offset="100%" stop-color="#065f46"/>
+      </linearGradient>
+      <linearGradient id="greenLidGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#6ee7b7"/><stop offset="100%" stop-color="#10b981"/>
+      </linearGradient>
+      <linearGradient id="goldGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#fde68a"/><stop offset="50%" stop-color="#fbbf24"/>
+        <stop offset="100%" stop-color="#b45309"/>
+      </linearGradient>
+      <linearGradient id="goldLidGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#fef3c7"/><stop offset="100%" stop-color="#f59e0b"/>
+      </linearGradient>
+      <linearGradient id="handleGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#ccc"/><stop offset="50%" stop-color="#666"/>
+        <stop offset="100%" stop-color="#999"/>
+      </linearGradient>
+      <filter id="caseShadow" x="-10%" y="-10%" width="120%" height="130%">
+        <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#000" flood-opacity="0.4"/>
+      </filter>
+    </defs>
+  </svg>
 
   <!-- DEAL OR NO DEAL -->
   <section class="section view-hidden" id="deal-or-no-deal">
@@ -1878,9 +1971,12 @@
 
     <div class="dond-card" id="dondCard">
       <div class="dond-status" id="dondStatus">Pick your case!</div>
-      <div class="dond-cases" id="dondCases"></div>
-      <div class="dond-amounts" id="dondAmounts"></div>
-      <div id="dondOfferArea" style="display:none;">
+      <div class="dond-stage">
+        <div class="dond-amounts-col" id="dondAmountsLeft"></div>
+        <div class="dond-cases" id="dondCases"></div>
+        <div class="dond-amounts-col" id="dondAmountsRight"></div>
+      </div>
+      <div id="dondOfferArea">
         <div class="dond-offer">
           <div class="dond-offer-label" data-i18n="dond_banker">The Banker offers</div>
           <div class="dond-offer-amount" id="dondOfferAmount">$0</div>
@@ -1890,7 +1986,7 @@
           <button class="dond-btn-nodeal" id="dondNoDealBtn" data-i18n="dond_nodeal">NO DEAL</button>
         </div>
       </div>
-      <div id="dondResult" style="display:none;">
+      <div id="dondResult">
         <div class="dond-result">
           <div class="dond-result-label" id="dondResultLabel"></div>
           <div class="dond-result-amount" id="dondResultAmount"></div>
@@ -2133,21 +2229,19 @@
         wyr_q25: 'Would you rather...',
         wyr_q25_a: '$5 million to never masturbate again',
         wyr_q25_b: '$100 every time you masturbate',
-        nav_gtp: 'Guess the Price',
-        s5_title: 'Guess the Price',
-        s5_subtitle: 'How well do you know what things cost around the world?',
-        s5_guess: 'Guess!',
-        s5_next: 'Next →',
-        s5_new_game: 'New Game',
-        s5_perfect: 'Spot on! 🎯',
-        s5_close: 'Close enough! ✓',
-        s5_off: '{pct}% off',
-        s5_cheapest: 'Cheapest',
-        s5_priciest: 'Most expensive',
-        s5_rank_expert: 'Price Expert! 🌍',
+        nav_gtp: 'Higher or Lower',
+        s5_title: 'Higher or Lower',
+        s5_subtitle: 'Which country pays more? One wrong and it\'s game over!',
+        s5_higher: '⬆ Higher',
+        s5_lower: '⬇ Lower',
+        s5_correct: 'Correct!',
+        s5_wrong: 'Wrong!',
+        s5_game_over: 'Game Over!',
+        s5_new_game: 'Play Again',
+        s5_rank_expert: 'World Traveler! 🌍',
         s5_rank_good: 'Well Traveled! ✈️',
-        s5_rank_ok: 'Getting There 📚',
-        s5_rank_tourist: 'Tourist Mode 🗺️',
+        s5_rank_ok: 'Getting There! 🗺️',
+        s5_rank_tourist: 'Tourist Mode 🧳',
         nav_dond: 'Deal or No Deal',
         dond_title: 'Deal or No Deal',
         dond_subtitle: 'Pick a case. Open the rest. Take the banker\'s offer — or risk it all.',
@@ -2335,21 +2429,19 @@
         wyr_q25: 'Kumma valid...',
         wyr_q25_a: '$5 miljonit, aga ei masturbeeri enam kunagi',
         wyr_q25_b: '$100 iga kord kui masturbeerid',
-        nav_gtp: 'Arva hind',
-        s5_title: 'Arva hind',
-        s5_subtitle: 'Kui hästi sa tead mis asjad maailmas maksavad?',
-        s5_guess: 'Paku!',
-        s5_next: 'Järgmine →',
-        s5_new_game: 'Uus mäng',
-        s5_perfect: 'Täppi! 🎯',
-        s5_close: 'Piisavalt lähedal! ✓',
-        s5_off: '{pct}% mööda',
-        s5_cheapest: 'Kõige odavam',
-        s5_priciest: 'Kõige kallim',
-        s5_rank_expert: 'Hinnaekspert! 🌍',
+        nav_gtp: 'Kõrgem/Madalam',
+        s5_title: 'Kõrgem või madalam',
+        s5_subtitle: 'Kummas riigis on kallim? Üks vale ja mäng on läbi!',
+        s5_higher: '⬆ Kõrgem',
+        s5_lower: '⬇ Madalam',
+        s5_correct: 'Õige!',
+        s5_wrong: 'Vale!',
+        s5_game_over: 'Mäng läbi!',
+        s5_new_game: 'Mängi uuesti',
+        s5_rank_expert: 'Maailmarändur! 🌍',
         s5_rank_good: 'Palju reisinud! ✈️',
-        s5_rank_ok: 'Hakkab tulema 📚',
-        s5_rank_tourist: 'Turisti mood 🗺️',
+        s5_rank_ok: 'Hakkab tulema! 🗺️',
+        s5_rank_tourist: 'Turisti mood 🧳',
         nav_dond: 'Võta või Jäta',
         dond_title: 'Võta või Jäta',
         dond_subtitle: 'Vali kohver. Ava ülejäänud. Võta pankuri pakkumine — või riski kõigega.',
@@ -2536,21 +2628,19 @@
         wyr_q25: 'Was würdest du lieber...',
         wyr_q25_a: '$5 Millionen, aber nie wieder masturbieren',
         wyr_q25_b: '$100 jedes Mal wenn du masturbierst',
-        nav_gtp: 'Rate den Preis',
-        s5_title: 'Rate den Preis',
-        s5_subtitle: 'Wie gut kennst du die Preise rund um die Welt?',
-        s5_guess: 'Raten!',
-        s5_next: 'Weiter →',
-        s5_new_game: 'Neues Spiel',
-        s5_perfect: 'Volltreffer! 🎯',
-        s5_close: 'Nah genug! ✓',
-        s5_off: '{pct}% daneben',
-        s5_cheapest: 'Am günstigsten',
-        s5_priciest: 'Am teuersten',
-        s5_rank_expert: 'Preisexperte! 🌍',
-        s5_rank_good: 'Weltreisender! ✈️',
-        s5_rank_ok: 'Auf dem Weg 📚',
-        s5_rank_tourist: 'Tourist-Modus 🗺️',
+        nav_gtp: 'Höher/Niedriger',
+        s5_title: 'Höher oder Niedriger',
+        s5_subtitle: 'Welches Land zahlt mehr? Ein Fehler und das Spiel ist vorbei!',
+        s5_higher: '⬆ Höher',
+        s5_lower: '⬇ Niedriger',
+        s5_correct: 'Richtig!',
+        s5_wrong: 'Falsch!',
+        s5_game_over: 'Spiel vorbei!',
+        s5_new_game: 'Nochmal spielen',
+        s5_rank_expert: 'Weltreisender! 🌍',
+        s5_rank_good: 'Vielgereist! ✈️',
+        s5_rank_ok: 'Auf dem Weg! 🗺️',
+        s5_rank_tourist: 'Tourist-Modus 🧳',
         nav_dond: 'Deal or No Deal',
         dond_title: 'Deal or No Deal',
         dond_subtitle: 'Wähle einen Koffer. Öffne die anderen. Nimm das Angebot — oder riskiere alles.',
@@ -2737,21 +2827,19 @@
         wyr_q25: 'Tu préfères...',
         wyr_q25_a: '$5 millions mais ne plus jamais se masturber',
         wyr_q25_b: '$100 à chaque fois que tu te masturbes',
-        nav_gtp: 'Devinez le prix',
-        s5_title: 'Devinez le prix',
-        s5_subtitle: 'Connaissez-vous les prix dans le monde ?',
-        s5_guess: 'Deviner !',
-        s5_next: 'Suivant →',
-        s5_new_game: 'Nouvelle partie',
-        s5_perfect: 'En plein dans le mille ! 🎯',
-        s5_close: 'Assez proche ! ✓',
-        s5_off: '{pct}% à côté',
-        s5_cheapest: 'Le moins cher',
-        s5_priciest: 'Le plus cher',
-        s5_rank_expert: 'Expert des prix ! 🌍',
+        nav_gtp: 'Plus/Moins cher',
+        s5_title: 'Plus cher ou moins cher',
+        s5_subtitle: 'Quel pays paie plus ? Une erreur et c\'est fini !',
+        s5_higher: '⬆ Plus cher',
+        s5_lower: '⬇ Moins cher',
+        s5_correct: 'Correct !',
+        s5_wrong: 'Faux !',
+        s5_game_over: 'Partie terminée !',
+        s5_new_game: 'Rejouer',
+        s5_rank_expert: 'Globe-trotter ! 🌍',
         s5_rank_good: 'Grand voyageur ! ✈️',
-        s5_rank_ok: 'En progrès 📚',
-        s5_rank_tourist: 'Mode touriste 🗺️',
+        s5_rank_ok: 'En progrès ! 🗺️',
+        s5_rank_tourist: 'Mode touriste 🧳',
         nav_dond: 'À prendre ou à laisser',
         dond_title: 'À prendre ou à laisser',
         dond_subtitle: 'Choisis une valise. Ouvre les autres. Accepte l\'offre — ou risque tout.',
@@ -2938,21 +3026,19 @@
         wyr_q25: '¿Qué prefieres?',
         wyr_q25_a: '$5 millones pero no masturbarte nunca más',
         wyr_q25_b: '$100 cada vez que te masturbas',
-        nav_gtp: 'Adivina el precio',
-        s5_title: 'Adivina el precio',
-        s5_subtitle: '¿Sabes cuánto cuestan las cosas en el mundo?',
-        s5_guess: '¡Adivinar!',
-        s5_next: 'Siguiente →',
-        s5_new_game: 'Nuevo juego',
-        s5_perfect: '¡En el clavo! 🎯',
-        s5_close: '¡Bastante cerca! ✓',
-        s5_off: '{pct}% de diferencia',
-        s5_cheapest: 'Más barato',
-        s5_priciest: 'Más caro',
-        s5_rank_expert: '¡Experto en precios! 🌍',
+        nav_gtp: 'Mayor/Menor',
+        s5_title: 'Mayor o Menor',
+        s5_subtitle: '¿Qué país paga más? ¡Un error y se acabó!',
+        s5_higher: '⬆ Mayor',
+        s5_lower: '⬇ Menor',
+        s5_correct: '¡Correcto!',
+        s5_wrong: '¡Incorrecto!',
+        s5_game_over: '¡Fin del juego!',
+        s5_new_game: 'Jugar de nuevo',
+        s5_rank_expert: '¡Trotamundos! 🌍',
         s5_rank_good: '¡Gran viajero! ✈️',
-        s5_rank_ok: 'En camino 📚',
-        s5_rank_tourist: 'Modo turista 🗺️',
+        s5_rank_ok: '¡En camino! 🗺️',
+        s5_rank_tourist: 'Modo turista 🧳',
         nav_dond: 'Trato o No Trato',
         dond_title: 'Trato o No Trato',
         dond_subtitle: 'Elige un maletín. Abre los demás. Acepta la oferta — o arriésgalo todo.',
@@ -3004,7 +3090,6 @@
       setupEventListeners();
       setupNavigation();
       wyrInit();
-      gtpInit();
     }
 
     // ---- POPULATE DROPDOWNS ----
@@ -3157,13 +3242,11 @@
         wyrShowNext();
       });
 
-      // Guess the Price
-      document.getElementById('gtpGuessBtn').addEventListener('click', gtpGuess);
-      document.getElementById('gtpNextBtn').addEventListener('click', gtpNext);
-      document.getElementById('gtpNewBtn').addEventListener('click', gtpInit);
-      document.getElementById('gtpInput').addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') gtpGuess();
-      });
+      // Higher or Lower
+      document.getElementById('holHigherBtn').addEventListener('click', function() { holGuess('higher'); });
+      document.getElementById('holLowerBtn').addEventListener('click', function() { holGuess('lower'); });
+      document.getElementById('holNewBtn').addEventListener('click', holInit);
+      holInit();
 
       // Deal or No Deal
       document.getElementById('dondDealBtn').addEventListener('click', dondDeal);
@@ -3172,7 +3255,7 @@
       dondInit();
 
       // Select all on focus + comma→dot for number inputs (numpad UX)
-      var numInputs = [document.getElementById('incomeInput'), document.getElementById('gtpInput')];
+      var numInputs = [document.getElementById('incomeInput')];
       numInputs.forEach(function(inp) {
         if (!inp) return;
         inp.addEventListener('focus', function() { this.select(); });
@@ -4280,195 +4363,157 @@
     var wyrCurrent = -1;
     var wyrAnswered = false;
 
-    // ---- GUESS THE PRICE GAME ----
-    var gtpRounds = [];
-    var gtpCurrent = 0;
-    var gtpScore = 0;
-    var gtpHistory = [];
-    var GTP_TOTAL = 10;
-    var GTP_TOLERANCE = 0.20; // ±20% = hit
+    // ---- HIGHER OR LOWER GAME ----
+    var holStreak = 0;
+    var holProduct = '';
+    var holCountryA = '';
+    var holCountryB = '';
+    var holPriceA = 0;
+    var holPriceB = 0;
+    var holBusy = false;
 
-    function gtpInit() {
-      gtpRounds = [];
-      gtpCurrent = 0;
-      gtpScore = 0;
-      gtpHistory = [];
+    function holInit() {
+      holStreak = 0;
+      document.getElementById('holGameOver').style.display = 'none';
+      document.getElementById('holGame').style.display = '';
+      document.getElementById('holStreak').textContent = '🔥 0';
+      holNextRound();
+    }
 
-      // Build pool of product+country combos with valid prices (>0)
-      var pool = [];
+    function holNextRound() {
+      holBusy = false;
       var productKeys = Object.keys(D.products);
-      var countryCodes = Object.keys(D.countries);
-      for (var p = 0; p < productKeys.length; p++) {
-        for (var c = 0; c < countryCodes.length; c++) {
-          var pk = productKeys[p];
-          var cc = countryCodes[c];
-          if (D.prices[cc] && D.prices[cc][pk] && D.prices[cc][pk] > 0) {
-            pool.push({ product: pk, country: cc });
-          }
+      var countryCodes = Object.keys(D.prices);
+
+      // Pick random product
+      var attempts = 0;
+      var pk, ccA, ccB, pA, pB;
+      do {
+        pk = productKeys[Math.floor(Math.random() * productKeys.length)];
+        // Pick 2 different countries with valid prices for this product
+        var validCountries = [];
+        for (var i = 0; i < countryCodes.length; i++) {
+          var cc = countryCodes[i];
+          if (D.prices[cc][pk] && D.prices[cc][pk] > 0) validCountries.push(cc);
         }
-      }
+        if (validCountries.length < 2) { attempts++; continue; }
 
-      // Shuffle and pick 10, ensuring variety (no repeat product+country)
-      for (var i = pool.length - 1; i > 0; i--) {
-        var j = Math.floor(Math.random() * (i + 1));
-        var tmp = pool[i]; pool[i] = pool[j]; pool[j] = tmp;
-      }
+        // Shuffle and pick 2
+        var idx1 = Math.floor(Math.random() * validCountries.length);
+        ccA = validCountries[idx1];
+        validCountries.splice(idx1, 1);
+        var idx2 = Math.floor(Math.random() * validCountries.length);
+        ccB = validCountries[idx2];
 
-      // Try to pick diverse products — at most 2 of same product
-      var prodCount = {};
-      for (var k = 0; k < pool.length && gtpRounds.length < GTP_TOTAL; k++) {
-        var pk2 = pool[k].product;
-        if (!prodCount[pk2]) prodCount[pk2] = 0;
-        if (prodCount[pk2] < 2) {
-          gtpRounds.push(pool[k]);
-          prodCount[pk2]++;
-        }
-      }
+        pA = D.prices[ccA][pk];
+        pB = D.prices[ccB][pk];
 
-      // If we didn't get enough (unlikely), fill from pool
-      for (var m = 0; m < pool.length && gtpRounds.length < GTP_TOTAL; m++) {
-        if (gtpRounds.indexOf(pool[m]) === -1) gtpRounds.push(pool[m]);
-      }
+        // Ensure prices are different
+        if (pA !== pB) break;
+        attempts++;
+      } while (attempts < 50);
 
-      document.getElementById('gtpSummary').style.display = 'none';
-      document.getElementById('gtpGame').style.display = '';
-      gtpShowRound();
+      holProduct = pk;
+      holCountryA = ccA;
+      holCountryB = ccB;
+      holPriceA = pA;
+      holPriceB = pB;
+
+      var prod = D.products[pk];
+
+      // Update UI
+      document.getElementById('holProduct').innerHTML = prod.icon + ' ' + prod.name;
+      document.getElementById('holFlagA').innerHTML = getFlag(ccA);
+      document.getElementById('holCountryA').textContent = D.countries[ccA].name;
+      document.getElementById('holPriceA').textContent = '$' + holFormatPrice(pA);
+      document.getElementById('holFlagB').innerHTML = getFlag(ccB);
+      document.getElementById('holCountryB').textContent = D.countries[ccB].name;
+      document.getElementById('holPriceB').textContent = '?';
+      document.getElementById('holPriceB').className = 'hol-price hol-price-hidden';
+
+      // Reset
+      document.getElementById('holButtons').style.display = '';
+      document.getElementById('holFeedback').style.display = 'none';
+      document.getElementById('holLeft').className = 'hol-side hol-left';
+      document.getElementById('holRight').className = 'hol-side hol-right';
     }
 
-    function gtpShowRound() {
-      if (gtpCurrent >= gtpRounds.length) {
-        gtpShowSummary();
-        return;
-      }
-
-      var round = gtpRounds[gtpCurrent];
-      var product = D.products[round.product];
-      var country = D.countries[round.country];
-
-      document.getElementById('gtpProgress').textContent = (gtpCurrent + 1) + ' / ' + GTP_TOTAL;
-      document.getElementById('gtpIcon').textContent = product.icon;
-      document.getElementById('gtpProduct').textContent = product.name;
-      document.getElementById('gtpFlag').innerHTML = getFlag(round.country);
-      document.getElementById('gtpCountry').textContent = country.name;
-
-      document.getElementById('gtpInput').value = '';
-      document.getElementById('gtpInput').focus();
-      document.getElementById('gtpFeedback').style.display = 'none';
-      document.getElementById('gtpGuessBtn').style.display = '';
-      document.getElementById('gtpInput').disabled = false;
+    function holFormatPrice(n) {
+      if (n >= 100000) return Math.round(n).toLocaleString();
+      if (n >= 100) return Math.round(n).toLocaleString();
+      if (n >= 1) return n.toFixed(2);
+      return n.toFixed(2);
     }
 
-    function gtpGuess() {
-      var input = document.getElementById('gtpInput');
-      var guess = parseFloat(input.value);
-      if (isNaN(guess) || guess < 0) {
-        input.style.borderColor = '#dc2626';
-        setTimeout(function() { input.style.borderColor = ''; }, 600);
-        return;
+    function holGuess(guess) {
+      if (holBusy) return;
+      holBusy = true;
+
+      var correct = (guess === 'higher' && holPriceB >= holPriceA) ||
+                    (guess === 'lower' && holPriceB <= holPriceA);
+
+      // Reveal price B
+      document.getElementById('holPriceB').textContent = '$' + holFormatPrice(holPriceB);
+      document.getElementById('holPriceB').className = 'hol-price hol-price-known';
+      document.getElementById('holButtons').style.display = 'none';
+
+      // Highlight winner/loser
+      if (holPriceB > holPriceA) {
+        document.getElementById('holRight').classList.add('winner');
+      } else {
+        document.getElementById('holLeft').classList.add('winner');
       }
 
-      var round = gtpRounds[gtpCurrent];
-      var actual = D.prices[round.country][round.product];
-      var product = D.products[round.product];
-      var diff = Math.abs(guess - actual);
-      var pct = actual > 0 ? diff / actual : 1;
-      var isHit = pct <= GTP_TOLERANCE;
-
-      if (isHit) gtpScore++;
-      gtpHistory.push({
-        product: round.product,
-        country: round.country,
-        guess: guess,
-        actual: actual,
-        hit: isHit,
-        pct: pct
-      });
-
-      // Show feedback
-      document.getElementById('gtpGuessBtn').style.display = 'none';
-      input.disabled = true;
-      var fb = document.getElementById('gtpFeedback');
+      var fb = document.getElementById('holFeedback');
       fb.style.display = '';
 
-      document.getElementById('gtpAnswer').textContent = '$' + actual.toFixed(2);
+      if (correct) {
+        holStreak++;
+        document.getElementById('holStreak').textContent = '🔥 ' + holStreak;
+        fb.className = 'hol-feedback correct';
+        fb.textContent = '✓ ' + (t('s5_correct') || 'Correct!');
 
-      var accEl = document.getElementById('gtpAccuracy');
-      if (isHit) {
-        accEl.textContent = pct < 0.05 ? t('s5_perfect') : t('s5_close');
-        accEl.className = 'gtp-accuracy ' + (pct < 0.05 ? 'perfect' : 'close');
+        // Next round after delay
+        setTimeout(function() { holNextRound(); }, 1500);
       } else {
-        var offPct = Math.round(pct * 100);
-        accEl.textContent = t('s5_off', { pct: offPct });
-        accEl.className = 'gtp-accuracy off';
-      }
+        fb.className = 'hol-feedback wrong';
+        fb.textContent = '✗ ' + (t('s5_wrong') || 'Wrong!');
 
-      // Find cheapest and most expensive for this product
-      var cheapest = { code: '', price: Infinity };
-      var priciest = { code: '', price: 0 };
-      var countryCodes = Object.keys(D.prices);
-      for (var i = 0; i < countryCodes.length; i++) {
-        var cc = countryCodes[i];
-        var pr = D.prices[cc][round.product];
-        if (pr && pr > 0) {
-          if (pr < cheapest.price) { cheapest = { code: cc, price: pr }; }
-          if (pr > priciest.price) { priciest = { code: cc, price: pr }; }
-        }
+        // Game over after delay
+        setTimeout(function() { holGameOver(); }, 1500);
       }
-
-      document.getElementById('gtpRange').innerHTML =
-        t('s5_cheapest') + ': ' + getFlag(cheapest.code) + ' ' + D.countries[cheapest.code].name + ' — $' + cheapest.price.toFixed(2) +
-        '<br>' +
-        t('s5_priciest') + ': ' + getFlag(priciest.code) + ' ' + D.countries[priciest.code].name + ' — $' + priciest.price.toFixed(2);
     }
 
-    function gtpNext() {
-      gtpCurrent++;
-      gtpShowRound();
-    }
-
-    function gtpShowSummary() {
-      document.getElementById('gtpGame').style.display = 'none';
-      document.getElementById('gtpSummary').style.display = '';
-
-      document.getElementById('gtpFinalScore').textContent = gtpScore + ' / ' + GTP_TOTAL;
+    function holGameOver() {
+      document.getElementById('holGame').style.display = 'none';
+      document.getElementById('holGameOver').style.display = '';
+      document.getElementById('holFinalStreak').textContent = '🔥 ' + holStreak;
 
       var label = '';
-      if (gtpScore >= 9) label = t('s5_rank_expert');
-      else if (gtpScore >= 7) label = t('s5_rank_good');
-      else if (gtpScore >= 4) label = t('s5_rank_ok');
-      else label = t('s5_rank_tourist');
+      if (holStreak >= 15) label = t('s5_rank_expert') || 'World Traveler! 🌍';
+      else if (holStreak >= 10) label = t('s5_rank_good') || 'Well Traveled! ✈️';
+      else if (holStreak >= 5) label = t('s5_rank_ok') || 'Getting There! 🗺️';
+      else label = t('s5_rank_tourist') || 'Tourist Mode 🧳';
 
-      document.getElementById('gtpFinalLabel').textContent = label;
-
-      // Build detail rows
-      var detailsHtml = '';
-      for (var i = 0; i < gtpHistory.length; i++) {
-        var h = gtpHistory[i];
-        var prod = D.products[h.product];
-        var cty = D.countries[h.country];
-        detailsHtml += '<div class="gtp-detail-row">' +
-          '<span class="gtp-detail-q">' + prod.icon + ' ' + prod.name + ' in ' + getFlag(h.country) + ' ' + cty.name + '</span>' +
-          '<span class="gtp-detail-result ' + (h.hit ? 'hit' : 'miss') + '">' +
-          '$' + h.guess.toFixed(2) + ' → $' + h.actual.toFixed(2) +
-          (h.hit ? ' ✓' : ' ✗') +
-          '</span></div>';
-      }
-      document.getElementById('gtpDetails').innerHTML = detailsHtml;
+      document.getElementById('holFinalLabel').textContent = label;
     }
 
     // ---- DEAL OR NO DEAL ----
-    var DOND_AMOUNTS = [1, 5, 10, 50, 100, 500, 1000, 5000, 10000, 25000, 50000, 100000, 250000, 500000, 750000, 1000000];
-    var dondCases = []; // { amount, opened }
+    // 26 amounts like the original show
+    var DOND_AMOUNTS = [0.01, 1, 5, 10, 25, 50, 75, 100, 200, 300, 400, 500, 750,
+                        1000, 5000, 10000, 25000, 50000, 75000, 100000, 200000, 300000, 400000, 500000, 750000, 1000000];
+    var dondCases = [];
     var dondPlayerCase = -1;
-    var dondPhase = 'pick'; // pick, open, offer, done
+    var dondPhase = 'pick';
     var dondRound = 0;
-    var dondToOpen = 0; // cases to open this round
-    var dondOpened = 0; // cases opened this round
+    var dondToOpen = 0;
+    var dondOpened = 0;
     var dondDealAmount = 0;
-    var DOND_SCHEDULE = [4, 3, 2, 1, 1, 1]; // cases to open per round
+    // Original show: 6, 5, 4, 3, 2, 1, 1, 1, 1 cases per round
+    var DOND_SCHEDULE = [6, 5, 4, 3, 2, 1, 1, 1, 1];
 
     function dondInit() {
-      // Shuffle amounts into 16 cases
+      // Shuffle amounts into 26 cases
       var amounts = DOND_AMOUNTS.slice();
       for (var i = amounts.length - 1; i > 0; i--) {
         var j = Math.floor(Math.random() * (i + 1));
@@ -4482,68 +4527,97 @@
       dondToOpen = 0;
       dondDealAmount = 0;
 
-      document.getElementById('dondOfferArea').style.display = 'none';
-      document.getElementById('dondResult').style.display = 'none';
+      document.getElementById('dondOfferArea').classList.remove('visible');
+      document.getElementById('dondResult').classList.remove('visible');
       document.getElementById('dondStatus').textContent = t('dond_pick') || 'Pick your case!';
 
       dondRenderCases();
       dondRenderAmounts();
     }
 
+    var DOND_CASE_SVG = '<svg viewBox="0 0 100 85" filter="url(#caseShadow)">' +
+      '<rect class="case-body case-stroke" x="5" y="25" width="90" height="55" rx="6" fill="url(#steelGrad)" stroke="#666" stroke-width="1.5"/>' +
+      '<rect class="case-lid case-stroke" x="5" y="20" width="90" height="20" rx="6" fill="url(#steelLidGrad)" stroke="#666" stroke-width="1.5"/>' +
+      '<line class="case-seam" x1="8" y1="35" x2="92" y2="35" stroke="#777" stroke-width="0.8"/>' +
+      '<path d="M38 20 Q38 8 50 8 Q62 8 62 20" fill="none" stroke="url(#handleGrad)" stroke-width="4" stroke-linecap="round"/>' +
+      '<rect x="32" y="33" width="8" height="5" rx="1" fill="#b8860b" stroke="#8b6914" stroke-width="0.5"/>' +
+      '<rect x="60" y="33" width="8" height="5" rx="1" fill="#b8860b" stroke="#8b6914" stroke-width="0.5"/>' +
+      '<rect x="12" y="27" width="40" height="3" rx="1.5" fill="rgba(255,255,255,0.15)"/>' +
+      '</svg>';
+
     function dondRenderCases() {
       var container = document.getElementById('dondCases');
       container.innerHTML = '';
-      dondCases.forEach(function(c, i) {
-        var el = document.createElement('div');
-        el.className = 'dond-case';
-        if (c.opened) el.className += ' opened';
-        if (i === dondPlayerCase) el.className += ' player-case';
 
-        if (c.opened) {
-          el.textContent = '$' + dondFormatAmount(c.amount);
-        } else if (i === dondPlayerCase) {
-          el.innerHTML = '🔒 #' + (i + 1);
-        } else {
-          el.textContent = '#' + (i + 1);
-        }
-
-        el.onclick = function() { dondClickCase(i); };
+      // Layout: 4+4+4+4+4+4+2 = 26, last 2 centered
+      for (var i = 0; i < 26; i++) {
+        var el = dondMakeCase(i);
+        // Last 2 cases: center in grid (col 2 and col 3)
+        if (i === 24) el.style.gridColumn = '2';
         container.appendChild(el);
-      });
+      }
+    }
+
+    function dondMakeCase(i) {
+      var c = dondCases[i];
+      var el = document.createElement('div');
+      el.className = 'dond-case';
+      if (c.opened) el.className += ' opened';
+      if (i === dondPlayerCase) el.className += ' player-case';
+
+      var label = '';
+      if (c.opened) {
+        label = '$' + dondFormatAmount(c.amount);
+      } else if (i === dondPlayerCase) {
+        label = '🔒 ' + (i + 1);
+      } else {
+        label = '' + (i + 1);
+      }
+
+      el.innerHTML = DOND_CASE_SVG + '<span class="dond-case-num">' + label + '</span>';
+      el.onclick = function() { dondClickCase(i); };
+      return el;
     }
 
     function dondRenderAmounts() {
-      var container = document.getElementById('dondAmounts');
-      container.innerHTML = '';
-      var remaining = [];
-      dondCases.forEach(function(c) {
-        if (c.opened) return;
-        if (dondPlayerCase >= 0 && c === dondCases[dondPlayerCase]) return;
-        remaining.push(c.amount);
+      var leftCol = document.getElementById('dondAmountsLeft');
+      var rightCol = document.getElementById('dondAmountsRight');
+      leftCol.innerHTML = '';
+      rightCol.innerHTML = '';
+
+      var half = Math.ceil(DOND_AMOUNTS.length / 2);
+      var lowAmounts = DOND_AMOUNTS.slice(0, half); // left side
+      var highAmounts = DOND_AMOUNTS.slice(half);    // right side
+
+      function isEliminated(a) {
+        for (var i = 0; i < dondCases.length; i++) {
+          if (dondCases[i].amount === a && !dondCases[i].opened) return false;
+          if (i === dondPlayerCase && dondCases[i].amount === a) return false;
+        }
+        return true;
+      }
+
+      lowAmounts.forEach(function(a) {
+        var el = document.createElement('div');
+        el.className = 'dond-amount low';
+        if (isEliminated(a)) el.className += ' eliminated';
+        el.textContent = '$' + dondFormatAmount(a);
+        leftCol.appendChild(el);
       });
 
-      DOND_AMOUNTS.forEach(function(a) {
-        var el = document.createElement('span');
-        el.className = 'dond-amount';
-        if (a >= 50000) el.className += ' high';
-        var isEliminated = true;
-        for (var i = 0; i < dondCases.length; i++) {
-          if (dondCases[i].amount === a && !dondCases[i].opened && i !== dondPlayerCase) {
-            isEliminated = false; break;
-          }
-          if (i === dondPlayerCase && dondCases[i].amount === a) {
-            isEliminated = false; break;
-          }
-        }
-        if (isEliminated) el.className += ' eliminated';
+      highAmounts.forEach(function(a) {
+        var el = document.createElement('div');
+        el.className = 'dond-amount high';
+        if (isEliminated(a)) el.className += ' eliminated';
         el.textContent = '$' + dondFormatAmount(a);
-        container.appendChild(el);
+        rightCol.appendChild(el);
       });
     }
 
     function dondFormatAmount(n) {
       if (n >= 1000000) return (n / 1000000).toFixed(0) + 'M';
       if (n >= 1000) return (n / 1000).toFixed(0) + 'K';
+      if (n < 1) return n.toFixed(2);
       return n.toString();
     }
 
@@ -4567,10 +4641,20 @@
         if (dondCases[i].opened) return; // already opened
 
         // Open case with animation
+        var openedAmount = dondCases[i].amount;
         dondCases[i].opened = true;
         dondOpened++;
         dondRenderCases();
         dondRenderAmounts();
+
+        // Flash the eliminated amount in the side columns
+        var allAmountEls = document.querySelectorAll('.dond-amount.eliminated');
+        allAmountEls.forEach(function(el) {
+          if (el.textContent === '$' + dondFormatAmount(openedAmount)) {
+            el.classList.add('just-eliminated');
+            setTimeout(function() { el.classList.remove('just-eliminated'); }, 700);
+          }
+        });
 
         // Briefly show revealed amount
         var caseEl = document.getElementById('dondCases').children[i];
@@ -4580,9 +4664,9 @@
         }, 1200);
 
         if (dondOpened >= dondToOpen) {
-          // Round complete — banker makes offer
+          // Round complete — delay 1.5s so player sees last case, then banker calls
           dondPhase = 'offer';
-          dondMakeOffer();
+          setTimeout(function() { dondMakeOffer(); }, 1500);
         } else {
           var remaining = dondToOpen - dondOpened;
           document.getElementById('dondStatus').textContent =
@@ -4592,25 +4676,33 @@
     }
 
     function dondMakeOffer() {
-      // Calculate banker offer: average of remaining × multiplier (increases each round)
+      // Banker formula: inspired by real show
+      // Early rounds: low-ball (15-30% of expected value)
+      // Late rounds: closer to fair (80-95%)
+      // Formula: EV × (round / totalRounds) ^ 0.7 with minimum 0.15
       var remaining = [];
       dondCases.forEach(function(c, i) {
         if (!c.opened && i !== dondPlayerCase) remaining.push(c.amount);
       });
       remaining.push(dondCases[dondPlayerCase].amount);
       var avg = remaining.reduce(function(a, b) { return a + b; }, 0) / remaining.length;
-      var multiplier = 0.3 + (dondRound * 0.12); // 0.3 → 0.42 → 0.54 → 0.66 → 0.78 → 0.90
+      var totalRounds = DOND_SCHEDULE.length;
+      var progress = (dondRound + 1) / totalRounds; // 0.11 → 1.0
+      var multiplier = Math.pow(progress, 0.7); // curves upward slowly then fast
+      if (multiplier < 0.15) multiplier = 0.15;
       if (multiplier > 0.95) multiplier = 0.95;
-      dondDealAmount = Math.round(avg * multiplier);
+      // Add tiny random variation ±5%
+      var jitter = 0.95 + Math.random() * 0.10;
+      dondDealAmount = Math.round(avg * multiplier * jitter);
 
       document.getElementById('dondOfferAmount').textContent = '$' + dondDealAmount.toLocaleString();
-      document.getElementById('dondOfferArea').style.display = '';
+      document.getElementById('dondOfferArea').classList.add('visible');
       document.getElementById('dondStatus').textContent = t('dond_banker_offers') || 'The banker calls...';
     }
 
     function dondDeal() {
       dondPhase = 'done';
-      document.getElementById('dondOfferArea').style.display = 'none';
+      document.getElementById('dondOfferArea').classList.remove('visible');
       var yourCase = dondCases[dondPlayerCase].amount;
       var resultLabel = document.getElementById('dondResultLabel');
       var resultAmount = document.getElementById('dondResultAmount');
@@ -4627,7 +4719,7 @@
         resultCompare.textContent = (t('dond_bad_deal') || 'Your case had $') + yourCase.toLocaleString() + (t('dond_missed') || ' — you missed out!');
         resultCompare.style.color = '#ef4444';
       }
-      document.getElementById('dondResult').style.display = '';
+      document.getElementById('dondResult').classList.add('visible');
       document.getElementById('dondStatus').textContent = '';
 
       // Reveal all cases
@@ -4638,7 +4730,7 @@
     function dondNoDeal() {
       dondPhase = 'open';
       dondRound++;
-      document.getElementById('dondOfferArea').style.display = 'none';
+      document.getElementById('dondOfferArea').classList.remove('visible');
 
       // Check if only 1 case left (besides player's)
       var unopened = 0;
@@ -4668,7 +4760,7 @@
         } else {
           resultCompare.textContent = '';
         }
-        document.getElementById('dondResult').style.display = '';
+        document.getElementById('dondResult').classList.add('visible');
         document.getElementById('dondStatus').textContent = '';
         dondCases.forEach(function(c) { c.opened = true; });
         dondRenderCases();
