@@ -3703,8 +3703,10 @@
 
       for (let i = 0; i < percs.length - 1; i++) {
         if (monthlyIncome >= percs[i][1] && monthlyIncome < percs[i + 1][1]) {
-          // Linear interpolation
-          const ratio = (monthlyIncome - percs[i][1]) / (percs[i + 1][1] - percs[i][1]);
+          // Linear interpolation (guard against equal thresholds)
+          const denom = percs[i + 1][1] - percs[i][1];
+          if (denom === 0) return percs[i][0];
+          const ratio = (monthlyIncome - percs[i][1]) / denom;
           return percs[i][0] + ratio * (percs[i + 1][0] - percs[i][0]);
         }
       }
@@ -3719,15 +3721,18 @@
       const percentiles = [10, 20, 30, 40, 50, 60, 70, 80, 90, 95, 99];
 
       if (monthlyIncome <= thresholds[0]) {
-        return (monthlyIncome / thresholds[0]) * 10;
+        return thresholds[0] > 0 ? (monthlyIncome / thresholds[0]) * 10 : 5;
       }
       if (monthlyIncome >= thresholds[thresholds.length - 1]) {
-        return 99 + (1 - 1 / (1 + (monthlyIncome - thresholds[thresholds.length - 1]) / thresholds[thresholds.length - 1]));
+        var lastT = thresholds[thresholds.length - 1];
+        return lastT > 0 ? 99 + (1 - 1 / (1 + (monthlyIncome - lastT) / lastT)) : 99;
       }
 
       for (let i = 0; i < thresholds.length - 1; i++) {
         if (monthlyIncome >= thresholds[i] && monthlyIncome < thresholds[i + 1]) {
-          const ratio = (monthlyIncome - thresholds[i]) / (thresholds[i + 1] - thresholds[i]);
+          const denom = thresholds[i + 1] - thresholds[i];
+          if (denom === 0) return percentiles[i];
+          const ratio = (monthlyIncome - thresholds[i]) / denom;
           return percentiles[i] + ratio * (percentiles[i + 1] - percentiles[i]);
         }
       }
