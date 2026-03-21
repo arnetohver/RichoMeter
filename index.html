@@ -976,12 +976,32 @@
     .money-card {
       background: linear-gradient(135deg, #1e1b4b, #312e81);
       border-radius: 16px;
-      padding: 28px 24px;
       color: #fff;
       text-align: center;
       opacity: 0;
       transform: translateY(20px);
       animation: cardReveal 0.5s forwards;
+      overflow: hidden;
+      position: relative;
+      min-height: 420px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .money-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(15,12,50,0.92) 0%, rgba(15,12,50,0.7) 40%, rgba(15,12,50,0.1) 70%, transparent 100%);
+      z-index: 1;
+    }
+
+    .money-card-body {
+      position: relative;
+      z-index: 2;
+      padding: 24px 28px 32px;
     }
 
     @keyframes cardReveal {
@@ -1176,27 +1196,27 @@
     }
 
     .wyr-option.option-a {
-      background: linear-gradient(135deg, #ecfdf5, #d1fae5);
-      color: #065f46;
-      border-color: #a7f3d0;
+      background: linear-gradient(135deg, #eff6ff, #dbeafe);
+      color: #1e3a5f;
+      border-color: #bfdbfe;
     }
 
     .wyr-option.option-a:hover {
-      border-color: var(--accent);
+      border-color: #3b82f6;
       transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
     }
 
     .wyr-option.option-b {
-      background: linear-gradient(135deg, #fef2f2, #fee2e2);
-      color: #991b1b;
-      border-color: #fecaca;
+      background: linear-gradient(135deg, #f5f3ff, #ede9fe);
+      color: #3b1f6e;
+      border-color: #c4b5fd;
     }
 
     .wyr-option.option-b:hover {
-      border-color: #ef4444;
+      border-color: #7c3aed;
       transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2);
+      box-shadow: 0 4px 12px rgba(124, 58, 237, 0.2);
     }
 
     .wyr-option.disabled {
@@ -1209,8 +1229,63 @@
       border-width: 3px;
     }
 
-    .wyr-option.chosen.option-a { border-color: var(--accent-dark); }
-    .wyr-option.chosen.option-b { border-color: #dc2626; }
+    .wyr-option.chosen.option-a { border-color: #2563eb; }
+    .wyr-option.chosen.option-b { border-color: #6d28d9; }
+
+    .wyr-stat-bar {
+      height: 6px;
+      border-radius: 3px;
+      margin-top: 6px;
+      background: #e5e7eb;
+      overflow: hidden;
+    }
+    .wyr-stat-bar-fill {
+      height: 100%;
+      border-radius: 3px;
+      transition: width 0.8s ease;
+    }
+    .wyr-stat-bar-fill.bar-a { background: #3b82f6; }
+    .wyr-stat-bar-fill.bar-b { background: #7c3aed; }
+
+    .wyr-summary {
+      text-align: center;
+      padding: 32px 16px;
+    }
+    .wyr-summary-type {
+      font-size: 32px;
+      font-weight: 800;
+      margin-bottom: 8px;
+      background: linear-gradient(135deg, #3b82f6, #7c3aed);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .wyr-summary-desc {
+      font-size: 16px;
+      color: var(--text-light);
+      line-height: 1.5;
+      margin-bottom: 24px;
+    }
+    .wyr-summary-stats {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      margin-bottom: 24px;
+    }
+    .wyr-summary-stat {
+      text-align: center;
+    }
+    .wyr-summary-stat-num {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--text);
+    }
+    .wyr-summary-stat-label {
+      font-size: 12px;
+      color: var(--text-lighter);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
 
     .wyr-result {
       display: none;
@@ -1283,10 +1358,10 @@
     }
 
     .money-card-text {
-      font-size: 15px;
-      color: rgba(255,255,255,0.85);
-      margin-top: 8px;
-      line-height: 1.5;
+      font-size: 17px;
+      color: rgba(255,255,255,0.9);
+      margin-top: 10px;
+      line-height: 1.6;
     }
 
     .money-card-text strong {
@@ -1318,6 +1393,39 @@
     .footer-sources-link:hover { opacity: 1; }
 
     /* ---- DEAL OR NO DEAL ---- */
+    .dond-howto {
+      max-width: 600px;
+      margin: 0 auto 24px;
+      background: rgba(124, 58, 237, 0.08);
+      border: 1px solid rgba(124, 58, 237, 0.2);
+      border-radius: 12px;
+      padding: 0;
+      overflow: hidden;
+    }
+    .dond-howto summary {
+      padding: 14px 20px;
+      cursor: pointer;
+      font-weight: 600;
+      color: #7c3aed;
+      font-size: 15px;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .dond-howto summary::before {
+      content: '❓';
+    }
+    .dond-howto summary::-webkit-details-marker { display: none; }
+    .dond-howto[open] summary {
+      border-bottom: 1px solid rgba(124, 58, 237, 0.15);
+    }
+    .dond-howto-content {
+      padding: 16px 20px;
+      font-size: 14px;
+      line-height: 1.6;
+      color: #555;
+    }
     .dond-card {
       max-width: 800px;
       margin: 0 auto;
@@ -1636,8 +1744,9 @@
       .day-compare-punchline { font-size: 15px; }
       .day-compare-punchline span { font-size: 24px; }
       .money-card-number { font-size: 28px; }
-      .money-card-text { font-size: 13px; }
-      .money-card { padding: 18px; }
+      .money-card-text { font-size: 15px; }
+      .money-card { min-height: 360px; }
+      .money-card-body { padding: 18px 20px 24px; }
       .wyr-options { grid-template-columns: 1fr; }
       .wyr-option { padding: 18px 14px; font-size: 14px; }
       .wyr-question { font-size: 16px; }
@@ -1868,24 +1977,46 @@
     <p class="section-subtitle" data-i18n="s4_subtitle">Hard choices about money and life. Pick one — then see what others chose.</p>
 
     <div class="wyr-card">
-      <div class="wyr-question" id="wyrQuestion"></div>
-      <div class="wyr-vs">VS</div>
-      <div class="wyr-options" id="wyrOptions">
-        <div class="wyr-option option-a" id="wyrOptionA"></div>
-        <div class="wyr-option option-b" id="wyrOptionB"></div>
+      <div id="wyrGameArea">
+        <div class="wyr-question" id="wyrQuestion"></div>
+        <div class="wyr-vs">VS</div>
+        <div class="wyr-options" id="wyrOptions">
+          <div class="wyr-option option-a" id="wyrOptionA"></div>
+          <div class="wyr-option option-b" id="wyrOptionB"></div>
+        </div>
+        <div class="wyr-stats-label" id="wyrStatsLabel" style="display:none; text-align:center; font-size:13px; color:#888; margin-bottom:6px;" data-i18n="wyr_stats_label">Based on all players' choices</div>
+        <div class="wyr-result" id="wyrResultA">
+          <span id="wyrPctA">—</span>
+          <div class="wyr-result-sub" id="wyrCountA"></div>
+          <div class="wyr-stat-bar"><div class="wyr-stat-bar-fill bar-a" id="wyrBarA" style="width:0%"></div></div>
+        </div>
+        <div class="wyr-result" id="wyrResultB">
+          <span id="wyrPctB">—</span>
+          <div class="wyr-result-sub" id="wyrCountB"></div>
+          <div class="wyr-stat-bar"><div class="wyr-stat-bar-fill bar-b" id="wyrBarB" style="width:0%"></div></div>
+        </div>
+        <div class="wyr-nav">
+          <button class="wyr-nav-btn" id="wyrNextBtn" data-i18n="s4_next">Next Question</button>
+        </div>
+        <div class="wyr-counter" id="wyrCounter"></div>
       </div>
-      <div class="wyr-result" id="wyrResultA">
-        <span id="wyrPctA">—</span>
-        <div class="wyr-result-sub" id="wyrCountA"></div>
+      <div id="wyrSummary" class="wyr-summary" style="display:none;">
+        <div class="wyr-summary-type" id="wyrSummaryType"></div>
+        <div class="wyr-summary-desc" id="wyrSummaryDesc"></div>
+        <div class="wyr-summary-stats">
+          <div class="wyr-summary-stat">
+            <div class="wyr-summary-stat-num" id="wyrSummaryRisk">0</div>
+            <div class="wyr-summary-stat-label" data-i18n="wyr_risk_score">Risk Score</div>
+          </div>
+          <div class="wyr-summary-stat">
+            <div class="wyr-summary-stat-num" id="wyrSummaryMajority">0</div>
+            <div class="wyr-summary-stat-label" data-i18n="wyr_with_majority">With Majority</div>
+          </div>
+        </div>
+        <div class="wyr-nav">
+          <button class="wyr-nav-btn" id="wyrPlayAgainBtn">🔄 Play Again</button>
+        </div>
       </div>
-      <div class="wyr-result" id="wyrResultB">
-        <span id="wyrPctB">—</span>
-        <div class="wyr-result-sub" id="wyrCountB"></div>
-      </div>
-      <div class="wyr-nav">
-        <button class="wyr-nav-btn" id="wyrNextBtn" data-i18n="s4_next">Next Question</button>
-      </div>
-      <div class="wyr-counter" id="wyrCounter"></div>
     </div>
   </section>
 
@@ -1968,6 +2099,13 @@
     <button class="back-to-tools" onclick="switchView('tools'); window.scrollTo(0,0);">← <span data-i18n="nav_back">Back</span></button>
     <h2 class="section-title" data-i18n="dond_title">Deal or No Deal</h2>
     <p class="section-subtitle" data-i18n="dond_subtitle">Pick a case. Open the rest. Take the banker's offer — or risk it all.</p>
+
+    <details class="dond-howto" id="dondHowTo">
+      <summary data-i18n="dond_howto_title">How to play?</summary>
+      <div class="dond-howto-content" data-i18n="dond_howto_text">
+        There are 26 cases, each hiding a sum from $0.01 to $1,000,000. First, pick one case — that's yours to keep. Then start opening the other cases one by one to reveal their amounts. After each round, the Banker makes you an offer based on what's still in play. You choose: <strong>DEAL</strong> (take the money) or <strong>NO DEAL</strong> (keep playing). The fewer big amounts left, the lower the offer. The more big amounts remain, the higher. If you never take a deal, you win whatever is inside your case. The goal: walk away with as much money as possible.
+      </div>
+    </details>
 
     <div class="dond-card" id="dondCard">
       <div class="dond-status" id="dondStatus">Pick your case!</div>
@@ -2129,14 +2267,14 @@
         mf_another: '🤯 Another one!',
         mf_restart: '🤯 Start over!',
         mf_years: 'years',
-        mf_pickup_100: 'If Elon Musk drops $100, it\'s not even worth picking up — his wealth grows by this much in just 4 seconds anyway. (Based on average net worth growth over 5 years.)',
+        mf_pickup_100: 'If Elon Musk drops $100, it\'s not even worth picking up — his wealth grows by {amount} in just 4 seconds anyway. (Based on average net worth growth over 5 years.)',
         mf_bills_lined: 'Line up your monthly salary in $1 bills end to end. {comparison}',
         mf_bills_ref_pool: 'That\'s over 5 Olympic swimming pools.',
         mf_bills_ref_fields: 'That\'s {n} football fields.',
         mf_bills_ref_eiffel: 'That\'s taller than the Eiffel Tower (330m).',
         mf_bills_ref_km: 'That\'s {n} km — you\'d need a bike.',
-        mf_gold_backpack: 'Fill a regular backpack with pure gold. It\'s worth this much but weighs {weight} kg ({lbs} lbs) — you couldn\'t even lift it off the ground.',
-        mf_moon_ticket: 'A SpaceX ticket to the Moon costs this much. You\'d need to save every cent for {years} years.',
+        mf_gold_backpack: 'Fill a regular backpack with pure gold. It\'s worth $79.7 million, but weighs {weight} kg ({lbs} lbs) — you couldn\'t even lift it off the ground.',
+        mf_moon_ticket: 'A SpaceX ticket to the Moon costs $70 million. You\'d need to save every cent for {years} years.',
         mf_bitcoin_pizza: 'In 2010, someone paid 10,000 Bitcoin for 2 pizzas. Today that would be ~$850M. The most expensive meal in human history.',
         mf_physical_cash: 'Only 8% of all money in the world exists as physical cash. The other 92% is just numbers on computers.',
         mf_sun_bridge: 'If you converted all the world\'s physical cash into $1 bills, you could build a bridge to the Sun — and it would be just wide enough to walk on (57 cm).',
@@ -2153,7 +2291,10 @@
         s4_subtitle: 'Hard choices about money and life. Pick one — then see what others chose.',
         s4_next: 'Next Question',
         wyr_your_choice: 'Your choice',
+        wyr_stats_label: 'Based on all players\' choices',
         wyr_restart: '🔄 Play again',
+        wyr_risk_score: 'Risk Score',
+        wyr_with_majority: 'With Majority',
         wyr_q1: 'Would you rather...',
         wyr_q1_a: 'Get $1,000,000 right now',
         wyr_q1_b: 'Get $5,000 every month for the rest of your life',
@@ -2200,6 +2341,8 @@
         nav_dond: 'Deal or No Deal',
         dond_title: 'Deal or No Deal',
         dond_subtitle: 'Pick a case. Open the rest. Take the banker\'s offer — or risk it all.',
+        dond_howto_title: 'How to play?',
+        dond_howto_text: 'There are 26 cases, each hiding a sum from $0.01 to $1,000,000. First, pick one case — that\'s yours to keep. Then start opening the other cases one by one to reveal their amounts. After each round, the Banker makes you an offer based on what\'s still in play. You choose: <strong>DEAL</strong> (take the money) or <strong>NO DEAL</strong> (keep playing). The fewer big amounts left, the lower the offer. The more big amounts remain, the higher. If you never take a deal, you win whatever is inside your case. The goal: walk away with as much money as possible.',
         dond_pick: 'Pick your case!',
         dond_open_cases: 'Open {n} cases',
         dond_banker: 'The Banker offers',
@@ -2282,14 +2425,14 @@
         mf_another: '🤯 Veel üks!',
         mf_restart: '🤯 Alusta uuesti!',
         mf_years: 'aastat',
-        mf_pickup_100: 'Kui Elon Muskil kukub $100 maha, siis ei tasuks tal isegi seda üles võtta — tema vara tõuseb selle 4 sekundi jooksul nagunii nii palju. (Viimase 5 aasta vara kasvu põhjal.)',
+        mf_pickup_100: 'Kui Elon Muskil kukub $100 maha, siis ei tasuks tal isegi seda üles võtta — tema vara tõuseb selle 4 sekundi jooksul nagunii {amount} võrra. (Viimase 5 aasta vara kasvu põhjal.)',
         mf_bills_lined: 'Pane oma kuupalk $1 rahatähtedena üksteise järel ritta. {comparison}',
         mf_bills_ref_pool: 'See on üle 5 olümpia ujumisbasseini.',
         mf_bills_ref_fields: 'See on {n} jalgpalliväljakut.',
         mf_bills_ref_eiffel: 'See on kõrgem kui Eiffeli torn (330m).',
         mf_bills_ref_km: 'See on {n} km — vajad jalgratast.',
-        mf_gold_backpack: 'Täida tavaline seljakott puhta kullaga. See maksab nii palju, aga kaalub {weight} kg ({lbs} lbs) — sa ei jaksaks seda maast üleski tõsta.',
-        mf_moon_ticket: 'SpaceX pilet Kuule maksab nii palju. Pead iga sendi kokku hoidma {years} aastat.',
+        mf_gold_backpack: 'Täida tavaline seljakott puhta kullaga. See maksab $79.7 miljonit, aga kaalub {weight} kg ({lbs} lbs) — sa ei jaksaks seda maast üleski tõsta.',
+        mf_moon_ticket: 'SpaceX pilet Kuule maksab $70 miljonit. Pead iga sendi kokku hoidma {years} aastat.',
         mf_bitcoin_pizza: '2010. aastal maksis keegi 2 pizza eest 10 000 Bitcoini. Täna oleks see ~$850M. Inimkonna ajaloo kalleim eine.',
         mf_physical_cash: 'Ainult 8% kogu maailma rahast on füüsiline sularaha. Ülejäänud 92% eksisteerib vaid numbritena arvutites.',
         mf_sun_bridge: 'Kui kogu maailma füüsiline raha teha $1 rahatähtedeks, saaksid ehitada silla Päikeseni — ja see oleks piisavalt lai, et sellel kõndida (57 cm).',
@@ -2308,7 +2451,10 @@
         s4_subtitle: 'Rasked valikud raha ja elu kohta. Vali üks — siis vaata mida teised valisid.',
         s4_next: 'Järgmine küsimus',
         wyr_your_choice: 'Sinu valik',
+        wyr_stats_label: 'Kõikide mängijate valikute põhjal',
         wyr_restart: '🔄 Mängi uuesti',
+        wyr_risk_score: 'Riski skoor',
+        wyr_with_majority: 'Enamusega',
         wyr_q1: 'Kumma valid?',
         wyr_q1_a: 'Saad $1,000,000 kohe kätte',
         wyr_q1_b: 'Saad $5,000 iga kuu elu lõpuni',
@@ -2355,6 +2501,8 @@
         nav_dond: 'Võta või Jäta',
         dond_title: 'Võta või Jäta',
         dond_subtitle: 'Vali kohver. Ava ülejäänud. Võta pankuri pakkumine — või riski kõigega.',
+        dond_howto_title: 'Kuidas mängida?',
+        dond_howto_text: 'Laual on 26 kohvrit, igas peidus summa $0.01 kuni $1 000 000. Kõigepealt vali üks kohver — see jääb sulle. Seejärel hakka avama teisi kohvreid, et näha mis summad seal peidus on. Pärast igat vooru teeb Pankur sulle pakkumise, mis põhineb veel mängus olevatel summadel. Sina otsustad: <strong>DEAL</strong> (võtad raha) või <strong>NO DEAL</strong> (mängid edasi). Mida vähem suuri summasid alles, seda madalam pakkumine. Mida rohkem suuri summasid veel mängus, seda kõrgem. Kui sa kunagi deali ei võta, võidad selle mis on sinu kohvris. Eesmärk: lahku võimalikult suure summaga.',
         dond_pick: 'Vali oma kohver!',
         dond_open_cases: 'Ava {n} kohvrit',
         dond_banker: 'Pankur pakub',
@@ -2436,14 +2584,14 @@
         mf_another: '🤯 Noch einer!',
         mf_restart: '🤯 Nochmal!',
         mf_years: 'Jahre',
-        mf_pickup_100: 'Wenn Elon Musk $100 fallen lässt, lohnt es sich nicht mal, sie aufzuheben — sein Vermögen wächst in diesen 4 Sekunden sowieso um so viel. (Basierend auf dem durchschnittlichen Vermögenswachstum über 5 Jahre.)',
+        mf_pickup_100: 'Wenn Elon Musk $100 fallen lässt, lohnt es sich nicht mal, sie aufzuheben — sein Vermögen wächst in diesen 4 Sekunden sowieso um {amount}. (Basierend auf dem durchschnittlichen Vermögenswachstum über 5 Jahre.)',
         mf_bills_lined: 'Lege dein Monatsgehalt in $1-Scheinen hintereinander. {comparison}',
         mf_bills_ref_pool: 'Das sind über 5 olympische Schwimmbecken.',
         mf_bills_ref_fields: 'Das sind {n} Fußballfelder.',
         mf_bills_ref_eiffel: 'Das ist höher als der Eiffelturm (330m).',
         mf_bills_ref_km: 'Das sind {n} km — du brauchst ein Fahrrad.',
-        mf_gold_backpack: 'Fülle einen normalen Rucksack mit purem Gold. Er ist so viel wert, wiegt aber {weight} kg ({lbs} lbs) — du könntest ihn nicht mal vom Boden heben.',
-        mf_moon_ticket: 'Ein SpaceX-Ticket zum Mond kostet so viel. Du müsstest jeden Cent {years} Jahre lang sparen.',
+        mf_gold_backpack: 'Fülle einen normalen Rucksack mit purem Gold. Er ist $79,7 Millionen wert, wiegt aber {weight} kg ({lbs} lbs) — du könntest ihn nicht mal vom Boden heben.',
+        mf_moon_ticket: 'Ein SpaceX-Ticket zum Mond kostet $70 Millionen. Du müsstest jeden Cent {years} Jahre lang sparen.',
         mf_bitcoin_pizza: '2010 bezahlte jemand 10.000 Bitcoin für 2 Pizzen. Heute wären das ~$850M. Die teuerste Mahlzeit der Menschheitsgeschichte.',
         mf_physical_cash: 'Nur 8% des gesamten Geldes auf der Welt ist physisches Bargeld. Die anderen 92% existieren nur als Zahlen auf Computern.',
         mf_sun_bridge: 'Wenn man alles physische Geld der Welt in $1-Scheine umwandeln würde, könnte man eine Brücke zur Sonne bauen — gerade breit genug zum Drüberlaufen (57 cm).',
@@ -2462,7 +2610,10 @@
         s4_subtitle: 'Schwere Entscheidungen über Geld und Leben. Wähle eine — dann sieh, was andere gewählt haben.',
         s4_next: 'Nächste Frage',
         wyr_your_choice: 'Deine Wahl',
+        wyr_stats_label: 'Basierend auf den Entscheidungen aller Spieler',
         wyr_restart: '🔄 Nochmal spielen',
+        wyr_risk_score: 'Risiko-Score',
+        wyr_with_majority: 'Mit Mehrheit',
         wyr_q1: 'Was wählst du?',
         wyr_q1_a: '$1.000.000 sofort',
         wyr_q1_b: '$5.000 jeden Monat für den Rest deines Lebens',
@@ -2509,6 +2660,8 @@
         nav_dond: 'Deal or No Deal',
         dond_title: 'Deal or No Deal',
         dond_subtitle: 'Wähle einen Koffer. Öffne die anderen. Nimm das Angebot — oder riskiere alles.',
+        dond_howto_title: 'Wie spielt man?',
+        dond_howto_text: 'Es gibt 26 Koffer, jeder enthält einen Betrag von $0,01 bis $1.000.000. Wähle zuerst einen Koffer — der gehört dir. Dann öffne die anderen Koffer nacheinander, um die Beträge zu sehen. Nach jeder Runde macht dir der Banker ein Angebot, basierend auf den noch übrigen Beträgen. Du entscheidest: <strong>DEAL</strong> (Geld nehmen) oder <strong>NO DEAL</strong> (weiterspielen). Je weniger große Beträge übrig sind, desto niedriger das Angebot. Je mehr große Beträge noch im Spiel sind, desto höher. Wenn du nie einen Deal annimmst, gewinnst du den Inhalt deines Koffers. Ziel: mit so viel Geld wie möglich gehen.',
         dond_pick: 'Wähle deinen Koffer!',
         dond_open_cases: 'Öffne {n} Koffer',
         dond_banker: 'Der Banker bietet',
@@ -2590,14 +2743,14 @@
         mf_another: '🤯 Encore un!',
         mf_restart: '🤯 Recommencer!',
         mf_years: 'ans',
-        mf_pickup_100: 'Si Elon Musk laisse tomber $100, ça ne vaut même pas la peine de les ramasser — sa fortune augmente de ce montant en seulement 4 secondes. (Basé sur la croissance moyenne de sa fortune sur 5 ans.)',
+        mf_pickup_100: 'Si Elon Musk laisse tomber $100, ça ne vaut même pas la peine de les ramasser — sa fortune augmente de {amount} en seulement 4 secondes. (Basé sur la croissance moyenne de sa fortune sur 5 ans.)',
         mf_bills_lined: 'Alignez votre salaire mensuel en billets de $1 bout à bout. {comparison}',
         mf_bills_ref_pool: 'C\'est plus de 5 piscines olympiques.',
         mf_bills_ref_fields: 'C\'est {n} terrains de football.',
         mf_bills_ref_eiffel: 'C\'est plus haut que la Tour Eiffel (330m).',
         mf_bills_ref_km: 'C\'est {n} km — il vous faut un vélo.',
-        mf_gold_backpack: 'Remplissez un sac à dos normal d\'or pur. Il vaut ce montant mais pèse {weight} kg ({lbs} lbs) — vous ne pourriez même pas le soulever.',
-        mf_moon_ticket: 'Un billet SpaceX pour la Lune coûte ce montant. Vous devriez économiser chaque centime pendant {years} ans.',
+        mf_gold_backpack: 'Remplissez un sac à dos normal d\'or pur. Il vaut 79,7 millions $, mais pèse {weight} kg ({lbs} lbs) — vous ne pourriez même pas le soulever.',
+        mf_moon_ticket: 'Un billet SpaceX pour la Lune coûte 70 millions $. Vous devriez économiser chaque centime pendant {years} ans.',
         mf_bitcoin_pizza: 'En 2010, quelqu\'un a payé 10 000 Bitcoin pour 2 pizzas. Aujourd\'hui ça vaudrait ~$850M. Le repas le plus cher de l\'histoire humaine.',
         mf_physical_cash: 'Seulement 8% de tout l\'argent du monde est du cash physique. Les 92% restants n\'existent que sous forme de chiffres sur des ordinateurs.',
         mf_sun_bridge: 'Si on convertissait tout le cash physique du monde en billets de $1, on pourrait construire un pont jusqu\'au Soleil — juste assez large pour y marcher (57 cm).',
@@ -2616,7 +2769,10 @@
         s4_subtitle: 'Des choix difficiles sur l\'argent et la vie. Choisis — puis vois ce que les autres ont choisi.',
         s4_next: 'Question suivante',
         wyr_your_choice: 'Votre choix',
+        wyr_stats_label: 'Basé sur les choix de tous les joueurs',
         wyr_restart: '🔄 Rejouer',
+        wyr_risk_score: 'Score de risque',
+        wyr_with_majority: 'Avec la majorité',
         wyr_q1: 'Tu préfères ?',
         wyr_q1_a: 'Recevoir $1 000 000 maintenant',
         wyr_q1_b: 'Recevoir $5 000 chaque mois pour le reste de ta vie',
@@ -2663,6 +2819,8 @@
         nav_dond: 'À prendre ou à laisser',
         dond_title: 'À prendre ou à laisser',
         dond_subtitle: 'Choisis une valise. Ouvre les autres. Accepte l\'offre — ou risque tout.',
+        dond_howto_title: 'Comment jouer ?',
+        dond_howto_text: 'Il y a 26 valises, chacune cachant une somme de 0,01 $ à 1 000 000 $. D\'abord, choisis une valise — elle est à toi. Ensuite, ouvre les autres valises une par une pour révéler leurs montants. Après chaque tour, le Banquier te fait une offre basée sur les montants encore en jeu. Tu choisis : <strong>DEAL</strong> (prendre l\'argent) ou <strong>NO DEAL</strong> (continuer). Moins il reste de gros montants, plus l\'offre est basse. Plus il en reste, plus elle est élevée. Si tu n\'acceptes jamais, tu gagnes le contenu de ta valise. Le but : repartir avec le maximum.',
         dond_pick: 'Choisis ta valise !',
         dond_open_cases: 'Ouvre {n} valises',
         dond_banker: 'Le banquier propose',
@@ -2744,14 +2902,14 @@
         mf_another: '🤯 Otro más!',
         mf_restart: '🤯 De nuevo!',
         mf_years: 'años',
-        mf_pickup_100: 'Si a Elon Musk se le caen $100, ni vale la pena recogerlos — su fortuna crece esta cantidad en solo 4 segundos. (Basado en el crecimiento promedio de su patrimonio en 5 años.)',
+        mf_pickup_100: 'Si a Elon Musk se le caen $100, ni vale la pena recogerlos — su fortuna crece {amount} en solo 4 segundos. (Basado en el crecimiento promedio de su patrimonio en 5 años.)',
         mf_bills_lined: 'Alinea tu salario mensual en billetes de $1 uno tras otro. {comparison}',
         mf_bills_ref_pool: 'Son más de 5 piscinas olímpicas.',
         mf_bills_ref_fields: 'Son {n} campos de fútbol.',
         mf_bills_ref_eiffel: 'Es más alto que la Torre Eiffel (330m).',
         mf_bills_ref_km: 'Son {n} km — necesitas una bicicleta.',
-        mf_gold_backpack: 'Llena una mochila normal con oro puro. Vale esta cantidad pero pesa {weight} kg ({lbs} lbs) — no podrías ni levantarla del suelo.',
-        mf_moon_ticket: 'Un boleto SpaceX a la Luna cuesta esta cantidad. Necesitarías ahorrar cada centavo durante {years} años.',
+        mf_gold_backpack: 'Llena una mochila normal con oro puro. Vale $79,7 millones, pero pesa {weight} kg ({lbs} lbs) — no podrías ni levantarla del suelo.',
+        mf_moon_ticket: 'Un boleto SpaceX a la Luna cuesta $70 millones. Necesitarías ahorrar cada centavo durante {years} años.',
         mf_bitcoin_pizza: 'En 2010, alguien pagó 10.000 Bitcoin por 2 pizzas. Hoy serían ~$850M. La comida más cara de la historia humana.',
         mf_physical_cash: 'Solo el 8% de todo el dinero del mundo es efectivo físico. El otro 92% existe solo como números en computadoras.',
         mf_sun_bridge: 'Si convirtieras todo el efectivo físico del mundo en billetes de $1, podrías construir un puente al Sol — justo lo suficientemente ancho para caminar (57 cm).',
@@ -2770,7 +2928,10 @@
         s4_subtitle: 'Decisiones difíciles sobre dinero y vida. Elige una — luego ve qué eligieron otros.',
         s4_next: 'Siguiente pregunta',
         wyr_your_choice: 'Tu elección',
+        wyr_stats_label: 'Basado en las elecciones de todos los jugadores',
         wyr_restart: '🔄 Jugar de nuevo',
+        wyr_risk_score: 'Puntuación de riesgo',
+        wyr_with_majority: 'Con la mayoría',
         wyr_q1: '¿Qué prefieres?',
         wyr_q1_a: 'Recibir $1,000,000 ahora mismo',
         wyr_q1_b: 'Recibir $5,000 cada mes por el resto de tu vida',
@@ -2817,6 +2978,8 @@
         nav_dond: 'Trato o No Trato',
         dond_title: 'Trato o No Trato',
         dond_subtitle: 'Elige un maletín. Abre los demás. Acepta la oferta — o arriésgalo todo.',
+        dond_howto_title: '¿Cómo se juega?',
+        dond_howto_text: 'Hay 26 maletines, cada uno esconde una suma de $0,01 a $1.000.000. Primero, elige un maletín — es tuyo. Luego abre los demás maletines uno por uno para revelar sus cantidades. Después de cada ronda, el Banquero te hace una oferta basada en las cantidades que quedan en juego. Tú eliges: <strong>DEAL</strong> (tomar el dinero) o <strong>NO DEAL</strong> (seguir jugando). Cuantas menos cantidades grandes queden, menor la oferta. Cuantas más queden, mayor. Si nunca aceptas, ganas lo que hay dentro de tu maletín. El objetivo: irte con la mayor cantidad posible.',
         dond_pick: '¡Elige tu maletín!',
         dond_open_cases: 'Abre {n} maletines',
         dond_banker: 'El banquero ofrece',
@@ -3032,6 +3195,9 @@
         // onclick is used for restart override, so check it first
         if (document.getElementById('wyrNextBtn').onclick) return;
         wyrShowNext();
+      });
+      document.getElementById('wyrPlayAgainBtn').addEventListener('click', function() {
+        wyrInit();
       });
 
       // Higher or Lower
@@ -3814,7 +3980,8 @@
         icon: '💵',
         number: '$' + earnDuringPickup.toLocaleString(),
         unit: '',
-        text: t('mf_pickup_100')
+        text: t('mf_pickup_100', { amount: '$' + earnDuringPickup.toLocaleString() }),
+        img: 'Pictures/fact1_musk100.jpg'
       });
 
       // FACT 2: $1 bills lined up end to end (personalized — only if income entered)
@@ -3837,7 +4004,8 @@
           icon: '💸',
           number: meters.toLocaleString() + 'm',
           unit: '(' + feet.toLocaleString() + ' ft)',
-          text: t('mf_bills_lined', { comparison: comparison })
+          text: t('mf_bills_lined', { comparison: comparison }),
+          img: 'Pictures/fact2_dollar_bills_eiffel.jpg'
         });
       }
 
@@ -3849,7 +4017,8 @@
         icon: '🎒',
         number: '$' + (goldValueUSD / 1e6).toFixed(1) + 'M',
         unit: '',
-        text: t('mf_gold_backpack', { weight: goldWeightKg, lbs: goldWeightLbs })
+        text: t('mf_gold_backpack', { weight: goldWeightKg, lbs: goldWeightLbs }),
+        img: 'Pictures/fact3_gold_backpack.jpg'
       });
 
       // FACT 4: Moon ticket (personalized — only if income entered)
@@ -3859,7 +4028,8 @@
           icon: '🌙',
           number: '$70M',
           unit: '',
-          text: t('mf_moon_ticket', { years: yearsToMoon.toLocaleString() })
+          text: t('mf_moon_ticket', { years: yearsToMoon.toLocaleString() }),
+          img: 'Pictures/fact4_moon_ticket.jpg'
         });
       }
 
@@ -3868,7 +4038,8 @@
         icon: '🍕',
         number: '~$850M',
         unit: '',
-        text: t('mf_bitcoin_pizza')
+        text: t('mf_bitcoin_pizza'),
+        img: 'Pictures/fact5_bitcoin_pizza.jpg'
       });
 
       // FACT 6: Only 8% of money is physical (universal)
@@ -3876,7 +4047,8 @@
         icon: '🏦',
         number: '8%',
         unit: '',
-        text: t('mf_physical_cash')
+        text: t('mf_physical_cash'),
+        img: 'Pictures/fact6_empty_vault.jpg'
       });
 
       // FACT 7: Sun bridge (universal)
@@ -3884,7 +4056,8 @@
         icon: '☀️',
         number: '57 cm',
         unit: '',
-        text: t('mf_sun_bridge')
+        text: t('mf_sun_bridge'),
+        img: 'Pictures/fact7_sun_bridge.jpg'
       });
 
       // FACT 8: 12 richest (universal, Oxfam 2026)
@@ -3892,7 +4065,8 @@
         icon: '👑',
         number: '12',
         unit: 'vs 4,100,000,000',
-        text: t('mf_12_richest')
+        text: t('mf_12_richest'),
+        img: 'Pictures/fact8_12_richest.jpg'
       });
 
       // FACT 9: Millionaire closer to homeless (universal)
@@ -3900,7 +4074,8 @@
         icon: '🪜',
         number: '$999M',
         unit: '',
-        text: t('mf_millionaire_closer')
+        text: t('mf_millionaire_closer'),
+        img: 'Pictures/fact9_millionaire_closer.jpg'
       });
 
       // FACT 10: Musk lost $200B — Guinness record (universal)
@@ -3908,7 +4083,8 @@
         icon: '📉',
         number: '-$200B',
         unit: '',
-        text: t('mf_musk_loss')
+        text: t('mf_musk_loss'),
+        img: 'Pictures/fact10_musk_loss.jpg'
       });
 
       // FACT 11: Most expensive painting $450M (universal)
@@ -3916,7 +4092,8 @@
         icon: '🖼️',
         number: '$450M',
         unit: '→ was $60',
-        text: t('mf_painting')
+        text: t('mf_painting'),
+        img: 'Pictures/fact11_painting.jpg'
       });
 
       // FACT 12: Parking spot $1.3M Hong Kong (universal)
@@ -3924,7 +4101,8 @@
         icon: '🅿️',
         number: '$1.3M',
         unit: '',
-        text: t('mf_parking')
+        text: t('mf_parking'),
+        img: 'Pictures/fact12_parking.jpg'
       });
 
       // FACT 13: Richest dog $372M (universal)
@@ -3932,7 +4110,8 @@
         icon: '🐕',
         number: '$372M',
         unit: '',
-        text: t('mf_rich_dog')
+        text: t('mf_rich_dog'),
+        img: 'Pictures/fact13_rich_dog.jpg'
       });
 
       // FACT 14: Rockefeller $631B inflation-adjusted (universal)
@@ -3940,7 +4119,8 @@
         icon: '👴',
         number: '$631B',
         unit: '',
-        text: t('mf_rockefeller')
+        text: t('mf_rockefeller'),
+        img: 'Pictures/fact14_rockefeller.jpg'
       });
 
       moneyFactsReady = true;
@@ -3971,11 +4151,33 @@
       container.innerHTML = '';
       var el = document.createElement('div');
       el.className = 'money-card';
-      el.innerHTML =
+      if (!card.img) {
+        el.style.minHeight = 'auto';
+        el.style.padding = '32px 24px';
+      }
+
+      // Background image with overlay + text on top
+      var overlayHtml = '';
+      if (card.img) {
+        overlayHtml = '<div class="money-card-overlay"></div>';
+      }
+
+      el.innerHTML = overlayHtml +
+        '<div class="money-card-body">' +
         '<div class="money-card-icon">' + card.icon + '</div>' +
         '<div class="money-card-number">' + card.number + ' <small style="font-size:60%;opacity:0.7">' + card.unit + '</small></div>' +
-        '<div class="money-card-text">' + card.text + '</div>';
+        '<div class="money-card-text">' + card.text + '</div>' +
+        '</div>';
       container.appendChild(el);
+
+      // Lazy load background image
+      if (card.img) {
+        var loader = new Image();
+        loader.onload = function() {
+          el.style.backgroundImage = 'url(' + card.img + ')';
+        };
+        loader.src = card.img;
+      }
 
       // Disclaimer if this fact has one (Musk stat)
       if (card.disclaimer) {
@@ -4145,15 +4347,38 @@
     }
 
     // ---- WOULD YOU RATHER ----
-    // Build questions array from translation keys (q1-q25)
+    // Build questions array from translation keys (q1-q10)
+    // Each question has fake stats (pctA = % who chose A) and risk score for A choice
+    // riskA: positive = choosing A is riskier, negative = choosing B is riskier
     var wyrQuestions = [];
+    var WYR_STATS = [
+      { pctA: 38, riskA: -1 },  // Q1: $1M now vs $5K/month forever — most pick safe monthly
+      { pctA: 44, riskA: 1 },   // Q2: Double salary hate job vs half dream job — slight lean to dream
+      { pctA: 27, riskA: 2 },   // Q3: $1B 10 years vs healthy +25 — most want life
+      { pctA: 41, riskA: -1 },  // Q4: Beach house poor vs rainy city 3x — close split
+      { pctA: 52, riskA: 1 },   // Q5: Retire 40 tight vs work 65 rich — surprisingly even
+      { pctA: 23, riskA: 2 },   // Q6: 70h $1M vs 20h modest — most pick balance
+      { pctA: 35, riskA: 1 },   // Q7: Lottery lose friends vs bankrupt soulmate — most pick love
+      { pctA: 64, riskA: -1 },  // Q8: $50K top vs $100K bottom — relative wealth wins
+      { pctA: 71, riskA: 1 },   // Q9: Restart at 10 vs 45 with $50M — nostalgia + knowledge
+      { pctA: 33, riskA: -1 },  // Q10: 2 kids no money vs no kids $5M — money usually wins
+    ];
     for (var qi = 1; qi <= 10; qi++) {
-      wyrQuestions.push({ q_key: 'wyr_q' + qi, a_key: 'wyr_q' + qi + '_a', b_key: 'wyr_q' + qi + '_b' });
+      wyrQuestions.push({
+        q_key: 'wyr_q' + qi,
+        a_key: 'wyr_q' + qi + '_a',
+        b_key: 'wyr_q' + qi + '_b',
+        pctA: WYR_STATS[qi - 1].pctA,
+        riskA: WYR_STATS[qi - 1].riskA
+      });
     }
 
     var wyrShown = [];
     var wyrCurrent = -1;
     var wyrAnswered = false;
+    var wyrRiskScore = 0;
+    var wyrMajorityCount = 0;
+    var wyrChoices = [];
 
     // ---- HIGHER OR LOWER GAME ----
     var holStreak = 0;
@@ -4568,6 +4793,11 @@
 
     function wyrInit() {
       wyrShown = [];
+      wyrRiskScore = 0;
+      wyrMajorityCount = 0;
+      wyrChoices = [];
+      document.getElementById('wyrGameArea').style.display = '';
+      document.getElementById('wyrSummary').style.display = 'none';
       document.getElementById('wyrNextBtn').style.display = '';
       document.getElementById('wyrNextBtn').textContent = t('s4_next');
       wyrShowNext();
@@ -4576,15 +4806,9 @@
     function wyrShowNext() {
       wyrAnswered = false;
 
-      // All questions shown? Show restart button
+      // All questions shown? Show summary
       if (wyrShown.length >= wyrQuestions.length) {
-        var nextBtn = document.getElementById('wyrNextBtn');
-        nextBtn.textContent = t('wyr_restart') || '🔄 Play again';
-        nextBtn.style.display = '';
-        nextBtn.onclick = function() {
-          nextBtn.onclick = null;
-          wyrInit();
-        };
+        wyrShowSummary();
         return;
       }
 
@@ -4613,9 +4837,12 @@
       optA.className = 'wyr-option option-a';
       optB.className = 'wyr-option option-b';
 
-      // Hide results
+      // Hide results + bars + label
+      document.getElementById('wyrStatsLabel').style.display = 'none';
       document.getElementById('wyrResultA').className = 'wyr-result';
       document.getElementById('wyrResultB').className = 'wyr-result';
+      document.getElementById('wyrBarA').style.width = '0%';
+      document.getElementById('wyrBarB').style.width = '0%';
 
       // Counter
       document.getElementById('wyrCounter').textContent = wyrShown.length + ' / ' + wyrQuestions.length;
@@ -4624,15 +4851,73 @@
       document.getElementById('wyrNextBtn').onclick = null;
     }
 
+    var WYR_TYPES = {
+      high_risk: {
+        en: { name: 'The Gambler', desc: 'You chase the big wins. Safety is boring — you want the jackpot or nothing.' },
+        et: { name: 'Hasardöör', desc: 'Sa jahid suuri võite. Turvalisus on igav — sina tahad jackpoti või mitte midagi.' },
+        de: { name: 'Der Zocker', desc: 'Du jagst die großen Gewinne. Sicherheit ist langweilig — du willst den Jackpot oder nichts.' },
+        fr: { name: 'Le Joueur', desc: 'Tu vises les gros gains. La sécurité est ennuyeuse — tu veux le jackpot ou rien.' },
+        es: { name: 'El Apostador', desc: 'Persigues las grandes ganancias. La seguridad es aburrida — quieres el premio gordo o nada.' }
+      },
+      moderate_risk: {
+        en: { name: 'The Strategist', desc: 'Calculated risks, smart trade-offs. You know when to push and when to play it safe.' },
+        et: { name: 'Strateeg', desc: 'Kalkuleeritud riskid, targad kompromissid. Sa tead millal suruda ja millal ettevaatlik olla.' },
+        de: { name: 'Der Stratege', desc: 'Kalkulierte Risiken, kluge Kompromisse. Du weißt, wann man pushen und wann man vorsichtig sein sollte.' },
+        fr: { name: 'Le Stratège', desc: 'Risques calculés, compromis intelligents. Tu sais quand pousser et quand jouer la sécurité.' },
+        es: { name: 'El Estratega', desc: 'Riesgos calculados, compromisos inteligentes. Sabes cuándo arriesgar y cuándo ir a lo seguro.' }
+      },
+      low_risk: {
+        en: { name: 'The Realist', desc: 'Steady and grounded. You pick the sure thing — why gamble what you already have?' },
+        et: { name: 'Realist', desc: 'Kindel ja maas. Sa valid kindla variandi — miks riskida sellega mis sul juba on?' },
+        de: { name: 'Der Realist', desc: 'Beständig und bodenständig. Du nimmst das Sichere — warum riskieren, was du schon hast?' },
+        fr: { name: 'Le Réaliste', desc: 'Stable et ancré. Tu choisis le sûr — pourquoi risquer ce que tu as déjà ?' },
+        es: { name: 'El Realista', desc: 'Estable y con los pies en la tierra. Eliges lo seguro — ¿por qué arriesgar lo que ya tienes?' }
+      },
+      contrarian: {
+        en: { name: 'The Rebel', desc: 'You go against the crowd. When everyone zigs, you zag. Bold and unpredictable.' },
+        et: { name: 'Rebel', desc: 'Sa lähed rahvahulga vastu. Kui kõik lähevad paremale, sina lähed vasakule. Julge ja ettearvamatu.' },
+        de: { name: 'Der Rebell', desc: 'Du gehst gegen den Strom. Wenn alle nach rechts gehen, gehst du nach links. Mutig und unberechenbar.' },
+        fr: { name: 'Le Rebelle', desc: 'Tu vas à contre-courant. Quand tout le monde va à droite, tu vas à gauche. Audacieux et imprévisible.' },
+        es: { name: 'El Rebelde', desc: 'Vas contra la corriente. Cuando todos van a la derecha, tú vas a la izquierda. Audaz e impredecible.' }
+      }
+    };
+
+    function wyrShowSummary() {
+      document.getElementById('wyrGameArea').style.display = 'none';
+      document.getElementById('wyrSummary').style.display = '';
+
+      // Determine type based on risk score and majority alignment
+      var typeKey;
+      var majorityPct = Math.round((wyrMajorityCount / wyrQuestions.length) * 100);
+
+      if (majorityPct <= 30) {
+        typeKey = 'contrarian';
+      } else if (wyrRiskScore >= 4) {
+        typeKey = 'high_risk';
+      } else if (wyrRiskScore <= -2) {
+        typeKey = 'low_risk';
+      } else {
+        typeKey = 'moderate_risk';
+      }
+
+      var typeData = WYR_TYPES[typeKey][currentLang] || WYR_TYPES[typeKey]['en'];
+      document.getElementById('wyrSummaryType').textContent = typeData.name;
+      document.getElementById('wyrSummaryDesc').textContent = typeData.desc;
+      document.getElementById('wyrSummaryRisk').textContent = wyrRiskScore > 0 ? '+' + wyrRiskScore : wyrRiskScore;
+      document.getElementById('wyrSummaryMajority').textContent = majorityPct + '%';
+    }
+
     function wyrChoose(choice) {
+      if (wyrAnswered) return; // Prevent double-click
       wyrAnswered = true;
 
+      var q = wyrQuestions[wyrCurrent];
       var optA = document.getElementById('wyrOptionA');
       var optB = document.getElementById('wyrOptionB');
 
-      // Reset both first (allows changing choice)
-      optA.className = 'wyr-option option-a';
-      optB.className = 'wyr-option option-b';
+      // Disable both options
+      optA.classList.add('disabled');
+      optB.classList.add('disabled');
 
       // Mark chosen
       if (choice === 'a') {
@@ -4641,15 +4926,38 @@
         optB.classList.add('chosen');
       }
 
-      // Show placeholder results
+      // Track risk score
+      if (choice === 'a') {
+        wyrRiskScore += q.riskA;
+      } else {
+        wyrRiskScore -= q.riskA;
+      }
+
+      // Track majority alignment
+      var pctA = q.pctA;
+      var pctB = 100 - pctA;
+      var choseMajority = (choice === 'a' && pctA >= 50) || (choice === 'b' && pctB >= 50);
+      if (choseMajority) wyrMajorityCount++;
+      wyrChoices.push(choice);
+
+      // Show stats label + bars
+      var statsLabel = document.getElementById('wyrStatsLabel');
+      statsLabel.style.display = '';
+      statsLabel.textContent = t('wyr_stats_label') || 'Based on all players\' choices';
       var resultA = document.getElementById('wyrResultA');
       var resultB = document.getElementById('wyrResultB');
-      document.getElementById('wyrPctA').textContent = choice === 'a' ? '✓' : '';
-      document.getElementById('wyrPctB').textContent = choice === 'b' ? '✓' : '';
-      document.getElementById('wyrCountA').textContent = choice === 'a' ? t('wyr_your_choice') : '';
-      document.getElementById('wyrCountB').textContent = choice === 'b' ? t('wyr_your_choice') : '';
+      document.getElementById('wyrPctA').textContent = pctA + '%';
+      document.getElementById('wyrPctB').textContent = pctB + '%';
+      document.getElementById('wyrCountA').textContent = choice === 'a' ? '← ' + (t('wyr_your_choice') || 'Your choice') : '';
+      document.getElementById('wyrCountB').textContent = choice === 'b' ? '← ' + (t('wyr_your_choice') || 'Your choice') : '';
       resultA.className = 'wyr-result visible';
       resultB.className = 'wyr-result visible';
+
+      // Animate stat bars
+      setTimeout(function() {
+        document.getElementById('wyrBarA').style.width = pctA + '%';
+        document.getElementById('wyrBarB').style.width = pctB + '%';
+      }, 50);
 
       // Show next button
       document.getElementById('wyrNextBtn').style.display = '';
