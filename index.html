@@ -3138,6 +3138,8 @@
       document.getElementById('langSelect').addEventListener('change', (e) => {
         currentLang = e.target.value;
         applyTranslations();
+        // Reset money facts pool so texts regenerate in new language
+        moneyFactsReady = false;
         // Update active WYR question text in new language
         if (wyrCurrent >= 0 && wyrCurrent < wyrQuestions.length) {
           var q = wyrQuestions[wyrCurrent];
